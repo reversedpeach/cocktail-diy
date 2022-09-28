@@ -1,0 +1,21 @@
+.resultlist {
+	position: absolute;
+	top: 40px;
+}
+
+.testlogo {
+	position: absolute;
+	/* left: 100px; */
+	/* top: 100px; */
+	background-color: springgreen;
+
+	height: 100px;
+	width: 100px;
+}
+
+.testtext {
+	word-wrap: break-word;
+	position: absolute;
+	top: 100px;
+	width: 99px;
+}
