@@ -1,0 +1,93 @@
+.discoverBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction:row;
+
+}
+
+.shakerBox{
+    padding-left: 50px;
+    padding-top: 50px;
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction:row;
+
+}
+
+.ingCol {
+  padding-left: 10px;
+  border: solid;
+  width: 100px;
+  height: 300px;
+  gap: 10px 2px; 
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  
+
+}
+
+.ingShaker {
+  font-size: 10px;
+    color: rgb(101, 101, 101);
+    text-align: center;
+    font-family: "Arial";
+    font: "sans-serif";
+    border: solid;
+    border-radius: 5%;
+    border-width: 1px;
+
+}
+.shakerImg  {
+  width: 400px;
+  
+}
+.barBox {
+    position: relative;
+    width: 500px;
+    height: 280px;
+    font-size: 14px;
+    color: rgb(101, 101, 101);
+    text-align: center;
+    font-family: "Arial";
+    font: "sans-serif";
+  }
+
+  .barShelf
+  {
+    background-image: url(woodshelf.jpg);
+    background-repeat: repeat;
+    background-size: 520px 111px;
+    background-position: 0% 32%; 
+    width: 500px;
+    height: 195px;
+    padding-bottom: 50px;
+    padding-top: 20px;
+    border-radius: 5%;
+    border: 0.01px;
+    border-style: solid;
+    border-color: rgb(177, 177, 177);
+    box-shadow: 10px 10px 8px #888888;
+  }
+  
+  /* Make the image responsive */
+ .barImage  {
+    width: 80px;
+    filter: drop-shadow(16px 5px 10px black);
+  }
+
+
+  .barRow {
+    padding-left: 50px;
+    width: 420px;
+    gap: 30px 2px; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction:row;
+  }
+  
+  

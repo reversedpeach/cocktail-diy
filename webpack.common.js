@@ -6,6 +6,23 @@ loaders.push({
     exclude: /node_modules/,
     use: 'babel-loader',
 })
+
+loaders.push({
+    test: /\.css$/,
+    use: 'style-loader', 
+})
+
+loaders.push({
+    test: /\.css$/,
+    use: 'css-loader',
+})
+
+loaders.push({
+    test: /\.(png|jpe?g|gif)$/i,
+    use: 'file-loader',
+})
+
+
 export default {
     entry: {
         app:'./client/app.jsx'
