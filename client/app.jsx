@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState, createContext } from "react";
 import ReactDOM from "react-dom";
+import "./src/utils/css/app.css";
 
-import { Dummy } from "./src/components/Dummy.jsx";
-import DrinkResults from "./src/components/DrinkResults.jsx";
-import SearchIngredientForm from "./src/components/SearchIngredientForm.jsx";
+import HomePage from "./src/Pages/HomePage.jsx";
+
+export const UserContext = createContext(null);
+
+const globalState = {
+	CurrentUser: "Rongfei", //Or an user object
+	Mybar: [
+		{ name: "vodka", img: " " },
+		{ name: "gin", img: " " },
+	],
+	ShakerContent: ["vodka", "gin", "lemon"],
+};
 
 const App = () => {
+	const [GlobalState, SetGlobalState] = useState(globalState);
 	return (
 		<div>
-			{/* <SearchIngredientForm /> */}
-			<DrinkResults />
+			<UserContext.Provider value={GlobalState}>
+				<HomePage />
+			</UserContext.Provider>
 		</div>
 	);
 };

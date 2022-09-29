@@ -1,14 +1,18 @@
-import React from "react";
-import testlogo from "../utils/ttest.png";
-import "../utils/drinkResults.css";
+import React, { useContext } from "react";
+import testlogo from "../utils/images/ttest.png";
+import "../utils/css/drinkResults.css";
+
+import { UserContext } from "../../app.jsx";
 
 const images = [testlogo, testlogo, testlogo, testlogo, testlogo, testlogo, testlogo, testlogo];
 
-export default function DrinkResults() {
+export default function DrinkResults({ props }) {
+	const GlobalState = useContext(UserContext);
+	console.log(GlobalState);
 	return (
-		<div>
-			<span>Drink Results</span>
-			<div className="resultlist">
+		<div className="drinkresults">
+			<span>Drinks</span>
+			<div>
 				{images.map(function (img, index) {
 					const leftmargin = index * 150 + "px";
 					return (

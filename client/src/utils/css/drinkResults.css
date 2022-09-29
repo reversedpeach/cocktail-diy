@@ -1,6 +1,6 @@
-.resultlist {
+.drinkresults {
 	position: absolute;
-	top: 40px;
+	top: 100px;
 }
 
 .testlogo {
@@ -16,6 +16,7 @@
 .testtext {
 	word-wrap: break-word;
 	position: absolute;
-	top: 100px;
+	text-align: center;
+	top: 120px;
 	width: 99px;
 }
