@@ -6,9 +6,9 @@ class CocktailModel{
     }
 
     addIngShaker(ing){
-        this.currentdrink.push(ing);
+        this.currentdrink = this.currentdrink.concat(ing); 
         console.log(ing + " is added");
-        this.notifyObservers;
+        this.notifyObservers();
     }
 
     emptyShaker(){
@@ -17,7 +17,9 @@ class CocktailModel{
 
     removeIngShaker(ing){
         this.currentdrink = this.currentdrink.filter( (elem) => elem !== ing);
-        this.notifyObservers;
+        console.log(ing + " is removed");
+        console.log(this.currentdrink);
+        this.notifyObservers();
     }
 
     getCurrentDrink(){
@@ -31,6 +33,7 @@ class CocktailModel{
 
     notifyObservers(){
         this.subscribers.forEach((callback)=> {
+            console.log(callback);
             try{callback()} catch(err){
                 console.error("Error ", err, callback);}
         });                                                      

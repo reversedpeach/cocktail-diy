@@ -20,7 +20,7 @@ const CocktailSource={
     .then(response => response.json()).catch(console.error);  
     }
     ,    
-    getImage(query) { 
+    getCocktail(query) { 
         if(query === ""){  //to prevent error from happening while setting the promise
             return null
         }

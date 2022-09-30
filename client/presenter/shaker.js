@@ -1,8 +1,6 @@
 
-import  MyBarView from "../view/myBarView.js";
 import React from "react";
 import useModelProp from "./useModelProp.js";
-import MyBarElemView from "../view/myBarElemView.js";
 import CocktailSource from "../cocktailApi.js";
 import { usePromise } from "./usePromise.js";
 import ShakerView from "../view/shakerView.js";
@@ -12,10 +10,11 @@ function Shaker({model}) {
    /*const [promise, setPromise] = React.useState(null); // Init with and empty promise because errors on line 10 otherwise
     React.useEffect(() => setPromise(CocktailSource.getImage("")), []);
     const [data, error] = usePromise(promise); 
-*/
-    const shakering = useModelProp(model, "currentdrink")
-    
-    shakering.forEach(element => console.log(element));
+*/  console.log("hej");
+    const shakering = useModelProp(model, "currentdrink");
+   
+    //shakering.forEach(element => console.log(element));
+    console.log(shakering);
 
    return (<div className="shakerBox">
              <div className = "ingCol" >

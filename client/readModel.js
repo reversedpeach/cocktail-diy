@@ -10,10 +10,10 @@ function readModel() {
     
     /* ReadFromFirebase({model}); */
     
-    const storageobs = () => {localStorage.setItem("CocktailModel",  //sets model w prop to local storage
-        )};
+    //const storageobs = () => {localStorage.setItem("CocktailModel",  //sets model w prop to local storage
+   //     )};
 
-    model.addObserver(storageobs);  
+   // model.addObserver(storageobs);  
     return model;
 }
 
