@@ -8,22 +8,22 @@ import Shaker from './presenter/shaker.js';
 import readModel from './readModel.js';
 
 import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Routes,
-  } from "react-router-dom";
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Routes,
+} from "react-router-dom";
 import Switch from 'react-dom';
 
 const model = readModel();
 
-const App = ({model}) => {
-    return <div className='discoverBox'>
-        <Shaker model = {model}/>
-        <MyBar model ={model} />
-        </div>
-                     
-          
+const App = ({ model }) => {
+  return <div className='discoverBox'>
+    <Shaker model={model} />
+    <MyBar model={model} />
+  </div>
+
+
 }
 
 //const container = document.querySelector("#app");
@@ -31,6 +31,6 @@ const App = ({model}) => {
 //root.render(<App model={model}  />);
 
 
-ReactDOM.render(<App model={model}/> , document.querySelector("#app"));
+ReactDOM.render(<App model={model} />, document.querySelector("#app"));
 
 export default App;

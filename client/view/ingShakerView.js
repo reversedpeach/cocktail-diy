@@ -1,11 +1,11 @@
 import React from "react";
 
-const IngShakerView = ({ing, onRemove}) => {
+const IngShakerView = ({ ing, onRemove }) => {
 
-        return   <div className="ingShaker">
-                       {ing}
-                       <button onClick={()=> onRemove(ing)}> X </button>
-                </div>
+        return <div className="ingShaker">
+                <span className="ingShakerTitle"> {ing}</span>
+                <button className="ingShakerBtn" onClick={() => onRemove(ing)}> x </button>
+        </div>
 
 };
 

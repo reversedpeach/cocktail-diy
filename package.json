@@ -20,7 +20,8 @@
   "homepage": "https://github.com/reversedpeach/cocktail-diy#readme",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
