@@ -7,9 +7,14 @@ export default merge(common, {
     devtool: 'inline-source-map',
     mode: 'development',
     devServer: {
-        static: {directory:path.join(path.resolve(), "dist")
+        static: {directory:path.join(path.resolve(), "../dist")
     },
-    port: 8080
+    port: 3000,
+    http2:true,
+    https: {
+        key: fs.readFileSync("./cert/localhost-key.pem"),
+        cert: fs.readFileSync("./cert/localhost.pem"),
+    }
 }
 
 })

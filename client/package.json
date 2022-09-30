@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack server --config webpack.dev.js",
+    "build:dev": "webpack --config webpack.dev.js",
     "test": "jest"
   },
   "repository": {
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/reversedpeach/cocktail-diy#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

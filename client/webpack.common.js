@@ -8,12 +8,12 @@ loaders.push({
 })
 export default {
     entry: {
-        app:'./client/app.jsx'
+        app:'./src/app.jsx'
     }, module: {
         rules: loaders
     },
     output: {
         filename: 'main.bundle.js',
-        path: path.resolve(path.resolve(), 'dist')
+        path: path.resolve(path.resolve(), '../dist')
     }
 }
