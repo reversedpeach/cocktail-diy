@@ -2,7 +2,7 @@ import React, { useState, createContext } from "react";
 import ReactDOM from "react-dom";
 import "./src/utils/css/app.css";
 
-import HomePage from "./src/Pages/HomePage.jsx";
+import HomePage from "./HomePage.jsx";
 
 export const UserContext = createContext(null);
 
