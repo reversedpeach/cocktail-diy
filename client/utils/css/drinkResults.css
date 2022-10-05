@@ -1,12 +1,27 @@
 .drinkresults {
+	display: flex;
+	flex-direction: column;
+
 	position: absolute;
-	top: 100px;
+	top: 500px;
+}
+
+.drinkresultsList {
+	position: absolute;
+	left: 20px;
+	top: 70px;
+}
+
+.searchIngredientForm {
+	position: absolute;
+	left: 10%;
+	padding-top: 10px;
+
+	width: 300px;
 }
 
 .testlogo {
 	position: absolute;
-	/* left: 100px; */
-	/* top: 100px; */
 	background-color: springgreen;
 
 	height: 100px;
@@ -19,4 +34,10 @@
 	text-align: center;
 	top: 120px;
 	width: 99px;
+}
+
+.img {
+	position: absolute;
+	width: 70px;
+	height: 70px;
 }

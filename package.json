@@ -28,14 +28,7 @@
     "mui": "^0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
-    "react-router-dom": "^6.4.1",
-    "react-search-field": "^2.0.1",
-    "react-select": "^5.4.0",
-    "url-loader": "^4.1.1"
-=======
     "react-dropzone": "^14.2.2"
->>>>>>> 363277e9aed463d813ef7208afbb6661b9332dbc
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
