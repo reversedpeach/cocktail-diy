@@ -24,6 +24,7 @@ function MyBar({ model }) {
                         }
                   </div>
             </div>
+
       </div>)
 };
 
