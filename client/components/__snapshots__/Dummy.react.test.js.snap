@@ -3,5 +3,6 @@
 exports[`The component should render our text if the prop is true 1`] = `
 <div>
   Hello world
+  !
 </div>
 `;

@@ -2,8 +2,8 @@
 
 import React from "react";
 
-export const Dummy = ({shouldRenderText, text}) => {
+export const Dummy = ({text}) => {
 
-    return shouldRenderText && <div>{"HAHA"}</div>
+    return <div>{text}!</div>
 
 }
