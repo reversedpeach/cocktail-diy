@@ -1,19 +1,20 @@
 import React from "react";
 
-import MyBar from "./myBar.js";
+import useModelProp from "../utils/useModelProp.js";
+
+import MyProfileView from "../view/myProfileView.js";
 
 export default function MyProfile({ model }) {
+	const favoritedrinks = useModelProp(model, "favoritedrinks");
+	const likeddrinks = useModelProp(model, "likeddrinks");
+	const recentdrinks = useModelProp(model, "recentdrinks");
+
 	return (
-		<div className="myProfile">
-			<span>username level:100</span>
-			<div className="profileBar">
-				<MyBar model={model} />
-			</div>
-			<div className="profileInfo">
-				<div>Favorite Drink: xxxx</div>
-				<div>Recent Drinks: xxxx</div>
-				<div>Liked Drinks: xxxx</div>
-			</div>
-		</div>
+		<MyProfileView
+			model={model}
+			favoritedrinks={favoritedrinks}
+			likeddrinks={likeddrinks}
+			recentdrinks={recentdrinks}
+		/>
 	);
 }

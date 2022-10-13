@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import testlogo from "../utils/images/ttest.png";
 import "../utils/css/drinkResults.css";
 import useModelProp from "../utils/useModelProp.js";
 import CocktailSource from "../cocktailApi.js";
@@ -21,7 +20,6 @@ export default function ResultsList({ model }) {
 			query += ing + ",";
 		}
 		query = query.slice(0, query.length - 1);
-		//console.log(query);
 
 		if (query != "") {
 			im = new Array();
@@ -33,19 +31,24 @@ export default function ResultsList({ model }) {
 
 	useEffect(() => {
 		searching = true;
-		const result = updateImages();
+		updateImages();
 		searching = false;
-	}, [model["currentdrink"]]
-	);
+	}, [model["currentdrink"]]);
 
-	return (!searching
-		? images.map(function (drink, index) {
-			//console.log(img);
+	return !searching ? (
+		images.map(function (drink, index) {
 			return (
-				<ResultListView image={drink["strDrinkThumb"]} title={drink["strDrink"]} index={index} setDetails={() => (model.setDetails(drink["idDrink"]))} />
-			)
-		}) : <p></p>);
+				<ResultListView
+					image={drink["strDrinkThumb"]}
+					title={drink["strDrink"]}
+					index={index}
+					setDetails={() => model.setDetails(drink["idDrink"])}
+				/>
+			);
+		})
+	) : (
+		<p></p>
+	);
 }
 
-
-//onClick={() => (<drinkDetails model = {model} drink={images[0]["strDrink"]} />)} 
+//onClick={() => (<drinkDetails model = {model} drink={images[0]["strDrink"]} />)}

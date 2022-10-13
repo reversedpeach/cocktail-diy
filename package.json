@@ -22,13 +22,15 @@
     "@appbaseio/reactivesearch": "^3.40.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
-    "@mui/material": "^5.10.7",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.9",
     "context": "^3.0.4",
     "file-loader": "^6.2.0",
     "mui": "^0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.2"
+    "react-dropzone": "^14.2.2",
+    "react-select": "^5.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",

@@ -3,7 +3,7 @@
 	justify-content: flex-start;
 	flex-direction: column;
 	border-color: black;
-	border: solid
+	border: solid;
 }
 
 .discoverBox {
@@ -12,14 +12,14 @@
 	justify-content: flex-start;
 	flex-direction: column;
 	border-color: black;
-	border: solid
+	border: solid;
 }
 
 .topBox {
 	display: flex;
 	flex-direction: row;
 	border-color: black;
-	border: solid
+	border: solid;
 }
 
 .shakerBox {
@@ -132,4 +132,26 @@
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	flex-direction: row;
+}
+
+.myProfile {
+	display: flex;
+	position: absolute;
+	top: 30px;
+}
+
+.myProfile .title {
+	display: flex;
+	height: 30px;
+	width: 200px;
+}
+
+.myProfile .profileBar {
+	/* display: flex; */
+	padding-left: 30px;
+}
+
+.myProfile .profileInfo {
+	position: absolute;
+	top: 40px;
 }
