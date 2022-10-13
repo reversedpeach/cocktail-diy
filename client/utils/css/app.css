@@ -1,13 +1,25 @@
+.bottomBox {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	border-color: black;
+	border: solid
+}
+
 .discoverBox {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	flex-direction: column;
+	border-color: black;
+	border: solid
 }
 
 .topBox {
 	display: flex;
 	flex-direction: row;
+	border-color: black;
+	border: solid
 }
 
 .shakerBox {
@@ -64,6 +76,12 @@
 	cursor: pointer;
 	align-self: flex-end;
 	align-items: center;
+	justify-content: center;
+}
+
+.drinkRow {
+	flex-direction: row;
+	display: flex;
 	justify-content: center;
 }
 

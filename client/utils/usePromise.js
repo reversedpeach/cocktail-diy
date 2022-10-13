@@ -19,7 +19,7 @@ function usePromise(promise) {
 
 function promiseNoData(promise, data, error, h) {
 	return (
-		(!promise && "") || // Case 0  // removed text for now since the first promise will be without data
+		(!promise && null) || // Case 0  // removed text for now since the first promise will be without data
 		(error && <h1 id="no-ingredient">No ingredient is found!</h1>) || // Case 1
 		(!data && <img src={data} alt="" />)
 	); // Case 2;
