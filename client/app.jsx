@@ -10,18 +10,54 @@ import readModel from "./readModel.js";
 
 import MyBar from "./presenter/myBar.js";
 import Shaker from "./presenter/shaker.js";
-import DrinkResult from "./presenter/drinkResult";
+import ResultsList from "./presenter/resultsList.js";
+import IngShaker from "./presenter/ingShaker.js";
+import MyBarElem from "./presenter/myBarElem.js";
+import SearchIng from "./presenter/searchIng.js";
+import ResultDetails from "./presenter/resultDetails";
+import useModelProp from "./utils/useModelProp";
 
 const model = readModel();
 
+
+
 const App = ({ model }) => {
+	const showDetails = useModelProp(model, "drinkdetails");
 	return (
 		<div className="discoverBox">
 			<div className="topBox">
-				<Shaker model={model} />
-				<MyBar model={model} />
+				<div className="shakerBox">
+					<div className="ingCol">
+						<IngShaker model={model} />
+					</div>
+					<Shaker />
+				</div>
+				<div className="barBox">
+					<MyBar model={model} />
+					<div className="barShelf">
+						<div className="barRow">
+							<MyBarElem model={model} />
+						</div>
+					</div>
+					<div className="searchIngredientForm">
+						<SearchIng
+							model={model}
+							onAdd={(add) => model.addIngShaker(add)} />
+					</div>
+				</div>
+
 			</div>
-			<DrinkResult model={model} />
+			<div className="bottomBox">
+				<div className="resultCol">
+					<div>
+						<span>Drinks</span>
+						<div className="drinkresultsList">
+							<ResultsList model={model} />
+						</div>
+						{showDetails === null ? <div></div> : <ResultDetails model={model} />}
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

@@ -6,6 +6,7 @@ const MyBarElemView = ({ barIng, onAdd }) => {
                 <span>{barIng}</span>
         </div>
 
+
 };
 
 export default MyBarElemView;

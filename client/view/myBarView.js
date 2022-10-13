@@ -1,7 +1,6 @@
 import React from "react";
 
-const MyBarView = ({ addIng }) => {
-    //const [text, setText]= React.useState("");
+const MyBarView = () => {
     return <div >
         <h1>
             <span>My Bar</span>

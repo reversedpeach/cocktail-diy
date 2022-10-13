@@ -6,10 +6,13 @@ import ShakerView from "../view/shakerView.js";
 import IngShakerView from "../view/ingShakerView.js";
 // import { useDropzone } from 'react-dropzone'
 
-function Shaker() {
-	return (
-		<ShakerView />
-	)
-};
+function IngShaker({ model }) {
+    const shakering = useModelProp(model, "currentdrink");
 
-export default Shaker;
+    return (shakering.map((element) => (
+        <IngShakerView ing={element} onRemove={(remove) => model.removeIngShaker(remove)} />
+    ))
+    );
+}
+
+export default IngShaker;
