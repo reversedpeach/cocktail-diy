@@ -25,4 +25,24 @@ function MyBar({ model }) {
 	);
 }
 
+<<<<<<< HEAD
 export default MyBar;
+=======
+      const shakering = useModelProp(model, "mybar");
+
+      return (<div className="barBox">
+            <MyBarView />
+            <div className="barShelf">
+                  <div className="barRow" >
+                        {shakering.map(element =>
+                              <MyBarElemView barIng={element} onAdd={(add) => model.addIngShaker(add)} />)
+                        }
+                  </div>
+            </div>
+
+      </div>)
+};
+
+
+export default MyBar;
+>>>>>>> aa132e6ebcdb3910a673c7a5c8855b8b2a68867a
