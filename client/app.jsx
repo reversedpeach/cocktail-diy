@@ -1,11 +1,12 @@
 import React, { useState, createContext } from "react";
 import ReactDOM from "react-dom";
-import Switch from "react-dom";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-
 import "./utils/css/app.css";
 
 import readModel from "./readModel.js";
+
+import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
+
 
 import MyBar from "./presenter/myBar.js";
 import Shaker from "./presenter/shaker.js";
@@ -21,14 +22,18 @@ import CreateInstruc from "./presenter/createInstruc";
 import CreateTitle from "./presenter/createTitle";
 import CreateSave from "./presenter/createSave";
 
+
 const model = readModel();
 
 const App = ({ model }) => {
+
 	const showDetails = useModelProp(model, "drinkdetails");
 	const showResult = useModelProp(model, "currentdrink");
 	const currentMode = useModelProp(model, "selectedmode");
 	return (
 		<div className="discoverBox">
+    {/* <HomePage model={model} /> */}
+			<ProfilePage model={model} />
 			<div className="topBox">
 				<div className="shakerBox">
 					<div className="ingCol">
