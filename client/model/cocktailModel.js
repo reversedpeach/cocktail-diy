@@ -15,6 +15,7 @@ class CocktailModel {
         ]; // array with objects of drinks
         this.currentdrink = []; // array with ingredients
         this.drinkdetails = null;
+        this.selectedmode = "discover";
     }
 
     addIngShaker(ing) {
@@ -25,6 +26,15 @@ class CocktailModel {
 
     emptyShaker() {
         this.currentdrink = [];
+    }
+
+    setMode() {
+        if (this.selectedmode === "discover") {
+            this.selectedmode = "create";
+        } else {
+            this.selectedmode = "discover";
+        }
+        this.notifyObservers();
     }
 
     setDetails(drink) {

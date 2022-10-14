@@ -9,7 +9,6 @@ import ResultListView from "../view/resultListView.js";
 
 export default function ResultsList({ model }) {
 	const shakering = useModelProp(model, "currentdrink");
-	const drinkClicked = useModelProp(model, "drinkdetails");
 	const [images, setImages] = useState([model["currentdrink"]]);
 	//const [details, setDetails] = useState([model["drinkdetails"]]);
 	let im = new Array();
@@ -47,5 +46,3 @@ export default function ResultsList({ model }) {
 		}) : <p></p>);
 }
 
-
-//onClick={() => (<drinkDetails model = {model} drink={images[0]["strDrink"]} />)} 

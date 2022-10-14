@@ -4,9 +4,9 @@
 }
 
 .drinkresultsList {
+	display: flex;
 	left: 20px;
 	top: 70px;
-	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 }
@@ -17,7 +17,6 @@
 }
 
 .searchIngredientForm {
-
 	left: 10%;
 	padding-top: 10px;
 	display: flex;

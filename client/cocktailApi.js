@@ -26,7 +26,7 @@ const CocktailSource = {
 
     return this.apiCall(paramsString).then((data) => {
       // console.log(data["drinks"]);
-      return data["drinks"];
+      return data.drinks;
     }); // gets all the drinks as objects
   },
   idGetCocktail(query) {
@@ -40,7 +40,7 @@ const CocktailSource = {
     return (
       this.apiCall(paramsString)
         //data.parsed[0].food)
-        .then((data) => data["drinks"])
+        .then((data) => data.drinks[0])
     ); // get the drink as an object
   },
 

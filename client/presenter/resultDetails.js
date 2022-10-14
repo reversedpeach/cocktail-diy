@@ -10,16 +10,20 @@ import ResultDetailsView from "../view/resultDetailsView.js";
 export default function ResultDetails({ model }) {
     const [promise, setPromise] = React.useState(null);
     const id = useModelProp(model, "drinkdetails");
-    //React.useEffect(() => setPromise(EdamamSource.searchIngredient("")), []); // needs to be run to set the promise
-    //const [data, error] = usePromise(promise); 
-    React.useEffect(() => setPromise(CocktailSource.idGetCocktail(id)), [id]);
+    useEffect(() => { setPromise(CocktailSource.idGetCocktail(id)) }, [id]);
     const [drink, error] = usePromise(promise);
+    console.log(drink);
     const alcoholic = undefined;
+    let recipe = [];
 
+    if (drink !== null) {
+        for (let i = 1; i < 16; i++) {
+            if (drink["strIngredient" + i] !== null) {
+                recipe.push({ ingredient: drink["strIngredient" + i], amount: drink["strMeasure" + i] });
+                console.log(recipe);
+            }
+        }
+    }
 
-    return (
-        promiseNoData(promise, drink, error) || (
-            console.log(drink),
-            <ResultDetailsView title={drink["strDrink"]} instructions={drink["strInstructions"]} glass={drink["strGlass"]} alcoholic={alcoholic} />)
-    );
+    return (drink !== null ? <ResultDetailsView title={drink["strDrink"]} ingredients={recipe} instructions={drink["strInstructions"]} image={drink["strDrinkThumb"]} glass={drink["strGlass"]} alcoholic={drink["strAlcoholic"]} /> : promiseNoData(promise, drink, error));
 }

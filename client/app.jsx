@@ -16,6 +16,8 @@ import MyBarElem from "./presenter/myBarElem.js";
 import SearchIng from "./presenter/searchIng.js";
 import ResultDetails from "./presenter/resultDetails";
 import useModelProp from "./utils/useModelProp";
+import ToggleMode from "./presenter/toggleMode";
+import CreateDrink from "./presenter/createDrink";
 
 const model = readModel();
 
@@ -23,11 +25,14 @@ const model = readModel();
 
 const App = ({ model }) => {
 	const showDetails = useModelProp(model, "drinkdetails");
+	const showResult = useModelProp(model, "currentdrink");
+	const currentMode = useModelProp(model, "selectedmode");
 	return (
 		<div className="discoverBox">
 			<div className="topBox">
 				<div className="shakerBox">
 					<div className="ingCol">
+						<ToggleMode model={model} />
 						<IngShaker model={model} />
 					</div>
 					<Shaker />
@@ -45,10 +50,11 @@ const App = ({ model }) => {
 							onAdd={(add) => model.addIngShaker(add)} />
 					</div>
 				</div>
-
 			</div>
-			<div className="bottomBox">
+
+			{showResult.length === 0 && currentMode === "create" ? <CreateDrink /> : (<div className="bottomBox">
 				<div className="resultCol">
+
 					<div>
 						<span>Drinks</span>
 						<div className="drinkresultsList">
@@ -57,7 +63,7 @@ const App = ({ model }) => {
 						{showDetails === null ? <div></div> : <ResultDetails model={model} />}
 					</div>
 				</div>
-			</div>
+			</div>)}
 		</div>
 	);
 };
