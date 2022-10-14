@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreateDrinkView = ({ startCreate }) => {
+const CreateSaveView = ({ startCreate }) => {
 
     return <div className="createBtnBox">
         <button className="createBtn" onClick={startCreate}>Create </button>
@@ -8,4 +8,4 @@ const CreateDrinkView = ({ startCreate }) => {
 
 };
 
-export default CreateDrinkView;
+export default CreateSaveView;

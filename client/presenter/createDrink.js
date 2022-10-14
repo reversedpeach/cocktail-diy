@@ -1,15 +1,13 @@
 import React from "react";
-import useModelProp from "../utils/useModelProp.js";
-import CocktailSource from "../cocktailApi.js";
-import { usePromise } from "../utils/usePromise.js";
-import ShakerView from "../view/shakerView.js";
-import IngShakerView from "../view/ingShakerView.js";
-import CreateDrinkView from "../view/createDrinkView.js";
-// import { useDropzone } from 'react-dropzone'
+import CreateElemList from "./createElemList.js";
+import CreateTitle from "./createTitle.js";
+import CreateInstruc from "./createInstruc.js";
 
-function CreateDrink() {
+function CreateDrink({ model }) {
 
-    return <CreateDrinkView startCreate={console.log("START")} />
+    return (
+        <CreateElemList model={model} />)
+
 };
 
 export default CreateDrink;

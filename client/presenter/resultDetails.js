@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { usePromise, promiseNoData } from "../utils/usePromise.js";
-import Select from "react-select";
 import CocktailSource from "../cocktailApi.js";
 
 import useModelProp from "../utils/useModelProp.js";

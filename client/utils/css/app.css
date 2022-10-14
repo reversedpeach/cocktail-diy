@@ -134,7 +134,7 @@
 	flex-direction: row;
 }
 
-/* The switch - the box around the slider */
+/* ändra The switch - the box around the slider */
 .switch {
 	position: relative;
 	display: inline-block;
@@ -188,7 +188,7 @@ input:checked+.slider:before {
 	transform: translateX(26px);
 }
 
-/* Rounded sliders */
+/* ändra*/
 .slider.round {
 	border-radius: 34px;
 }
@@ -222,4 +222,12 @@ input:checked+.slider:before {
 	align-self: flex-end;
 	padding-right: 40%;
 
+}
+
+.createTitle {
+	display: flex;
+	align-self: flex-start;
+	justify-content: center;
+	align-items: center;
+	font-size: 30pt;
 }

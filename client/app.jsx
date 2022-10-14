@@ -4,8 +4,7 @@ import Switch from "react-dom";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 
 import "./utils/css/app.css";
-import { createRoot } from "react-dom/client";
-import CocktailModel from "./model/cocktailModel";
+
 import readModel from "./readModel.js";
 
 import MyBar from "./presenter/myBar.js";
@@ -18,10 +17,11 @@ import ResultDetails from "./presenter/resultDetails";
 import useModelProp from "./utils/useModelProp";
 import ToggleMode from "./presenter/toggleMode";
 import CreateDrink from "./presenter/createDrink";
+import CreateInstruc from "./presenter/createInstruc";
+import CreateTitle from "./presenter/createTitle";
+import CreateSave from "./presenter/createSave";
 
 const model = readModel();
-
-
 
 const App = ({ model }) => {
 	const showDetails = useModelProp(model, "drinkdetails");
@@ -52,18 +52,34 @@ const App = ({ model }) => {
 				</div>
 			</div>
 
-			{showResult.length === 0 && currentMode === "create" ? <CreateDrink /> : (<div className="bottomBox">
-				<div className="resultCol">
+			{currentMode === "create" ? (showResult.length > 0 ?
+				<div className="bottomBox">
+					<CreateTitle />
 
-					<div>
-						<span>Drinks</span>
-						<div className="drinkresultsList">
-							<ResultsList model={model} />
+					<div className="topBox">
+						<div className="resultCol">
+							<CreateDrink model={model} />
 						</div>
-						{showDetails === null ? <div></div> : <ResultDetails model={model} />}
+						<div className="resultCol">
+							<CreateInstruc model={model} />
+							<CreateSave />
+						</div>
 					</div>
+
+
 				</div>
-			</div>)}
+				: <p></p>)
+				: showResult.length > 0 ? (<div className="bottomBox">
+					<div className="resultCol">
+						<div>
+							<span>Drinks</span>
+							<div className="drinkresultsList">
+								<ResultsList model={model} />
+							</div>
+							{showDetails === null ? <div></div> : <ResultDetails model={model} />}
+						</div>
+					</div>
+				</div>) : <p></p>}
 		</div>
 	);
 };

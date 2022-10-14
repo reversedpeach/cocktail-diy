@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import testlogo from "../utils/images/ttest.png";
 import "../utils/css/drinkResults.css";
 import useModelProp from "../utils/useModelProp.js";
 import CocktailSource from "../cocktailApi.js";
-import DrinkResultDetails from "./resultDetails.js";
-import { promiseNoData, usePromise } from "../utils/usePromise.js";
 import ResultListView from "../view/resultListView.js";
 
 export default function ResultsList({ model }) {
