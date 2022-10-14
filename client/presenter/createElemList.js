@@ -1,17 +1,18 @@
+import CreateElemListView from "../view/createElemListView.js";
 import React from "react";
 import useModelProp from "../utils/useModelProp.js";
-import MyBarElemView from "../view/myBarElemView.js";
 import "../utils/css/drinkResults.css";
 
-function MyBarElem({ model }) {
+function CreateElemList({ model }) {
     // const [promise, setPromise] = React.useState(null);
     // React.useEffect(() => setPromise(CocktailSource.getIngredient("vodka")), []);
     // const [data, error] = usePromise(promise);
-    const shakering = useModelProp(model, "mybar");
+    const ingredients = useModelProp(model, "currentdrink");
+    console.log("kommer hit")
 
-    return shakering.map((element) => (
-        <MyBarElemView barIng={element} onAdd={(add) => model.addIngShaker(add)} />
+    return ingredients.map((ing) => (
+        <CreateElemListView ingredient={ing} />
     ));
 }
 
-export default MyBarElem;
+export default CreateElemList;

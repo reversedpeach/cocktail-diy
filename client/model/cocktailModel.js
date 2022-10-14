@@ -1,24 +1,28 @@
 class CocktailModel {
-	constructor() {
-		this.subscribers = [];
-		this.mybar = [
-			"Gin",
-			"Vodka",
-			"Cointreau",
-			"Amaretto",
-			"Rum",
-			"Whiskey",
-			"Champagne",
-			"Bourbon",
-			"Tequila",
-			"Bacardi",
-		]; // array with objects of drinks
-		this.currentdrink = []; // array with ingredients
-		this.drinkdetails = null;
-		this.favoritedrinks = "Pink Moon";
-		this.likeddrinks = ["Abbey Cocktail", "Pink Moon", "Singapore Sling"];
-		this.recentdrinks = ["Lone Tree Cocktail", "Rose", "Tom Collins", "Martini"];
-	}
+
+    constructor() {
+        this.subscribers = [];
+        this.mybar = [
+            "Gin",
+            "Vodka",
+            "Cointreau",
+            "Amaretto",
+            "Rum",
+            "Whiskey",
+            "Champagne",
+            "Bourbon",
+            "Tequila",
+            "Bacardi",
+        ]; // array with objects of drinks
+        this.currentdrink = []; // array with ingredients
+        this.drinkdetails = null;
+        this.selectedmode = "discover";
+        this.createddrink = [];
+        this.favoritedrinks = "Pink Moon";
+		    this.likeddrinks = ["Abbey Cocktail", "Pink Moon", "Singapore Sling"];
+		    this.recentdrinks = ["Lone Tree Cocktail", "Rose", "Tom Collins", "Martini"];
+    }
+
 
 	setIngList(ingList) {
 		this.currentdrink = ingList;
@@ -34,6 +38,15 @@ class CocktailModel {
 	emptyShaker() {
 		this.currentdrink = [];
 	}
+    setMode() {
+        if (this.selectedmode === "discover") {
+            this.selectedmode = "create";
+        } else {
+            this.selectedmode = "discover";
+        }
+        this.notifyObservers();
+    }
+
 
 	setDetails(drink) {
 		this.drinkdetails = drink;

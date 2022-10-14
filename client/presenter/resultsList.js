@@ -2,13 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import "../utils/css/drinkResults.css";
 import useModelProp from "../utils/useModelProp.js";
 import CocktailSource from "../cocktailApi.js";
-import DrinkResultDetails from "./resultDetails.js";
-import { promiseNoData, usePromise } from "../utils/usePromise.js";
 import ResultListView from "../view/resultListView.js";
 
 export default function ResultsList({ model }) {
 	const shakering = useModelProp(model, "currentdrink");
-	const drinkClicked = useModelProp(model, "drinkdetails");
 	const [images, setImages] = useState([model["currentdrink"]]);
 	//const [details, setDetails] = useState([model["drinkdetails"]]);
 	let im = new Array();
@@ -51,4 +48,3 @@ export default function ResultsList({ model }) {
 	);
 }
 
-//onClick={() => (<drinkDetails model = {model} drink={images[0]["strDrink"]} />)}
