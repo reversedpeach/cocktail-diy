@@ -5,6 +5,7 @@ const MyBarElemView = ({ barIng, onAdd }) => {
                 <input className="barImage" type="image" src={"https://www.thecocktaildb.com/images/ingredients/" + barIng + "-Small.png"} onClick={() => onAdd(barIng)} />
         </div>
 
+
 };
 
 export default MyBarElemView;
