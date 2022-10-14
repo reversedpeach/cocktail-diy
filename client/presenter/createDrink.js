@@ -7,7 +7,6 @@ function CreateDrink({ model }) {
 
     return (
         <CreateElemList model={model} />)
-
 };
 
 export default CreateDrink;
