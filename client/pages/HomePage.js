@@ -28,7 +28,13 @@ export default function HomePage({ model }) {
 						</div>
 					</div>
 					<div className="searchIngredientForm">
-						<SearchIng model={model} setIng={(ingList) => model.setIngList(ingList)} />
+						<SearchIng
+							model={model}
+							setIng={(ingList) => model.setIngList(ingList)}
+							addIng={(ing) => {
+								model.addIngShaker(ing);
+							}}
+						/>
 					</div>
 				</div>
 			</div>

@@ -20,13 +20,20 @@ class CocktailModel {
 		this.recentdrinks = ["Lone Tree Cocktail", "Rose", "Tom Collins", "Martini"];
 	}
 
+	addMyBar(ing) {
+		this.mybar = this.mybar.concat(ing);
+		this.notifyObservers();
+	}
+
 	setIngList(ingList) {
 		this.currentdrink = ingList;
 		this.notifyObservers();
 	}
 
 	addIngShaker(ing) {
-		this.currentdrink = this.currentdrink.concat(ing);
+		if (this.currentdrink.indexOf(ing) == -1) {
+			this.currentdrink = this.currentdrink.concat(ing);
+		}
 		console.log(ing + " is added");
 		this.notifyObservers();
 	}

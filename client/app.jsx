@@ -11,8 +11,8 @@ const model = readModel();
 const App = ({ model }) => {
 	return (
 		<div>
-			{/* <HomePage model={model} /> */}
-			<ProfilePage model={model} />
+			<HomePage model={model} />
+			{/* <ProfilePage model={model} /> */}
 		</div>
 	);
 };

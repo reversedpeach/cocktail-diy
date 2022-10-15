@@ -134,6 +134,15 @@
 	flex-direction: row;
 }
 
+.myProfile .barShelf {
+	width: 700px;
+	height: 300px;
+}
+
+.myProfile .barRow {
+	width: 620px;
+}
+
 .myProfile {
 	display: flex;
 	position: absolute;
