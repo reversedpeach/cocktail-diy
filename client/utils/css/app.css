@@ -101,12 +101,10 @@
 }
 
 .barCol {
-
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	flex-direction: column;
-
 }
 
 .barShelf {
@@ -269,8 +267,4 @@ input:checked + .slider:before {
 	justify-content: center;
 	align-items: center;
 	font-size: 30pt;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6a89517ff92598dac8d0c1fdc077909fb501a347
