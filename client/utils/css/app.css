@@ -100,6 +100,15 @@
 	font: "sans-serif";
 }
 
+.barCol {
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	flex-direction: column;
+
+}
+
 .barShelf {
 	/* background-image: url(woodshelf.jpg); */
 	background-image: "../images/woodshelf.jpg";
@@ -116,10 +125,12 @@
 	border-color: rgb(177, 177, 177);
 	box-shadow: 10px 10px 8px #888888;
 	background-color: rgb(255, 255, 255);
+	display: flex;
 }
 
 /* Make the image responsive */
 .barImage {
+	display: flex;
 	width: 80px;
 	filter: grayscale(30%);
 }
@@ -258,4 +269,8 @@ input:checked + .slider:before {
 	justify-content: center;
 	align-items: center;
 	font-size: 30pt;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6a89517ff92598dac8d0c1fdc077909fb501a347
