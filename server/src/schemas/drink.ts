@@ -1,10 +1,22 @@
-import mongoose from "mongoose";
+import {Schema,Types, model} from "mongoose";
 
-const drinkSchema = new mongoose.Schema({
-    name: String,
+
+interface IDrink{
+    name: string;
+    ingredients: {name:String, measurement: Number}, 
+    glassType: string, 
+    createdAt: Date;
+    updatedAt: Date;
+    creator: Types.ObjectId;
+    instructions: string, 
+    img: string;
+}
+
+
+const drinkSchema = new Schema<IDrink>({
+    name: {type: String, required:true},
     ingredients: [{
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "Ingredient",
+        type: {name:String, measurement: Number},
     }],
     glassType: String,
     createdAt: {
@@ -12,20 +24,21 @@ const drinkSchema = new mongoose.Schema({
         immutable: true,
         default: () => Date.now(),
     },
-    updated: {
+    updatedAt: {
         type: Date,
         default: () => Date.now(),
     }, 
     creator: {
-        type: mongoose.SchemaTypes.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",},
     instructions: String,
     img: String,
 })
 
+/*
 drinkSchema.statics.findByIngredient = function(ingredient){
     return this.find({name: new RegExp(ingredient, 'i')}) //i case insencitive
-}
+}*/
 
 
-export default mongoose.model("Drink", drinkSchema);
+export default model("Drink", drinkSchema);

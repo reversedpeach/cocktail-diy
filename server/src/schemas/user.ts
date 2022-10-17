@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import {Schema,Types, model} from "mongoose";
 
 /*
 age: {
@@ -11,9 +11,47 @@ age: {
     },
  */
 
-    
+interface IUser{
+    name: String;
+    email: String;
+    createdAt: Date;
+    updatedAt: Date;
+    friends: Types.ObjectId[];
+    favoriteDrink: Types.ObjectId;
+    likedDrinks: Types.ObjectId[];
+    recentlyMadeDrinks: Types.ObjectId[];
+}  
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema<IUser>({
+    name: {type: String, required:true},
+    email: {type: String, required:true},
+    createdAt: {
+        type: Date,
+        immutable: true,
+        default: () => Date.now(),
+    },
+    updatedAt: {
+        type: Date,
+        default: () => Date.now(),
+    }, 
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: "User",}],
+    favoriteDrink: {
+        type: Schema.Types.ObjectId,
+        ref: "Drink"},
+    likedDrinks: [{
+        type: Schema.Types.ObjectId,
+        ref: "Drink"},],
+    recentlyMadeDrinks: [{
+        type: Schema.Types.ObjectId,
+        ref: "Drink"},],
+})
+
+const userModel = model("User", userSchema);
+
+/*
+const userSchema = new Schema({
     name: String,
     email: {
         type: String,
@@ -30,26 +68,27 @@ const userSchema = new mongoose.Schema({
         default: () => Date.now(),
     }, 
     friends: [{
-        type: mongoose.SchemaTypes.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",}],
     favoriteDrink: {
-        type: mongoose.SchemaTypes.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Drink"},
     likedDrinks: [{
-        type: mongoose.SchemaTypes.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Drink"},],
     recentlyMadeDrinks: [{
-        type: mongoose.SchemaTypes.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Drink"},],
-})
+})*/
 
+/*
 userSchema.methods.sayHi = function(){
     console.log(`Hi, my name is ${this.name}`);
 }
 
 userSchema.statics.findByName = function(name){
     return this.find({name: new RegExp(name, 'i')}) //i case insencitive
-}
+}*/
 /*
 userSchema.query.byName = function(name){
     return this.where({name: new RegExp(name, 'i')}) //i case insencitive
@@ -68,4 +107,4 @@ userSchema.post('save', function(doc, next){
     next();
 })
 */
-export default mongoose.model("User", userSchema);
+export {userModel, IUser};
