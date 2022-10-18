@@ -4,11 +4,14 @@
 }
 
 .drinkresultsList {
+	padding-top: 30px;
+	gap: 5%;
 	display: flex;
 	left: 20px;
 	top: 70px;
 	flex-direction: row;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .resultCol {
@@ -42,9 +45,10 @@
 }
 
 .img {
-	padding: 10%;
+	cursor: pointer;
 	width: 200px;
 	height: 200px;
 	display: flex;
 	justify-content: space-between;
+	border-radius: 20px;
 }
