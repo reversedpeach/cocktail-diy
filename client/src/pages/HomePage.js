@@ -36,31 +36,31 @@ export default function HomePage({ model }) {
 						</div>
 					</div>
 					<div className="searchIngredientForm">
-						<SearchIng
-							model={model}
-							onAdd={(add) => model.addIngShaker(add)} />
+						<SearchIng model={model} addIng={(add) => model.addIngShaker(add)} />
 					</div>
 				</div>
 			</div>
 
-			{currentMode === "create" ? (showResult.length > 0 ?
-				<div className="bottomBox">
-					<CreateTitle />
+			{currentMode === "create" ? (
+				showResult.length > 0 ? (
+					<div className="bottomBox">
+						<CreateTitle />
 
-					<div className="topBox">
-						<div className="resultCol">
-							<CreateDrink model={model} />
-						</div>
-						<div className="resultCol">
-							<CreateInstruc model={model} />
-							<CreateSave />
+						<div className="topBox">
+							<div className="resultCol">
+								<CreateDrink model={model} />
+							</div>
+							<div className="resultCol">
+								<CreateInstruc model={model} />
+								<CreateSave />
+							</div>
 						</div>
 					</div>
-
-
-				</div>
-				: <p></p>)
-				: showResult.length > 0 ? (<div className="bottomBox">
+				) : (
+					<p></p>
+				)
+			) : showResult.length > 0 ? (
+				<div className="bottomBox">
 					<div className="resultCol">
 						<div>
 							<span>Drinks</span>
@@ -70,7 +70,10 @@ export default function HomePage({ model }) {
 							{showDetails === null ? <div></div> : <ResultDetails model={model} />}
 						</div>
 					</div>
-				</div>) : <p></p>}
+				</div>
+			) : (
+				<p></p>
+			)}
 		</div>
 	);
 }

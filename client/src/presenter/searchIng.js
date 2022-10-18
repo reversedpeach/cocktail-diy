@@ -5,7 +5,7 @@ import useModelProp from "../utils/useModelProp.js";
 import CocktailSource from "../cocktailApi.js";
 import "../utils/css/drinkResults.css";
 
-export default function SearchIng({ model, setIng, addIng }) {
+export default function SearchIng({ model, addIng }) {
 	const IngList = useModelProp(model, "mybar");
 	const shakering = useModelProp(model, "currentdrink");
 	const [options, setOptions] = useState([]);
