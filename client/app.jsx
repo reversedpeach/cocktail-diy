@@ -17,8 +17,7 @@ const App = ({ model }) => {
 				<div>
 					<nav>
 						<li>
-							<Link to="/"> Home</Link>
-							<Link to="/profile">Profile</Link>
+							<Link to="/"> Home </Link> <Link to="/profile">Profile</Link>
 						</li>
 					</nav>
 				</div>

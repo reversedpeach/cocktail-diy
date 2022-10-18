@@ -2,7 +2,6 @@
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: column;
-
 }
 
 .discoverBox {
@@ -10,13 +9,11 @@
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	flex-direction: column;
-
 }
 
 .topBox {
 	display: flex;
 	flex-direction: row;
-
 }
 
 .shakerBox {
@@ -139,15 +136,6 @@
 	flex-direction: row;
 }
 
-.myProfile .barShelf {
-	width: 700px;
-	height: 300px;
-}
-
-.myProfile .barRow {
-	width: 620px;
-}
-
 .myProfile {
 	display: flex;
 	position: absolute;
@@ -263,10 +251,6 @@ input:checked + .slider:before {
 	align-self: flex-start;
 	justify-content: center;
 	align-items: center;
-<<<<<<< HEAD
-	font-size: 30pt;
-}
-=======
 	font-size: 28pt;
 	font-family: Verdana;
 	padding-bottom: 10px;
@@ -287,4 +271,3 @@ input:checked + .slider:before {
 	color: #454545;
 	padding-top: 10px;
 }
->>>>>>> 86c8faae4544d73e7c2ef5f43672711c0ed58587
