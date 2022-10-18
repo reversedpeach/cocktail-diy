@@ -17,7 +17,9 @@ const App = ({ model }) => {
 				<div>
 					<nav>
 						<li>
-							<Link to="/"> Home </Link> <Link to="/profile">Profile</Link>
+							<Link to="/"> Home</Link>
+							<Link to="/profile">Profile</Link>
+
 						</li>
 					</nav>
 				</div>
@@ -26,10 +28,12 @@ const App = ({ model }) => {
 					<Route path="/profile" element={<ProfilePage model={model} />} />
 				</Routes>
 			</div>
-		</Router>
-	);
+		</Router >
+	)
 };
+
 
 ReactDOM.render(<App model={model} />, document.querySelector("#app"));
 
 export default App;
+

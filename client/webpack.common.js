@@ -19,7 +19,7 @@ loaders.push(
 );
 export default {
 	entry: {
-		app: "./client/app.jsx",
+		app: "./src/app.jsx",
 	},
 	module: {
 		rules: loaders,

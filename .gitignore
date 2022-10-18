@@ -1,2 +1,7 @@
 node_modules
 .DS_Store
+<<<<<<< HEAD
+=======
+cert
+dist
+>>>>>>> 29f42320e62ab349b1c39041f59594cccdc6b722
