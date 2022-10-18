@@ -13,6 +13,7 @@ import CreateDrink from "../presenter/createDrink.js";
 import CreateInstruc from "../presenter/createInstruc.js";
 import CreateTitle from "../presenter/createTitle.js";
 import CreateSave from "../presenter/createSave.js";
+import ResultTitle from "../presenter/resultTitle.js";
 
 export default function HomePage({ model }) {
 	const showDetails = useModelProp(model, "drinkdetails");
@@ -51,7 +52,6 @@ export default function HomePage({ model }) {
 				showResult.length > 0 ? (
 					<div className="bottomBox">
 						<CreateTitle />
-
 						<div className="topBox">
 							<div className="resultCol">
 								<CreateDrink model={model} />
@@ -69,7 +69,7 @@ export default function HomePage({ model }) {
 				<div className="bottomBox">
 					<div className="resultCol">
 						<div>
-							<span>Drinks</span>
+							<ResultTitle />
 							<div className="drinkresultsList">
 								<ResultsList model={model} />
 							</div>
