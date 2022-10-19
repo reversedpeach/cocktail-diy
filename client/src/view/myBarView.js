@@ -1,10 +1,7 @@
 import React from "react";
 
 const MyBarView = () => {
-    return <div >
-        <h1>
-            <span>My Bar</span>
-        </h1>
+    return <div className="createTitle">My Bar
     </div>
 };
 

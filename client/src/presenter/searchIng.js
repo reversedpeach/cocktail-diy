@@ -37,7 +37,7 @@ export default function SearchIng({ model, setIng }) {
 			options={options}
 			onChange={(e) => {
 				setSelectedOption(e);
-				dic2arr(e);
+				setIng(dic2arr(e));
 			}}
 			isMulti={true}
 		/>

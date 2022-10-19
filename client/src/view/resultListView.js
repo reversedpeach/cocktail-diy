@@ -5,7 +5,7 @@ const ResultListView = ({ image, title, index, setDetails }) => {
     return <div >
         <div key={index} >
             <img src={image} className="img" onClick={setDetails} />
-            <span className="testtext" >
+            <span className="drinkName" >
                 {title}
             </span>
         </div>
