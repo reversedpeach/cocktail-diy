@@ -37,9 +37,7 @@ export default function HomePage({ model }) {
 						</div>
 					</div>
 					<div className="searchIngredientForm">
-						<SearchIng
-							model={model}
-							onAdd={(add) => model.addIngShaker(add)} />
+						<SearchIng model={model} addIng={(add) => model.addIngShaker(add)} />
 					</div>
 				</div>
 			</div>
@@ -56,11 +54,11 @@ export default function HomePage({ model }) {
 							<CreateSave />
 						</div>
 					</div>
-
-
-				</div>
-				: <p></p>)
-				: showResult.length > 0 ? (<div className="bottomBox">
+				) : (
+					<p></p>
+				)
+			) : showResult.length > 0 ? (
+				<div className="bottomBox">
 					<div className="resultCol">
 						<div>
 							<ResultTitle />
@@ -70,7 +68,10 @@ export default function HomePage({ model }) {
 							{showDetails === null ? <div></div> : <ResultDetails model={model} />}
 						</div>
 					</div>
-				</div>) : <p></p>}
+				</div>
+			) : (
+				<p></p>
+			)}
 		</div>
 	);
 }

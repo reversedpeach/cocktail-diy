@@ -19,10 +19,12 @@ export default function ResultsList({ model }) {
 		query = query.slice(0, query.length - 1);
 
 		if (query != "") {
-			im = new Array();
 			const result = await CocktailSource.filterCocktail(query);
-			im = result;
-			setImages(im);
+			if (result != "None Found") setImages(result);
+			else {
+				setImages([]);
+				alert("No drinks found");
+			}
 		}
 	}
 
@@ -47,4 +49,3 @@ export default function ResultsList({ model }) {
 		<p></p>
 	);
 }
-
