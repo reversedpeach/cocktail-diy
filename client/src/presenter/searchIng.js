@@ -43,7 +43,9 @@ export default function SearchIng({ model, addIng }) {
 			value={selectedOption}
 			options={options}
 			onChange={(e) => {
+
 				addIng(dic2arr(e));
+
 			}}
 			isMulti={true}
 		/>

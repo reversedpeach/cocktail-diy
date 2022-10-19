@@ -14,9 +14,9 @@ const App = ({ model }) => {
 	return (
 		<Router>
 			<div>
-				<div>
+				<div className="navBar">
 					<nav>
-						<li>
+						<li className="navBarLink">
 							<Link to="/"> Home</Link>
 							<Link to="/profile">Profile</Link>
 

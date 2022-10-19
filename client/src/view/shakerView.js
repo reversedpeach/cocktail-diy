@@ -1,5 +1,5 @@
 import React from "react";
-import shaker from "../utils/images/shaker.jpg";
+import shaker from "../utils/images/shaker.png";
 
 const ShakerView = () => {
 	return (
