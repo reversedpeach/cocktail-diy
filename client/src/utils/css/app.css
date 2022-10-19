@@ -106,7 +106,7 @@
 	background-repeat: repeat;
 	background-size: 520px 111px;
 	background-position: 0% 32%;
-	width: 500px;
+	width: 590px;
 	height: 195px;
 	padding-bottom: 50px;
 	padding-top: 20px;
@@ -128,7 +128,7 @@
 
 .barRow {
 	padding-left: 50px;
-	width: 420px;
+	/* width: 420px; */
 	gap: 30px 2px;
 	display: flex;
 	flex-wrap: wrap;
@@ -270,4 +270,9 @@ input:checked + .slider:before {
 	font-style: italic;
 	color: #454545;
 	padding-top: 10px;
+}
+
+.followList {
+	padding-left: 40px;
+	padding-top: 30px;
 }
