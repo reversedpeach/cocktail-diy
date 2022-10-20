@@ -1,14 +1,15 @@
 .drinkresults {
 	display: flex;
 	flex-direction: column;
+
 }
 
 .drinkresultsList {
-	padding-top: 30px;
-	gap: 5%;
+	margin: 20px;
+	padding-right: 30px;
+	padding-left: 30px;
+	column-gap: 5%;
 	display: flex;
-	left: 20px;
-	top: 70px;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -17,38 +18,30 @@
 .resultCol {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .searchIngredientForm {
 	left: 10%;
-	padding-top: 10px;
+	padding-top: 50px;
 	display: flex;
 	justify-content: flex-start;
-	width: 300px;
+	width: 400px;
 }
 
-.testlogo {
-	background-color: springgreen;
-	display: flex;
-	justify-content: flex-start;
-	height: 100px;
-	width: 100px;
-}
-
-.testtext {
-	word-wrap: break-word;
-	text-align: center;
-	top: 120px;
-	width: 99px;
-	display: flex;
-	justify-content: flex-start;
-}
 
 .img {
+	margin: 10px;
 	cursor: pointer;
 	width: 200px;
 	height: 200px;
 	display: flex;
 	justify-content: space-between;
-	border-radius: 20px;
+	border-radius: 100%;
+	border-color: white;
+	border-width: 2px;
+	border-style: solid;
+	box-shadow: 1px 1px 4px #3c3c3c;
+
 }
