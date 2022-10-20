@@ -2,6 +2,7 @@ class CocktailModel {
 	constructor() {
 		this.username = "";
 		this.password = "";
+		this.seeingUsername = "";
 		this.subscribers = [];
 		this.mybar = [
 			"Gin",
@@ -24,7 +25,8 @@ class CocktailModel {
 		this.recentdrinks = ["Lone Tree Cocktail", "Rose", "Tom Collins", "Martini"];
 		this.following = ["Beatrice", "Marcus", "Rongfei", "Mr.unknown"];
 		this.users = ["asdf", "b23", "sdfas", "mhj", "vbv0", "xcer", "sdua", "x45w", "ppoz", "mnvr"];
-		this.userdrinks = ["whaha water", "rapsolja", "mainbudle", "testing drinks"];
+		this.userdrinks = ["whaha water"];
+		this.alluserdrinks = ["whaha water", "rapsolja", "mainbudle", "testing drinks"];
 	}
 
 	addMyBar(ing) {

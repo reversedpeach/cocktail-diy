@@ -5,16 +5,20 @@ import useModelProp from "../utils/useModelProp.js";
 import MyProfileView from "../view/myProfileView.js";
 import CocktailSource from "../cocktailApi.js";
 
-export default function MyProfile({ model }) {
-	const favoritedrinks = useModelProp(model, "favoritedrinks");
-	const likeddrinks = useModelProp(model, "likeddrinks");
-	const recentdrinks = useModelProp(model, "recentdrinks");
-	const following = useModelProp(model, "following");
-	const users = useModelProp(model, "users");
-	const madedrinks = useModelProp(model, "userdrinks");
-	const mybar = useModelProp(model, "mybar");
+export default function MyProfile(props) {
+	const favoritedrinks = useModelProp(props.model, "favoritedrinks");
+	const likeddrinks = useModelProp(props.model, "likeddrinks");
+	const recentdrinks = useModelProp(props.model, "recentdrinks");
+	const following = useModelProp(props.model, "following");
+	const users = useModelProp(props.model, "users");
+	const madedrinks = useModelProp(props.model, "userdrinks");
+	const mybar = useModelProp(props.model, "mybar");
 	const [allIng, setAllIng] = useState([]);
 	const [allUsers, setUsers] = useState([]);
+	const [showSearchingForm, setShow] = useState(false);
+	const [showSearchingFriend, setFriend] = useState(false);
+	const [selectedIngOptions, setSelectedIngOptions] = useState([]);
+	const [followButton, setFollow] = useState(false);
 
 	async function getAllIng() {
 		const allIngList = await CocktailSource.getAllIngredients();
@@ -29,6 +33,7 @@ export default function MyProfile({ model }) {
 			t = t.concat({ value: user, label: user });
 		}
 		setUsers(t);
+		props.model.seeingUsername = "";
 	}
 
 	useEffect(() => {
@@ -37,7 +42,7 @@ export default function MyProfile({ model }) {
 
 	return (
 		<MyProfileView
-			model={model}
+			model={props.model}
 			favoritedrinks={favoritedrinks}
 			likeddrinks={likeddrinks}
 			recentdrinks={recentdrinks}
@@ -45,6 +50,13 @@ export default function MyProfile({ model }) {
 			madedrinks={madedrinks}
 			allIng={allIng}
 			allUsers={allUsers}
+			showSearchingForm={showSearchingForm}
+			showSearchingFriend={showSearchingFriend}
+			selectedIngOptions={selectedIngOptions}
+			followButton={followButton}
+			setshow={setShow}
+			setFriend={setFriend}
+			setShowCom={props.setShowCom}
 		/>
 	);
 }

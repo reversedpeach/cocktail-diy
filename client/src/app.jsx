@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
+import CommunityPage from "./pages/CommunityPage";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const model = readModel();
@@ -23,6 +24,7 @@ const App = ({ model }) => {
 							<Link to="/profile"> Profile </Link>
 							<Link to="/login"> Log in </Link>
 							<Link to="/register"> register </Link>
+							<Link to="/community"> community </Link>
 						</li>
 					</nav>
 				</div>
@@ -31,6 +33,7 @@ const App = ({ model }) => {
 					<Route path="/profile" element={<ProfilePage model={model} />} />
 					<Route path="/login" element={<LoginPage model={model} />} />
 					<Route path="/register" element={<Register model={model} />} />
+					<Route path="/community" element={<CommunityPage model={model} />} />
 				</Routes>
 			</div>
 		</Router>
