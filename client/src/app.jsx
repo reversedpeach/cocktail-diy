@@ -6,6 +6,9 @@ import readModel from "./readModel.js";
 
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
+import LoginPage from "./pages/LoginPage";
+import Register from "./pages/Register";
+import CommunityPage from "./pages/CommunityPage";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import styled from "styled-components";
@@ -81,27 +84,31 @@ const App = ({ model }) => {
 		<Router>
 			<div>
 				<div>
+
 					<StyledNavBar>
 
 						<StyledNavWrapEnd>
 							<StyledLink to="/"> Home</StyledLink>
-							<StyledLink to="/">Community</StyledLink>
+							<StyledLink to="/community">Community</StyledLink>
 							<StyledLink to="/profile"> Profile</StyledLink>
-							<StyledLink to="/"> Logout</StyledLink>
+							<StyledLink to="/login"> Login</StyledLink>
+              <Link to="/register"> Register </Link>
 						</StyledNavWrapEnd>
 					</StyledNavBar>
+
 				</div>
 				<Routes>
 					<Route path="/" element={<HomePage model={model} />} />
 					<Route path="/profile" element={<ProfilePage model={model} />} />
+					<Route path="/login" element={<LoginPage model={model} />} />
+					<Route path="/register" element={<Register model={model} />} />
+					<Route path="/community" element={<CommunityPage model={model} />} />
 				</Routes>
 			</div>
-		</Router >
-	)
+		</Router>
+	);
 };
-
 
 ReactDOM.render(<App model={model} />, document.querySelector("#app"));
 
 export default App;
-

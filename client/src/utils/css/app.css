@@ -139,9 +139,11 @@
 
 .barShelf {
 
+
 	width: 460px;
 	height: 300px;
 	padding-bottom: 30px;
+
 	padding-top: 20px;
 	border-radius: 20px;
 	border: 3px;
@@ -165,10 +167,12 @@
 }
 
 .barRow {
+
 	padding-left: 20px;
 	padding-right: 20px;
 	width: 420px;
 	gap: 10px 2px;
+
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
@@ -299,4 +303,13 @@ input:checked+.slider:before {
 	color: #7F7F7F;
 	;
 	padding-top: 10px;
+
 }
+
+.followList {
+	padding-left: 40px;
+	padding-top: 30px;
+}
+
+
+
