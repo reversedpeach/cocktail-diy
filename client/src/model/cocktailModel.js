@@ -2,7 +2,7 @@ class CocktailModel {
 	constructor() {
 		this.username = "";
 		this.password = "";
-		this.seeingUsername = "";
+		this.seeingUsername = "User123";
 		this.subscribers = [];
 		this.mybar = [
 			"Gin",

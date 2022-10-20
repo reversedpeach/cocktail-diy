@@ -92,7 +92,7 @@ const App = ({ model }) => {
 							<StyledLink to="/community">Community</StyledLink>
 							<StyledLink to="/profile"> Profile</StyledLink>
 							<StyledLink to="/login"> Login</StyledLink>
-              <Link to="/register"> Register </Link>
+							<StyledLink to="/register"> Register </StyledLink>
 						</StyledNavWrapEnd>
 					</StyledNavBar>
 
