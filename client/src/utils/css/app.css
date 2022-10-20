@@ -35,6 +35,16 @@
 	justify-content: center;
 	align-items: flex-start;
 	gap: 3%;
+}
+
+.rowBoxLeft {
+	display: flex;
+	flex-direction: row;
+	align-content: flex-start;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 3%;
+	margin-left: 55px;
 
 }
 
@@ -181,6 +191,7 @@
 
 .myProfile {
 	display: flex;
+	flex-direction: row;
 	position: absolute;
 	top: 30px;
 }
@@ -310,6 +321,3 @@ input:checked+.slider:before {
 	padding-left: 40px;
 	padding-top: 30px;
 }
-
-
-
