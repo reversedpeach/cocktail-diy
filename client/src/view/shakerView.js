@@ -1,10 +1,20 @@
 import React from "react";
-import shaker from "../utils/images/shaker.png";
+import shaker from "../utils/images/shaker2.0.png";
+import styled from "styled-components";
+
+const StyledShaker = styled.img`
+	margin-left: 0%;
+	height:360px
+`
+
+
+
 
 const ShakerView = () => {
+
 	return (
 		<div>
-			<img className="shakerImg" src={shaker} />
+			<StyledShaker src={shaker} />
 		</div>
 	);
 };

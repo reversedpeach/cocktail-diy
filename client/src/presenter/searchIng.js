@@ -4,12 +4,28 @@ import Select from "react-select";
 import useModelProp from "../utils/useModelProp.js";
 import CocktailSource from "../cocktailApi.js";
 import "../utils/css/drinkResults.css";
+import styled from "styled-components";
+
+
 
 export default function SearchIng({ model, addIng }) {
 	const IngList = useModelProp(model, "mybar");
 	const shakering = useModelProp(model, "currentdrink");
 	const [options, setOptions] = useState([]);
 	const currentOptions = [];
+
+	const customStyles = {
+
+		option: (styles, state) => ({
+			...styles,
+			cursor: 'pointer',
+		}),
+		control: (styles) => ({
+			...styles,
+			cursor: 'pointer',
+			border: '3px solid rgb(127,127,127)',
+		})
+	};
 
 	const [selectedOption, setSelectedOption] = useState(currentOptions);
 
@@ -40,8 +56,10 @@ export default function SearchIng({ model, addIng }) {
 
 	return (
 		<Select
+			styles={customStyles}
 			value={selectedOption}
 			options={options}
+			placeholder="Search for an ingredient to add"
 			onChange={(e) => {
 
 				addIng(dic2arr(e));
