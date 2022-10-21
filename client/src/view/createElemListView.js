@@ -17,9 +17,9 @@ const StyledDesc = styled.div`
 
 
 
-const createElemListView = ({ ingredient }) => {
+const createElemListView = ({ ingredient, id }) => {
 	return <StyledDesc> {ingredient}
-		<input type="text" placeholder="Amount" />
+		<input type="text" placeholder="Amount" id={id} />
 	</StyledDesc>
 
 };

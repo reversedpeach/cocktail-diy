@@ -120,7 +120,7 @@ export default function HomePage({ model }) {
 						</div>
 						<div className="resultCol">
 							<StyledTitle>Upload an image</StyledTitle>
-							<CreateSave />
+							<CreateSave model={model} />
 						</div>
 					</div>
 				</div>
