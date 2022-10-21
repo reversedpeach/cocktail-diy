@@ -1,101 +1,125 @@
 //Here all database queries are defined.
 import mongoose from "mongoose";
-import {userModel, IUser} from "./schemas/user";
-import Drink from "./schemas/drink";
-import ingredient from "./schemas/ingredient";
-const User =userModel;
+import { userModel, IUser } from "./schemas/user";
+import { drinkModel } from "./schemas/drink";
+import { createDiffieHellmanGroup } from "crypto";
+const User = userModel;
+const Drink = drinkModel;
 
 //Create user
-async function createUser(name: String, email: String){
-    const user = new User({ name: name, email: email});
+async function createUser(name: String, email: String, password: String) {
+    const user = new User({ name: name, email: email, password: password });
     console.log("hejsan", user);
     user.save();
     console.log("Saved user: ", user);
     return user;//.id
 }
 
-async function getUsers(){
+async function setMybar(myNewBar: String[], userID: String) {
+    const res = await User.updateOne({ "id": userID }, { "myBar": myNewBar });
+    const updatedUser = await User.findById(userID);
+    return updatedUser.myBar;
+}
+
+async function getUsers() {
     console.log('reached getting users');
     return await User.find().populate('friends');
     /*console.log(typeof users);
     return users;*/
 }
 
-async function getUserByID(id:String){
-    console.log('reached getUser with id ',id);
+async function getUserByID(id: String) {
     const user = await User.findById(id).populate('friends');
     return user;
 }
 
-async function getUserByName(name:String){
-    console.log('reached getUser with name ',name);
-    User.findOne({'name': name}, 'name', function (err, results){
+async function getUserByName(name: String) {
+    console.log('reached getUser with name ', name);
+    User.findOne({ 'name': name }, 'name', function (err, results) {
         console.log(err);
         console.log(results);
         return results;
     })
 }
 
-async function getFriends(id:String){
-    const user = await User.find({"id": id}).populate('friends')
-    console.log('user:', user);
-    //return friends;
+async function getUserByEmail(email: String) {
+    return await User.findOne({ 'email': email });
 }
 
+async function getFriends(id: String) {
+    const user = await User.findById(id).populate('friends');
+    return user.friends;
+}
 
-async function getIngredients(id:String){
-    const drink = await Drink.find({"id": id}).populate('ingredients')
-    //const ingredients = drink['ingredients'];
-    console.log('Drink:', drink);
-    //return ingredients;
+//Add validation for this, cannot add same friend twice or add oneself as friend
+async function addFriend(userID: String, friendID: mongoose.Types.ObjectId) {
+    const user = await User.findById(userID);
+    var friends = user.friends;
+    friends.push(friendID);
+    const res = await User.updateOne({ "id": userID }, { "friends": friends });
+    const updatedUser = await User.findById(userID).populate('friends');
+    return updatedUser.friends;
 }
 
 //Create drink 
-async function createDrink(name: String, ingredients: Ingredient[], creatorID: String, glassType: String, instructions: String, img: String ){ //mongoose.Types.ObjectId
-    //console.log("ingredients:", ingredients);
-    const drink = await Drink.create({ 
+async function createDrink(name: String, ingredients: Ingredient[], creatorID: String, glassType: String, instructions: String, img: String) { //mongoose.Types.ObjectId
+    const drink = await Drink.create({
         name: name,
         ingredients: ingredients,
         creator: creatorID,
-        glassType : glassType,
+        glassType: glassType,
         instructions: instructions,
         img: img,
     });
     drink.save();
+    registerCreatedDrink(creatorID, drink._id);
     return drink;
 }
 
-interface Ingredient{
-    name: String, 
+async function registerCreatedDrink(userID: String, drinkID: mongoose.Types.ObjectId) {
+    const user = await getUserByID(userID);
+    var madeDrinks = user.createdDrinks;
+    madeDrinks.push(drinkID);
+    const res = await User.updateOne({ "id": userID }, { "createdDrinks": madeDrinks });
+}
+
+interface Ingredient {
+    name: String,
     measurement: Number
 }
-//Get drink by ingredient 
-async function getDrinksByIngredient(ingredients:Ingredient[]) {
-    //console.log('ingredients: ', ingredients.map(ingredient => {return ingredient.name;}));
-    console.log(ingredients);
-    const ingrednames = ingredients.map((ingredient) =>{return ingredient.name});
-    const drinks = await Drink.find({"ingredients.name": {"§in":ingredients} });
+
+function containsAllIngredients(drinkIngredients: String[], ingredients: String[]): boolean {
+    const result = ingredients.every((ingred) => {
+        const contains = drinkIngredients.includes(ingred);
+        return contains;
+    })
+    return result;
+}
+
+async function getDrinksByIngredients(ingredients: String[]) {
+    const drinks = await Drink.find({ "ingredients.name": { "$in": ingredients } }); //§
+    const filteredDrinks = drinks.filter((drink) => {
+        const drinkIngreds = drink.ingredients.map((ingred) => { return ingred.name });
+        return containsAllIngredients(drinkIngreds, ingredients);
+    })
+    return filteredDrinks;
+}
+
+async function getDrinksByCreator(id: String) {
+    const drinks = await Drink.find({ "creator": id });
     return drinks;
 }
 
-async function getDrinksByCreator(id:mongoose.Types.ObjectId) {
-    //console.log('id:',id.toString());
-    const user = await User.findById(id);
-    console.log('found user via get drinks:',user);
-    const drinks = await Drink.findOne({"creator": id});
-    return drinks;
-}
-
-async function getDrinkByName(name:String) {
-    console.log("got to getDrink function, name is:", name);
-    const drink = await Drink.find({"name": name});
-    console.log("Found drink in db:",drink);
+async function getDrinkByName(name: String) {
+    console.log("fetching from database with name: ", name);
+    const drink = await Drink.findOne({ "name": name });
+    console.log(drink);
     return drink;
 }
 
+async function getDrinkByID(id: String) {
+    return await Drink.findById(id);
+}
 
-
-//Get drink by ingredients
-
-export {createDrink, createUser, getDrinksByCreator, getDrinkByName, getUserByID,getUserByName, getUsers, getFriends, getIngredients, getDrinksByIngredient, Ingredient}
+export { addFriend, setMybar, createDrink, createUser, getDrinksByCreator, getDrinkByID, getDrinkByName, getUserByID, getUserByName, getUserByEmail, getUsers, getFriends, getDrinksByIngredients, Ingredient }
 

@@ -1,23 +1,21 @@
-import {Schema,Types, model} from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 
-interface IDrink{
+interface IDrink {
     name: string;
-    ingredients: {name:String, measurement: Number}, 
-    glassType: string, 
+    ingredients: { name: String, measurement: Number }[],
+    glassType: string,
     createdAt: Date;
     updatedAt: Date;
     creator: Types.ObjectId;
-    instructions: string, 
+    instructions: string,
     img: string;
 }
 
-
+//{type: {name:String, measurement: Number},}
 const drinkSchema = new Schema<IDrink>({
-    name: {type: String, required:true},
-    ingredients: [{
-        type: {name:String, measurement: Number},
-    }],
+    name: { type: String, required: true },
+    ingredients: [Schema.Types.Mixed],
     glassType: String,
     createdAt: {
         type: Date,
@@ -27,10 +25,11 @@ const drinkSchema = new Schema<IDrink>({
     updatedAt: {
         type: Date,
         default: () => Date.now(),
-    }, 
+    },
     creator: {
         type: Schema.Types.ObjectId,
-        ref: "User",},
+        ref: "User",
+    },
     instructions: String,
     img: String,
 })
@@ -40,5 +39,6 @@ drinkSchema.statics.findByIngredient = function(ingredient){
     return this.find({name: new RegExp(ingredient, 'i')}) //i case insencitive
 }*/
 
+const drinkModel = model("Drink", drinkSchema);
 
-export default model("Drink", drinkSchema);
+export { drinkModel, IDrink };
