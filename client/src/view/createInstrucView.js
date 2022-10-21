@@ -16,7 +16,7 @@ justify-content: center;
 const createInstrucView = () => {
 
     return <div>
-        <StyledInstructions placeholder="Start with mixing..." rows="8" cols="40"></StyledInstructions>
+        <StyledInstructions id="instructions" placeholder="Start with mixing..." rows="8" cols="40"></StyledInstructions>
     </div>
 
 

@@ -1,6 +1,8 @@
+import { CommentsDisabledOutlined } from "@mui/icons-material";
+
 class CocktailModel {
 	constructor() {
-		this.username = "";
+		this.username = "User123";
 		this.password = "";
 		this.seeingUsername = "User123";
 		this.subscribers = [];
@@ -19,7 +21,7 @@ class CocktailModel {
 		this.currentdrink = []; // array with ingredients
 		this.drinkdetails = null;
 		this.selectedmode = "discover";
-		this.createddrink = [];
+		this.createddrink = { ingredients: [], measurements: [], instructions: "", img: "" }
 		this.favoritedrinks = "Pink Moon";
 		this.likeddrinks = ["Abbey Cocktail", "Pink Moon", "Singapore Sling"];
 		this.recentdrinks = ["Lone Tree Cocktail", "Rose", "Tom Collins", "Martini"];
@@ -42,6 +44,23 @@ class CocktailModel {
 		}
 		this.notifyObservers();
 	}
+
+	addMeasurementsDrink(mea) {
+		this.createddrink.measurements.push(mea)
+		this.notifyObservers();
+	}
+
+	addIngredientsDrink(ing) {
+		this.createddrink.ingredients.push(ing)
+		this.notifyObservers();
+	}
+
+	addInstructionsDrink(ins) {
+		this.createddrink.instructions = ins;
+		this.notifyObservers();
+	}
+
+
 
 	setIngList(ingList) {
 		this.currentdrink = ingList;

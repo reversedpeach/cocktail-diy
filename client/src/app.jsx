@@ -84,9 +84,7 @@ const App = ({ model }) => {
 		<Router>
 			<div>
 				<div>
-
 					<StyledNavBar>
-
 						<StyledNavWrapEnd>
 							<StyledLink to="/"> Home</StyledLink>
 							<StyledLink to="/community">Community</StyledLink>
