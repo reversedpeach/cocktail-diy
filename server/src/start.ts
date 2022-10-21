@@ -1,78 +1,55 @@
-import express, {Application} from "express";
-import path from "path";
-import https from "https";
-import fs from "fs";
-import cors from "cors";
-//cookies
-import cookieParser from "cookie-parser";
-
-//: Application
-const app = express();
-
-const port = process.env.PORT || 8080;
-
-const router = express.Router();
-
-const options = {
-    key: fs.readFileSync("./cert/localhost-key.pem"),
-    cert: fs.readFileSync("./cert/localhost.pem"),
-}
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
+import { typeDefs } from './graphql/typeDefs';
+import { resolvers } from './graphql/resolvers';
+import { IUser } from "./schemas/user";
+import { getUser } from "./auth";
+import mongoose from "mongoose";
+import { CocktailsAPI } from "./cocktail-api";
 
 
-//middlewares
-if(!(process.env.NODE_ENV === "production")){
-    app.use(cors({credentials:true, origin: "https://localhost:8080"}));
-}
 
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, "../../dist")));
-
-app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-    console.log("Hello, just parring by!");
-    next();
-});
-
-//Authentication middleware
-app.use("/", (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    if(!auth){
-        res.status(403).send
+interface MyContext {
+    user: IUser
+    dataSources: {
+        cocktailsAPI: CocktailsAPI;
     }
-    //req.headers. can access the authoriation token wia headers
-    next();
+}
+
+
+// The ApolloServer constructor requires two parameters: your schema
+// definition and your set of resolvers.
+const server = new ApolloServer<MyContext>({
+    typeDefs,
+    resolvers,
 });
 
-app.get("/", (req: express.Request, res: express.Response) =>{
-    const htmlFile = path.join(__dirname, "../../dist/index.html");
+// Passing an ApolloServer instance to the `startStandaloneServer` function:
+//  1. creates an Express app
+//  2. installs your ApolloServer instance as middleware
+//  3. prepares your app to handle incoming requests
 
-    res.status(200).cookie(`My cookie`, "Some encrypted cookie value", {
-        //maxAge: 5000,
-        expires: new Date("2022-10-01"),
-        secure: true,
-        httpOnly: true,
-        sameSite: "lax",
-    }).send(htmlFile);
-})
+startStandaloneServer(server, {
+    context: async ({ req, res }) => {
 
-//Routes
-router.get("/api/getsomedata",(req: express.Request, res: express.Response) => {
-    console.log("Im in the get stuff route");
-    setTimeout(()=>{
-        res.status(200).send({someData:"All good"});
-    }, 1000);
+        const { cache } = server;
+        // Get the user token from the headers.
+        const token = req.headers.authorization || '';
+        //console.log(token);
+        // Try to retrieve a user with the token
+        const user = await getUser(token);
+
+        // Add the user to the context
+        return {
+            user,
+            dataSources: {
+                cocktailsAPI: new CocktailsAPI({ cache }), //token: process.env.APIKEY,
+            }
+        };
+    },
+    listen: { port: 4000 },
+}).then((url) => {
+    require('dotenv').config();
+    mongoose.connect("mongodb://localhost/appdb");
+    console.log(`🚀  Server ready at:`, url.url);
 });
-
-//Sensitive data:
-//router.post()
-
-//Add data:
-//router.put()
-
-//delete data:
-//router.delete()
-
-const server = https.createServer(options, app);
-
-server.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
-})
