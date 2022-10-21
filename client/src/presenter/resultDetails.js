@@ -24,12 +24,13 @@ export default function ResultDetails({ model }) {
         }
     }
 
-    return (drink !== null ? 
-    <ResultDetailsView 
-    title={drink["strDrink"]} 
-    ingredients={recipe} 
-    instructions={drink["strInstructions"]} 
-    image={drink["strDrinkThumb"]} 
-    glass={drink["strGlass"]} 
-    alcoholic={drink["strAlcoholic"]} /> : promiseNoData(promise, drink, error));
+    return (drink !== null ?
+        <ResultDetailsView
+            title={drink["strDrink"]}
+            ingredients={recipe}
+            instructions={drink["strInstructions"]}
+            image={drink["strDrinkThumb"]}
+            glass={drink["strGlass"]}
+            alcoholic={drink["strAlcoholic"]}
+            endDetails={() => model.setDetails(null)} /> : promiseNoData(promise, drink, error));
 }

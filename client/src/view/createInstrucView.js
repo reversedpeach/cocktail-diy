@@ -1,18 +1,22 @@
 import React from "react";
+import styled from 'styled-components';
 
+const StyledInstructions = styled.textarea`
+display: flex;
+font-size: 12pt;
+font-family: Helvetica;
+padding: 2px;
+color: #7F7F7F;;
+margin-top: 5px;
+width: 200px;
+justify-content: center;
+
+
+`
 const createInstrucView = () => {
 
     return <div>
-        <div>
-            <label>Instructions:</label>
-            <br></br>
-            <textarea placeholder="Start with mixing..." rows="10" cols="30"></textarea>
-        </div>
-        <form action={console.log("uploaded")}>
-            <label for="img">Upload image:</label>
-            <input type="file" id="img" name="img" accept="image/*" />
-            <input type="submit" />
-        </form>
+        <StyledInstructions placeholder="Start with mixing..." rows="8" cols="40"></StyledInstructions>
     </div>
 
 

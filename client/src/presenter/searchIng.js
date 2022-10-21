@@ -2,30 +2,53 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
 import useModelProp from "../utils/useModelProp.js";
+import CocktailSource from "../cocktailApi.js";
 import "../utils/css/drinkResults.css";
+import styled from "styled-components";
 
-export default function SearchIng({ model, setIng }) {
+
+
+export default function SearchIng({ model, addIng }) {
 	const IngList = useModelProp(model, "mybar");
 	const shakering = useModelProp(model, "currentdrink");
-	const options = [];
+	const [options, setOptions] = useState([]);
 	const currentOptions = [];
 
-	for (const ing of IngList) {
-		options.push({ value: ing, label: ing });
-	}
-	for (const curIng of shakering) {
-		currentOptions.push({ value: curIng, label: curIng });
-	}
+	const customStyles = {
+
+		option: (styles, state) => ({
+			...styles,
+			cursor: 'pointer',
+		}),
+		control: (styles) => ({
+			...styles,
+			cursor: 'pointer',
+			border: '3px solid rgb(127,127,127)',
+		})
+	};
+
 	const [selectedOption, setSelectedOption] = useState(currentOptions);
 
-	function dic2arr(ingDic) {
-		const ingList = [];
-		for (const value of ingDic) {
-			ingList.push(value["value"]);
+	async function getAllIng() {
+		const allIng = await CocktailSource.getAllIngredients();
+		let op = [];
+		for (const ing of allIng.drinks) {
+			op = op.concat({ value: ing["strIngredient1"], label: ing["strIngredient1"] });
 		}
-		// console.log(ingList);
-		return ingList;
+		for (const curIng of shakering) {
+			currentOptions = currentOptions.concat({ value: curIng, label: curIng });
+		}
+		setOptions(op);
+		setSelectedOption(currentOptions);
 	}
+
+	function dic2arr(ingDic) {
+		return ingDic[0]["value"];
+	}
+
+	useEffect(() => {
+		getAllIng();
+	}, []);
 
 	useEffect(() => {
 		setSelectedOption(currentOptions);
@@ -33,11 +56,14 @@ export default function SearchIng({ model, setIng }) {
 
 	return (
 		<Select
+			styles={customStyles}
 			value={selectedOption}
 			options={options}
+			placeholder="Search for an ingredient to add"
 			onChange={(e) => {
-				setSelectedOption(e);
-				dic2arr(e);
+
+				addIng(dic2arr(e));
+
 			}}
 			isMulti={true}
 		/>
