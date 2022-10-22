@@ -9,6 +9,7 @@ export default function CommunityView(props) {
 				return (
 					<li
 						key={index}
+						style={{ width: 120 }}
 						onClick={() => {
 							props.model.seeingUsername = value;
 							props.setShowCom(true);

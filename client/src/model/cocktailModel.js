@@ -1,6 +1,6 @@
 class CocktailModel {
 	constructor() {
-		this.username = "";
+		this.username = "User123";
 		this.password = "";
 		this.seeingUsername = "User123";
 		this.subscribers = [];
@@ -27,6 +27,16 @@ class CocktailModel {
 		this.users = ["asdf", "b23", "sdfas", "mhj", "vbv0", "xcer", "sdua", "x45w", "ppoz", "mnvr"];
 		this.userdrinks = ["whaha water"];
 		this.alluserdrinks = ["whaha water", "rapsolja", "mainbudle", "testing drinks"];
+	}
+
+	setUserName(username) {
+		this.username = username;
+		this.notifyObservers();
+	}
+
+	setSeeingUserName(seeingUsername) {
+		this.seeingUsername = seeingUsername;
+		this.notifyObservers();
 	}
 
 	addMyBar(ing) {
