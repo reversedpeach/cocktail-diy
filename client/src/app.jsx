@@ -80,6 +80,8 @@ padding-right: 20px;
 const model = readModel();
 
 const App = ({ model }) => {
+
+	console.log(model);
 	return (
 		<Router>
 			<div>

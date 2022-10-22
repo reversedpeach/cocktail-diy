@@ -5,9 +5,6 @@ import "../utils/css/drinkResults.css";
 import getFormData from "../utils/getFormData.js";
 
 function CreateElemList({ model }) {
-    // const [promise, setPromise] = React.useState(null);
-    // React.useEffect(() => setPromise(CocktailSource.getIngredient("vodka")), []);
-    // const [data, error] = usePromise(promise);
     const ingredients = useModelProp(model, "currentdrink");
 
     return ingredients.map((ing, index) => (

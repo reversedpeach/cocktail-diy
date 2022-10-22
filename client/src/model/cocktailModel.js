@@ -21,7 +21,7 @@ class CocktailModel {
 		this.currentdrink = []; // array with ingredients
 		this.drinkdetails = null;
 		this.selectedmode = "discover";
-		this.createddrink = { ingredients: [], measurements: [], instructions: "", img: "" }
+		this.createddrink = { ingredients: [], measurements: [], instructions: "", img: "", glass: "", type: "" }
 		this.favoritedrinks = "Pink Moon";
 		this.likeddrinks = ["Abbey Cocktail", "Pink Moon", "Singapore Sling"];
 		this.recentdrinks = ["Lone Tree Cocktail", "Rose", "Tom Collins", "Martini"];
@@ -57,6 +57,16 @@ class CocktailModel {
 
 	addInstructionsDrink(ins) {
 		this.createddrink.instructions = ins;
+		this.notifyObservers();
+	}
+
+	addTypeDrink(ty) {
+		this.createddrink.type = ty;
+		this.notifyObservers();
+	}
+
+	addGlassDrink(gla) {
+		this.createddrink.glass = gla;
 		this.notifyObservers();
 	}
 

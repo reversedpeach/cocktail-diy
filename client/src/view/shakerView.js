@@ -4,17 +4,15 @@ import styled from "styled-components";
 
 const StyledShaker = styled.img`
 	margin-left: 0%;
-	height:360px
+	height:360px	
 `
 
+const ShakerView = ({ onDrop, onDragOver }) => {
 
-
-
-const ShakerView = () => {
 
 	return (
 		<div>
-			<StyledShaker src={shaker} />
+			<StyledShaker src={shaker} ondrop={(ev) => onDrop(ev)} ondragover={(ev) => onDragOver(ev)} />
 		</div>
 	);
 };

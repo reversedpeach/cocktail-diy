@@ -1,9 +1,24 @@
+import { ContactSupportOutlined } from "@mui/icons-material";
 import React from "react";
 import ShakerView from "../view/shakerView.js";
 
-function Shaker() {
+function Shaker({ model }) {
+
+
+	function allowDrop(ev) {
+		ev.preventDefault();
+	}
+
+	function drop(ev) {
+		console.log("kommer hit")
+		var data = ev.dataTransfer.getData("text");
+		model.addIngShaker(data);
+
+	}
+
+
 	return (
-		<ShakerView />
+		<ShakerView onDrop={console.log("drop")} onDragOver={(ev) => allowDrop(ev)} />
 	)
 };
 
