@@ -11,7 +11,6 @@ export default function ResultDetails({ model }) {
     const id = useModelProp(model, "drinkdetails");
     useEffect(() => { setPromise(CocktailSource.idGetCocktail(id)) }, [id]);
     const [drink, error] = usePromise(promise);
-    console.log(drink);
     const alcoholic = undefined;
     let recipe = [];
 
@@ -19,7 +18,6 @@ export default function ResultDetails({ model }) {
         for (let i = 1; i < 16; i++) {
             if (drink["strIngredient" + i] !== null) {
                 recipe.push({ ingredient: drink["strIngredient" + i], amount: drink["strMeasure" + i] });
-                console.log(recipe);
             }
         }
     }

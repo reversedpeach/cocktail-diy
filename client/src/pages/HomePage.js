@@ -13,6 +13,8 @@ import CreateDrink from "../presenter/createDrink.js";
 import CreateInstruc from "../presenter/createInstruc.js";
 import CreateTitle from "../presenter/createTitle.js";
 import CreateSave from "../presenter/createSave.js";
+import CreateType from "../presenter/createType.js";
+import CreateGlass from "../presenter/createTypeGlass.js";
 import ResultTitle from "../presenter/resultTitle.js";
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -119,6 +121,8 @@ export default function HomePage({ model }) {
 
 						</div>
 						<div className="resultCol">
+							<select id="glasslist"><CreateGlass /></select>
+							<select id="typelist"><CreateType /></select>
 							<StyledTitle>Upload an image</StyledTitle>
 							<CreateSave model={model} />
 						</div>

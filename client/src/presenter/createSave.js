@@ -5,6 +5,7 @@ import useModelProp from "../utils/useModelProp.js";
 
 function CreateSave({ model }) {
     const ingredients = useModelProp(model, "currentdrink");
+    const newdrink = useModelProp(model, "createddrink");
 
     function saveData() {
         for (let i = 0; i < ingredients.length; i++) {
@@ -13,8 +14,11 @@ function CreateSave({ model }) {
             model.addMeasurementsDrink(measurement);
         }
         model.addInstructionsDrink(getFormData("instructions"));
+        model.addGlassDrink(getFormData("glasslist"));
+        model.addTypeDrink(getFormData("typelist"));
 
         //need to empty object afterwards
+        console.log(newdrink);
     }
     return <CreateSaveView startCreate={() => saveData()} />
 }

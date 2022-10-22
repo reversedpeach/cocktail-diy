@@ -5,9 +5,6 @@ import CreateInstruc from "./createInstruc.js";
 import CreateSave from "./createSave.js";
 
 function CreateDrink({ model }) {
-    // const newdrink = useModelProp(model, "createddrink");
-
-
     return (
         <CreateElemList model={model} />)
 };
