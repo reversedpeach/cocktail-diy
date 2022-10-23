@@ -1,7 +1,10 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
 import LoginView from "../view/loginView.js";
+import { Navigate, useNavigate } from "react-router-dom";
+import useModelProp from "../utils/useModelProp.js";
+
+
 
 const LOGIN = gql`
     query login(
@@ -22,6 +25,8 @@ const LOGIN = gql`
 
 
 export default function Login({ model }) {
+    const navigate = useNavigate();
+    const isAuth = useModelProp(model, "isAuth");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loginUser, { data, loading, error }] = useLazyQuery(LOGIN, { onCompleted: (data) => { model.setUser(data.login) } });
@@ -42,7 +47,13 @@ export default function Login({ model }) {
         if (!loading && !error && data) {
             console.log("Data: ", data);
         }
-
     }
+    useEffect(() => {
+        if (!loading && data) {
+            setTimeout(() => {
+                navigate("/");
+            }, 200)
+        }
+    }, [isAuth])
     return (<LoginView setEmail={setEmail} setPassword={setPassword} send={login} />);
 }
