@@ -7,12 +7,12 @@ import MyBarElemView from "../view/myBarElemView.js";
 function MyBar({ model }) {
 	const shakering = useModelProp(model, "mybar");
 
-	return <MyBarView />,
+	return (<React.Fragment><MyBarView />,
 		<div className="barRow">{
 			shakering.map((element) => (
 				<MyBarElemView barIng={element} onAdd={(element) => model.addIngShaker(element)} onDrag={(ev) => ev.dataTransfer.setData("text", element)} />
 			))}
-		</div>;
+		</div></React.Fragment>);
 }
 
 export default MyBar;
