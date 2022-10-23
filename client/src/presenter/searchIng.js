@@ -6,8 +6,6 @@ import CocktailSource from "../cocktailApi.js";
 import "../utils/css/drinkResults.css";
 import styled from "styled-components";
 
-
-
 export default function SearchIng({ model, addIng }) {
 	const IngList = useModelProp(model, "mybar");
 	const shakering = useModelProp(model, "currentdrink");
@@ -15,16 +13,16 @@ export default function SearchIng({ model, addIng }) {
 	const currentOptions = [];
 
 	const customStyles = {
-
 		option: (styles, state) => ({
 			...styles,
-			cursor: 'pointer',
+			cursor: "pointer",
 		}),
 		control: (styles) => ({
 			...styles,
-			cursor: 'pointer',
-			border: '3px solid rgb(127,127,127)',
-		})
+			cursor: "pointer",
+			border: "3px solid rgb(127,127,127)",
+			width: "260px",
+		}),
 	};
 
 	const [selectedOption, setSelectedOption] = useState(currentOptions);
@@ -61,9 +59,7 @@ export default function SearchIng({ model, addIng }) {
 			options={options}
 			placeholder="Search for an ingredient to add"
 			onChange={(e) => {
-
 				addIng(dic2arr(e));
-
 			}}
 			isMulti={true}
 		/>
