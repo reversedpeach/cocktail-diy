@@ -25,13 +25,15 @@ const StyledBtn = styled.button`
 
 const CreateSaveView = ({ startCreate }) => {
 
-    return <div>
-        <form action={console.log("skicka till databas")}>
-            <input type="file" id="img" name="img" accept="image/*" />
-            <input type="submit" />
-        </form>
-        <StyledBtn onClick={startCreate}>Create</StyledBtn>
-    </div>
+	return <div>
+		<form >
+			<input type="file" id="uploadimg" accept="image/*" onChange={(event) => {
+				console.log(event.target.files[0]);
+
+			}} />
+		</form>
+		<StyledBtn onClick={startCreate}>Create</StyledBtn>
+	</div>
 
 };
 

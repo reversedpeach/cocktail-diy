@@ -97,6 +97,11 @@ class CocktailModel {
 		this.notifyObservers();
 	}
 
+	addImgDrink(img) {
+		this.createddrink.img = img;
+		this.notifyObservers();
+
+	}
 
 
 	setIngList(ingList) {

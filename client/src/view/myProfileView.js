@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
 
 import MyBar from "../presenter/myBar.js";
-import MyBarElem from "../presenter/myBarElem.js";
+
 import styled from "styled-components";
 import Select from "react-select";
 
 import { AddOutlined } from "@mui/icons-material";
 import { Fab, Button } from "@mui/material";
+
+const StyledHeadTitle = styled.span`
+	display: flex;
+	align-self: flex-start;
+	font-size: 40pt;
+	font-family: Helvetica;
+	font-weight: bold;
+	width: 100%;
+	color: #7f7f7f;
+	padding-bottom: 12px;
+
+
+`;
 
 const StyledTitle = styled.div`
 	display: flex;
@@ -33,6 +46,7 @@ const StyledTitleSmall = styled.div`
 	padding-bottom: 6px;
 	width: 200px;
 	padding-top: 4px;
+	font-weight: bold;
 `;
 
 const StyledList = styled.li`
@@ -50,60 +64,59 @@ export default function MyProfileView(props) {
 	return (
 		<>
 			<div className="rowBoxLeft">
-				<StyledTitle>{props.seeingUsername}</StyledTitle>
-				<StyledTitle>Level:100</StyledTitle>
+				<StyledHeadTitle>{props.seeingUsername}'s Profile</StyledHeadTitle>
 			</div>
-			<div className="rowBoxLeft">
-				<div className="profileInfo">
-					<StyledTitleSmall>Favorite Drink</StyledTitleSmall> <StyledList>{props.favoritedrinks}</StyledList>
-					<StyledTitleSmall>Recent Drinks</StyledTitleSmall>
-					{props.likeddrinks.map((value, index) => {
-						return <StyledList key={index}>{value}</StyledList>;
-					})}
-					<div>
-						<StyledTitleSmall>Liked Drinks: </StyledTitleSmall>
-						{props.recentdrinks.map((value, index) => {
-							return <StyledList key={index}>{value}</StyledList>;
-						})}
-					</div>
-				</div>
 
+			<div className="rowBoxLeft">
 				<div className="barBox">
 					<div className="barShelf">
 						<MyBar model={props.model} />
-						<div className="barRow">
-							<MyBarElem model={props.model} />
-							<div style={{ width: "135px" }}>
-								<Fab size="small" color="grey" aria-label="add">
-									<AddOutlined
-										onClick={(e) => {
-											if (props.showSearchingForm) props.setShow(false);
-											else props.setShow(true);
-										}}
-									/>
-								</Fab>
-								{props.showSearchingForm ? (
-									<Select
-										value={props.selectedIngOptions}
-										options={props.allIng}
-										onChange={(e) => {
-											console.log(e[0].value);
-											props.addMyBar(e[0].value);
-										}}
-										isMulti={true}
-									/>
-								) : (
-									<div></div>
-								)}
-							</div>
+						<div style={{ width: "135px" }}>
+							<Fab size="small" color="grey" aria-label="add">
+								<AddOutlined
+									onClick={(e) => {
+										if (props.showSearchingForm) props.setShow(false);
+										else props.setShow(true);
+									}}
+								/>
+							</Fab>
+							{props.showSearchingForm ? (
+								<Select
+									value={props.selectedIngOptions}
+									options={props.allIng}
+									onChange={(e) => {
+										console.log(e[0].value);
+										props.addMyBar(e[0].value);
+									}}
+									isMulti={true}
+								/>
+							) : (
+								<div></div>
+							)}
 						</div>
+
 					</div>
 				</div>
+			</div>
+			<div className="rowBoxLeft">
+				<div className="profileInfo">
+					{/*<StyledTitleSmall>Favorite Drink</StyledTitleSmall> <StyledList>{props.favoritedrinks}</StyledList>*/}
+					<StyledTitleSmall>Created Drinks</StyledTitleSmall>
+					{props.likeddrinks.map((value, index) => {
+						return <StyledList key={index}>{value}</StyledList>;
+					})}
+				</div>
+				<div className="profileInfo">
+					<StyledTitleSmall>Liked Drinks </StyledTitleSmall>
+					{props.recentdrinks.map((value, index) => {
+						return <StyledList key={index}>{value}</StyledList>;
+					})}
+				</div>
+			</div>
 
-				<div>
+			{/*<div>
 					<div className="followList">
 						<StyledTitleSmall>Following </StyledTitleSmall>
-						<br></br>
 						{props.following.map((value, index) => {
 							return <StyledList key={index}>{value}</StyledList>;
 						})}
@@ -129,10 +142,9 @@ export default function MyProfileView(props) {
 								<p></p>
 							)}
 						</div>
-					</div>
-					<div style={{ paddingLeft: 40, paddingTop: 20 }}>
+							</div>
+					<div style={{ paddingTop: 10 }}>
 						<StyledTitleSmall>Created Drinks</StyledTitleSmall>
-						<br></br>
 						{props.madedrinks.map((value, index) => {
 							return <StyledList key={index}>{value}</StyledList>;
 						})}
@@ -145,23 +157,23 @@ export default function MyProfileView(props) {
 						) : (
 							<p></p>
 						)}
-					</div> */}
-					<div style={{ paddingLeft: 40, paddingTop: 20 }}>
-						{props.model.seeingUsername !== props.model.username ? (
-							<Button
-								color="grey"
-								variant="contained"
-								onClick={() => {
-									props.setShowCom(false);
-								}}>
-								Back to Community
-							</Button>
-						) : (
-							<p></p>
-						)}
-					</div>
+					</div> 
+				<div style={{ paddingLeft: 40, paddingTop: 20 }}>
+					{props.model.seeingUsername !== props.model.username ? (
+						<Button
+							color="grey"
+							variant="contained"
+							onClick={() => {
+								props.setShowCom(false);
+							}}>
+							Back to Community
+						</Button>
+					) : (
+						<p></p>
+					)}
 				</div>
-			</div>
+			</div>*/}
+
 		</>
 	);
 }
