@@ -10,7 +10,6 @@ function Shaker({ model }) {
 	}
 
 	function drop(ev) {
-		console.log("kommer hit")
 		var data = ev.dataTransfer.getData("text");
 		model.addIngShaker(data);
 

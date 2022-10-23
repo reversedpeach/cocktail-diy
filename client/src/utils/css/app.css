@@ -56,6 +56,15 @@
 	margin-left: 55px;
 }
 
+.rowBoxDesc {
+	display: flex;
+	flex-direction: row;
+	align-content: flex-start;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 14%;
+}
+
 .shakerBox {
 	display: flex;
 	justify-content: flex-start;
@@ -73,13 +82,13 @@
 }
 
 .ingShaker {
-	background-color: white;
+	background-color: cornflowerblue;
 	width: fit-content;
 	height: fit-content;
 	border-radius: 20px;
 	border-width: 2px;
 	border-style: solid;
-	border-color: #888888;
+	border-color: cornflowerblue;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -90,7 +99,7 @@
 .ingShakerTitle {
 	padding-right: 5px;
 	padding-left: 15px;
-	color: rgb(127, 127, 127);
+	color: white;
 	font-family: "Helvetica";
 	display: flex;
 	justify-content: center;
@@ -104,16 +113,18 @@
 	display: flex;
 	border: 1px;
 	border-width: 0.1px;
-	border-color: rgb(121, 121, 121);
+	border-color: white;
 	border-style: solid;
-	color: white;
-	background-color: rgba(127, 127, 127, 0.928);
+	color: rgba(127, 127, 127);
+	background-color: white;
 	cursor: pointer;
 	align-self: flex-end;
 	align-items: center;
+
 	align-content: center;
 	justify-content: center;
 	text-align: center;
+	font-weight: bold;
 }
 
 .drinkRow {
@@ -256,11 +267,11 @@
 }
 
 input:checked+.slider {
-	background-color: #2196f3;
+	background-color: CornflowerBlue;
 }
 
 input:focus+.slider {
-	box-shadow: 0 0 1px #2196f3;
+	box-shadow: 0 0 1px CornflowerBlue;
 }
 
 input:checked+.slider:before {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import MyBar from "../presenter/myBar.js";
+import MyBarProfile from "../presenter/myBarProfile.js";
 
 import styled from "styled-components";
 import Select from "react-select";
@@ -62,7 +62,7 @@ const StyledList = styled.li`
 
 export default function MyProfileView(props) {
 	return (
-		<>
+		<div className="discoverPage">
 			<div className="rowBoxLeft">
 				<StyledHeadTitle>{props.seeingUsername}'s Profile</StyledHeadTitle>
 			</div>
@@ -70,9 +70,9 @@ export default function MyProfileView(props) {
 			<div className="rowBoxLeft">
 				<div className="barBox">
 					<div className="barShelf">
-						<MyBar model={props.model} />
-						<div style={{ width: "135px" }}>
-							<Fab size="small" color="grey" aria-label="add">
+						<MyBarProfile model={props.model} />
+						{props.myBarLength < 10 ? (<div style={{ marginLeft: "-30px", marginTop: "-15px", display: "flex", justifyContent: "flex-end" }}>
+							<Fab style={{ display: "flex", alignSelf: "flex-end" }} size="small" color="grey" aria-label="add">
 								<AddOutlined
 									onClick={(e) => {
 										if (props.showSearchingForm) props.setShow(false);
@@ -81,38 +81,39 @@ export default function MyProfileView(props) {
 								/>
 							</Fab>
 							{props.showSearchingForm ? (
-								<Select
-									value={props.selectedIngOptions}
-									options={props.allIng}
-									onChange={(e) => {
-										console.log(e[0].value);
-										props.addMyBar(e[0].value);
-									}}
-									isMulti={true}
-								/>
+								<div style={{ width: "135px", display: "flex", zIndex: "1000" }}>
+									<Select
+										value={props.selectedIngOptions}
+										options={props.allIng}
+										onChange={(e) => {
+											console.log(e[0].value);
+											props.addMyBar(e[0].value);
+										}}
+										isMulti={true}
+									/></div>
 							) : (
 								<div></div>
 							)}
-						</div>
+						</div>)
+							: (<div></div>)}
 
 					</div>
 				</div>
-			</div>
-			<div className="rowBoxLeft">
+
+
 				<div className="profileInfo">
 					{/*<StyledTitleSmall>Favorite Drink</StyledTitleSmall> <StyledList>{props.favoritedrinks}</StyledList>*/}
 					<StyledTitleSmall>Created Drinks</StyledTitleSmall>
 					{props.likeddrinks.map((value, index) => {
 						return <StyledList key={index}>{value}</StyledList>;
 					})}
-				</div>
-				<div className="profileInfo">
+
 					<StyledTitleSmall>Liked Drinks </StyledTitleSmall>
 					{props.recentdrinks.map((value, index) => {
 						return <StyledList key={index}>{value}</StyledList>;
 					})}
-				</div>
-			</div>
+				</div></div>
+
 
 			{/*<div>
 					<div className="followList">
@@ -172,8 +173,8 @@ export default function MyProfileView(props) {
 						<p></p>
 					)}
 				</div>
-			</div>*/}
+			</div>*/}</div>
 
-		</>
+
 	);
 }

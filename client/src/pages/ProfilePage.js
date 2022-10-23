@@ -12,7 +12,6 @@ export default function ProfilePage({ model }) {
 	}, []);
 	return (
 		<div className="discoverBox">
-
 			<MyProfile model={model} setShowCom={() => { }} />
 		</div>
 	);

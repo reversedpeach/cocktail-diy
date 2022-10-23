@@ -3,15 +3,13 @@ import ReactDOM from "react-dom";
 import { createRoot } from 'react-dom/client';
 import "./utils/css/app.css";
 
-import readModel from "./readModel.js";
 import CocktailModel from './model/cocktailModel.js';
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
-import LoginPage from "./pages/LoginPage";
-//import Register from "./pages/Register";
+
 import Login from "./presenter/loginPresenter";
 import Register from "./presenter/registerPresenter";
-import CommunityPage from "./pages/CommunityPage";
+
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
@@ -20,6 +18,7 @@ import { onError } from "@apollo/client/link/error";
 import { GET_USERS } from "./graphql/queries";
 
 import styled from "styled-components";
+import StartScreenView from "./view/startScreenView";
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -99,10 +98,10 @@ const App = ({ model }) => {
 					<StyledNavBar>
 						<StyledNavWrapEnd>
 							<StyledLink to="/"> Home</StyledLink>
-							<StyledLink to="/community">Community</StyledLink>
 							<StyledLink to="/profile"> Profile</StyledLink>
 							<StyledLink to="/login"> Login</StyledLink>
 							<StyledLink to="/register"> Register </StyledLink>
+
 						</StyledNavWrapEnd>
 					</StyledNavBar>
 
@@ -112,7 +111,7 @@ const App = ({ model }) => {
 					<Route path="/profile" element={<ProfilePage model={model} />} />
 					<Route path="/login" element={<Login model={model} />} />
 					<Route path="/register" element={<Register model={model} />} />
-					<Route path="/community" element={<CommunityPage model={model} />} />
+					<Route path="/start" element={<StartScreenView />} />
 				</Routes>
 			</div>
 		</Router>

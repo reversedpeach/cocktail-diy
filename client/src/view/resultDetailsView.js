@@ -2,6 +2,7 @@ import React from "react";
 import "../utils/css/drinkResults.css";
 import styled from "styled-components";
 
+
 const StyledDetails = styled.div`
   position: fixed;
   transform: translate(-50%, -50%);
@@ -110,7 +111,22 @@ margin-right: 30px;
 	
 `
 
-const ResultDetailsView = ({ title, ingredients, instructions, image, glass, alcoholic, endDetails }) => {
+
+const StyledLikeBtn = styled.button`
+	display:flex;
+	width: 40px;
+	height: 20px;
+	border-radius: 5px;
+	border-color:cornflowerblue;
+	background-color: cornflowerblue;
+	color:  white;
+	cursor: pointer;
+	font-family:"Helvetica";
+	margin-left: 2px;
+	
+`
+
+const ResultDetailsView = ({ title, ingredients, instructions, image, glass, alcoholic, endDetails, likeStatus, onLike }) => {
 	return (
 		<StyledDetails>
 			<StyledRow>
@@ -118,7 +134,6 @@ const ResultDetailsView = ({ title, ingredients, instructions, image, glass, alc
 				<StyledBtn onClick={endDetails}>X</StyledBtn>
 			</StyledRow>
 			<StyledCol>
-
 				<StyledRow><img className="img" src={image}></img>
 					<StyledCol>
 						<StyledHeadingSmall>Glass</StyledHeadingSmall>
@@ -126,12 +141,14 @@ const ResultDetailsView = ({ title, ingredients, instructions, image, glass, alc
 						<br></br>
 						<StyledHeadingSmall>Type</StyledHeadingSmall>
 						<StyledInstructions>{alcoholic}</StyledInstructions>
+						<br></br>
+						<StyledLikeBtn onClick={onLike}> {likeStatus} </StyledLikeBtn>
+
 					</StyledCol>
 				</StyledRow>
 				<StyledRow>
 					<StyledCol>
 						<StyledHeading>Ingredients </StyledHeading>
-
 						<StyledTable>
 							{ingredients.map(obj =>
 								<tr>
