@@ -23,7 +23,8 @@ class CocktailModel {
 		this.currentdrink = []; // array with ingredients
 		this.drinkdetails = null;
 		this.selectedmode = "discover";
-		this.createddrink = { ingredients: [], measurements: [], instructions: "", img: "", glass: "", type: "" }
+		//this.createddrink = { ingredients: [], measurements: [], instructions: "", img: "", glass: "", type: "" }
+		this.createddrink = { name: "", ingredients: [], instructions: "", img: "", glass: "", type: "" };
 		this.favoritedrinks = "Pink Moon";
 		this.likeddrinks = ["Abbey Cocktail", "Pink Moon", "Singapore Sling"];
 		this.recentdrinks = ["Lone Tree Cocktail", "Rose", "Tom Collins", "Martini"];
@@ -31,6 +32,7 @@ class CocktailModel {
 		this.users = ["asdf", "b23", "sdfas", "mhj", "vbv0", "xcer", "sdua", "x45w", "ppoz", "mnvr"];
 		this.userdrinks = ["whaha water"];
 		this.alluserdrinks = ["whaha water", "rapsolja", "mainbudle", "testing drinks"];
+		this.communityDrink = false;
 	}
 
 	setUser(data) {
@@ -80,13 +82,22 @@ class CocktailModel {
 		this.notifyObservers();
 	}
 
+	resetCreatedDrink() {
+		this.createddrink = { name: "", ingredients: [], instructions: "", img: "", glass: "", type: "" };
+	}
+
+	addNameDrink(name) {
+		this.createddrink.name = name;
+		this.notifyObservers();
+	}
+
 	addMeasurementsDrink(mea) {
 		this.createddrink.measurements.push(mea)
 		this.notifyObservers();
 	}
 
-	addIngredientsDrink(ing) {
-		this.createddrink.ingredients.push(ing)
+	addIngredientsDrink(ing, amount) {
+		this.createddrink.ingredients.push({ name: ing, measurement: amount });
 		this.notifyObservers();
 	}
 
@@ -136,8 +147,14 @@ class CocktailModel {
 		this.notifyObservers();
 	}
 
-	setDetails(drink) {
-		this.drinkdetails = drink;
+	setDetails(drinkID, external) {
+		this.drinkdetails = drinkID;
+		this.communityDrink = false;
+		if (drinkID) {
+			if (!external) {
+				this.communityDrink = true;
+			}
+		}
 		this.notifyObservers();
 	}
 

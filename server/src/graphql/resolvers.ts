@@ -2,6 +2,7 @@ import { addFriend, setMybar, getDrinksByIngredients, getDrinkByName, getDrinkBy
 import { registerNewUser, login } from "../auth";
 import { GraphQLError } from "graphql";
 import { constructIngredientsArray } from "../util";
+import { drinkModel } from "../schemas/drink";
 
 
 const resolvers = {
@@ -15,11 +16,13 @@ const resolvers = {
         getDrink: async (parent: any, args, { dataSources }, info: any) => {
             console.log(args);
             if (args.community) {
-                if (args.name !== null) {
+                if (args.name) {
                     return await getDrinkByName(args.name);
                 }
-                if (args.id !== null) {
-                    return await getDrinkByID(args.id);
+                if (args.id) {
+                    const drink = await getDrinkByID(args.id);
+                    console.log(drink);
+                    return drink;
                 }
             }
             const response = await dataSources.cocktailsAPI.getDrinkByID(args.id);
@@ -30,7 +33,10 @@ const resolvers = {
                 name: drink.strDrink,
                 id: drink.idDrink,
                 img: drink.strDrinkThumb,
-                ingredients: ingredients
+                ingredients: ingredients,
+                instructions: drink.strInstructions,
+                glass: drink.strGlass,
+                type: drink.strAlcoholic
             }
         },
         getDrinks: async (parent: any, { ingredients, community }: { ingredients: String[], community: boolean }, { dataSources }, info: any) => {
@@ -50,6 +56,12 @@ const resolvers = {
             }
             const response = await dataSources.cocktailsAPI.getDrinks(ingreds);
             const communityDrinks = await getDrinksByIngredients(ingreds);
+            /*const reformattedCommunityDrinks = communityDrinks.map((drink) => {
+                return {
+                    drink, community: true
+                }
+
+            })*/
             console.log("community drinks: ", communityDrinks);
             //console.log("Recieved from api on server: ", response);
             if (response.drinks == 'None Found') return communityDrinks;
@@ -60,6 +72,7 @@ const resolvers = {
                     name: drink.strDrink,
                     id: drink.idDrink,
                     img: drink.strDrinkThumb,
+                    external: true,
                     //ingredients: ingredients
                 }
             })
@@ -101,9 +114,9 @@ const resolvers = {
                 return error;
             }
         },
-        createDrink: async (parent, { name, ingredients, glassType, instructions, img }: { name: String, ingredients: Ingredient[], glassType: String, instructions: String, img: String }, context: any, info: any) => {
+        createDrink: async (parent, { name, ingredients, glassType, instructions, img, type }: { name: String, ingredients: Ingredient[], glassType: String, instructions: String, img: String, type: String }, context: any, info: any) => {
             if (!context.user) throw new GraphQLError("you must be logged in to access this feature");
-            return await createDrink(name, ingredients, context.user, glassType, instructions, img)
+            return await createDrink(name, ingredients, context.user, glassType, instructions, img, type)
         },
         changeMyBar: async (parent, { newMyBar }, context, info) => {
             if (!context.user) throw new GraphQLError("you must be logged in to access this feature");

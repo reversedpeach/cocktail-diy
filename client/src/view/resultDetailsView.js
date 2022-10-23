@@ -110,38 +110,37 @@ margin-right: 30px;
 	
 `
 
-const ResultDetailsView = ({ title, ingredients, instructions, image, glass, alcoholic, endDetails }) => {
+function ResultDetailsView(props) {
 	return (
 		<StyledDetails>
 			<StyledRow>
-				<StyledTitle>{title.toUpperCase()}</StyledTitle>
-				<StyledBtn onClick={endDetails}>X</StyledBtn>
+				<StyledTitle>{props.title.toUpperCase()}</StyledTitle>
+				<StyledBtn onClick={props.endDetails}>X</StyledBtn>
 			</StyledRow>
 			<StyledCol>
 
-				<StyledRow><img className="img" src={image}></img>
+				<StyledRow><img className="img" src={props.image}></img>
 					<StyledCol>
 						<StyledHeadingSmall>Glass</StyledHeadingSmall>
-						<StyledInstructions>{glass}</StyledInstructions>
+						<StyledInstructions>{props.glass || ""}</StyledInstructions>
 						<br></br>
 						<StyledHeadingSmall>Type</StyledHeadingSmall>
-						<StyledInstructions>{alcoholic}</StyledInstructions>
+						<StyledInstructions>{props.alcoholic || ""}</StyledInstructions>
 					</StyledCol>
 				</StyledRow>
 				<StyledRow>
 					<StyledCol>
 						<StyledHeading>Ingredients </StyledHeading>
-
 						<StyledTable>
-							{ingredients.map(obj =>
+							{props.ingredients.map((ingredient) =>
 								<tr>
-									<td>{obj.ingredient} </td>
-									<td> : {obj.amount}</td>
+									<td>{ingredient.name} </td>
+									<td> : {ingredient.measurement}</td>
 								</tr>
 							)}</StyledTable>
 					</StyledCol>
 					<StyledCol>
-						<StyledHeading>Instructions</StyledHeading> <StyledInstructions>{instructions}</StyledInstructions>
+						<StyledHeading>Instructions</StyledHeading> <StyledInstructions>{props.instructions}</StyledInstructions>
 					</StyledCol>
 				</StyledRow>
 			</StyledCol>

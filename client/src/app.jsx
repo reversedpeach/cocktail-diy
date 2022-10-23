@@ -96,6 +96,7 @@ padding-right: 20px;
 					</StyledNavBar>
 */
 
+localStorage.setItem("token", null);
 const model = new CocktailModel();
 
 
