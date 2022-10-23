@@ -19,10 +19,11 @@ type User {
   token: String
   name: String!
   email: String!
+  myBar: [String]!
   friends: [User]
   favoriteDrink: Drink
   likedDrinks: [Drink]
-  recentlyMadeDrinks: [Drink]
+  createdDrinks: [Drink]
 }
 
 type Ingredient{
@@ -48,7 +49,7 @@ type Query {
   getDrinks(community:Boolean, ingredients: [String]): [Drink]
   login(email:String, password:String): User
   getAPIdrinks(ingredients:[String]): [APIdrink]
-  getAllIngredients: [Ingredient]
+  getAllIngredients: [String] 
   getIngredient(id:String):Ingredient
 }
 
@@ -60,5 +61,7 @@ type Mutation {
   changeDrink(id: String!, name: String, ingredients: [Ingredientinput], glassType: String, instructions: String, img: String): Drink
 }
 `;
+
+//Fix get all ingredients return type
 
 export { typeDefs }
