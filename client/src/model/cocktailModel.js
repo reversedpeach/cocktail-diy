@@ -1,5 +1,7 @@
 class CocktailModel {
 	constructor() {
+		this.isAuth = false
+		this.userID = "";
 		this.username = "";
 		this.password = "";
 		this.seeingUsername = "User123";
@@ -27,6 +29,19 @@ class CocktailModel {
 		this.users = ["asdf", "b23", "sdfas", "mhj", "vbv0", "xcer", "sdua", "x45w", "ppoz", "mnvr"];
 		this.userdrinks = ["whaha water"];
 		this.alluserdrinks = ["whaha water", "rapsolja", "mainbudle", "testing drinks"];
+	}
+
+	setUser(data) {
+		console.log("Setting user in model with:", data, data.name, data.id, data.myBar);
+		this.username = data.name;
+		this.seeingUsername = data.name;
+		this.userID = data.id;
+		this.mybar = data.myBar || [];
+		this.favoritedrinks = data.favoritedrink || [];
+		this.alluserdrinks = data.createdDrinks || [];
+		localStorage.setItem("token", data.token);
+		this.isAuth = true;
+		this.notifyObservers();
 	}
 
 	addMyBar(ing) {

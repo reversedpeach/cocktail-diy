@@ -31,7 +31,10 @@ const drinkSchema = new Schema<IDrink>({
         ref: "User",
     },
     instructions: String,
-    img: String,
+    img: {
+        type: String,
+        default: "https://www.thecocktaildb.com/images/media/drink/yqvvqs1475667388.jpg"
+    }
 })
 
 /*

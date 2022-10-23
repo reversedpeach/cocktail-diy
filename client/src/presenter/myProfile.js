@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
-
+import { gql, useLazyQuery } from "@apollo/client";
 import useModelProp from "../utils/useModelProp.js";
 
 import MyProfileView from "../view/myProfileView.js";
 import CocktailSource from "../cocktailApi.js";
+
+const GET_ALL_INGREDIENTS = gql`
+	query Query{
+		getAllIngredients
+	}
+`;
+
 
 export default function MyProfile(props) {
 	const favoritedrinks = useModelProp(props.model, "favoritedrinks");
@@ -19,14 +26,17 @@ export default function MyProfile(props) {
 	const [showSearchingFriend, setFriend] = useState(false);
 	const [selectedIngOptions, setSelectedIngOptions] = useState([]);
 	const [followButton, setFollow] = useState(false);
+	const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, { onCompleted: (data) => { console.log(data); setAllIng(data.getAllIngredients) } });//
 
-	async function getAllIng() {
+
+	/*async function getAllIng() {
 		const allIngList = await CocktailSource.getAllIngredients();
-
+		console.log(allIngList);
 		let op = [];
 		for (const ing of allIngList.drinks) {
 			op = op.concat({ value: ing["strIngredient1"], label: ing["strIngredient1"] });
 		}
+		console.log(op);
 		setAllIng(op);
 		let t = [];
 		for (const user of users) {
@@ -34,10 +44,10 @@ export default function MyProfile(props) {
 		}
 		setUsers(t);
 		props.model.seeingUsername = "";
-	}
+	}*/
 
 	useEffect(() => {
-		getAllIng();
+
 	}, []);
 
 	return (

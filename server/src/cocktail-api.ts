@@ -61,12 +61,12 @@ class CocktailsAPI extends RESTDataSource {
         return await this.get(`lookup.php?i=${encodeURIComponent(id.toString())}`);
     }
 
-    getAllIngredients(): Promise<Ingredient[]> {
-        return this.get(`"list.php?i=list"`);
+    async getAllIngredients(): Promise<Ingredient[]> {
+        return this.get(`list.php?i=list`);
     }
 
-    getIngredient(id: String): Promise<Ingredient> {
-        return this.get(`search.php?i=${encodeURIComponent(id.toString())}`);
+    getIngredient(name: String): Promise<Ingredient> {
+        return this.get(`search.php?i=${encodeURIComponent(name.toString())}`);
     }
 }
 
