@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { gql, useLazyQuery } from "@apollo/client";
+import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import useModelProp from "../utils/useModelProp.js";
-
 import MyProfileView from "../view/myProfileView.js";
 import CocktailSource from "../cocktailApi.js";
 
@@ -9,6 +8,12 @@ const GET_ALL_INGREDIENTS = gql`
 	query Query{
 		getAllIngredients
 	}
+`;
+
+const CHANGE_MY_BAR_MUTATION = gql`
+    mutation ChangeMyBar($newMyBar: [String]) {
+        changeMyBar(newMyBar: $newMyBar)
+    }
 `;
 
 
@@ -19,7 +24,7 @@ export default function MyProfile(props) {
 	const following = useModelProp(props.model, "following");
 	const users = useModelProp(props.model, "users");
 	const madedrinks = useModelProp(props.model, "userdrinks");
-	const mybar = useModelProp(props.model, "mybar");
+	const myBar = useModelProp(props.model, "mybar");
 	const seeingUsername = useModelProp(props.model, "seeingUsername");
 	const [allIng, setAllIng] = useState([]);
 	const [allUsers, setUsers] = useState([]);
@@ -27,30 +32,45 @@ export default function MyProfile(props) {
 	const [showSearchingFriend, setFriend] = useState(false);
 	const [selectedIngOptions, setSelectedIngOptions] = useState([]);
 	const [followButton, setFollow] = useState(false);
-	const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, { onCompleted: (data) => { console.log(data); setAllIng(data.getAllIngredients) } });//
-
-
-	/*async function getAllIng() {
-		const allIngList = await CocktailSource.getAllIngredients();
-		console.log(allIngList);
-		let op = [];
-		for (const ing of allIngList.drinks) {
-			op = op.concat({ value: ing["strIngredient1"], label: ing["strIngredient1"] });
+	//const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, { onCompleted: (data) => { console.log(data); setAllIng(data.getAllIngredients) } });//
+	const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, {
+		onCompleted: (data) => {
+			console.log(data);
+			const ingredientsArray = data.getAllIngredients;
+			const ingredientDict = ingredientsArray.map((ingredient) => {
+				return { value: ingredient, label: ingredient }
+			})
+			console.log(ingredientDict);
+			setAllIng(ingredientDict);
 		}
-		console.log(op);
-		setAllIng(op);
-		let t = [];
-		for (const user of users) {
-			t = t.concat({ value: user, label: user });
-		}
-		setUsers(t);
-		props.model.seeingUsername = "";
-	}*/
+	});
+	const [changeMyBar, { myBarData, myBarLoading, myBarError }] = useMutation(CHANGE_MY_BAR_MUTATION);
 
+	async function saveMyBarToServer(newBar) {
+		console.log("new Bar: ", newBar);
+		changeMyBar({
+			variables: {
+				newMyBar: newBar
+			},
+		});
+	}
+
+	/*
+	useEffect(() => {
+		console.log("myBar model prop: ", myBar);
+		saveMyBarToServer(myBar);
+	}, [myBar]);
+	*/
 
 	useEffect(() => {
-
+		getAllIngredients();
 	}, []);
+
+	async function addToBar(selected) {
+		console.log("Selected ingredient: ", selected);
+		props.model.addMyBar(selected);
+		saveMyBarToServer(props.model.mybar);
+	}
 
 	return (
 		<MyProfileView
@@ -70,9 +90,7 @@ export default function MyProfile(props) {
 			setShow={setShow}
 			setFriend={setFriend}
 			setShowCom={props.setShowCom}
-			addMyBar={(e) => {
-				props.model.addMyBar(e);
-			}}
+			addMyBar={addToBar}
 			addFollowing={(e) => {
 				props.model.addFollowing(e);
 			}}

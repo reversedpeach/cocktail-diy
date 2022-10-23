@@ -28,7 +28,7 @@ export default function SearchIng({ model, addIng }) {
 			console.log(ingredientDict);
 			setAllIng(ingredientDict);
 		}
-	});//
+	});
 
 
 	const customStyles = {

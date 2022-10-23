@@ -43,9 +43,9 @@ class CocktailModel {
 		this.alluserdrinks = data.createdDrinks || [];
 		localStorage.setItem("token", data.token);
 		this.isAuth = true;
-    this.notifyObservers();
-    }
-    
+		this.notifyObservers();
+	}
+
 	setUserName(username) {
 		this.username = username;
 		this.notifyObservers();
@@ -57,10 +57,12 @@ class CocktailModel {
 	}
 
 	addMyBar(ing) {
+		ing = ing.toLowerCase();
+		console.log(ing, this.mybar.indexOf(ing));
 		if (this.mybar.indexOf(ing) === -1) {
 			this.mybar = this.mybar.concat(ing);
+			this.notifyObservers();
 		}
-		this.notifyObservers();
 	}
 
 	addFollowing(friend) {

@@ -26,29 +26,6 @@ const REGISTER_USER_MUTATION = gql`
         `;
 
 
-/*function register() {
-console.log("got to register", changeMyBar, data, error);
-registerUser({
-    variables: {
-        name: name,
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
-    }
-});
-if (!loading && !error) {
-    model.setUser(data);
-}
-}
-
-"name": username,
-            "email": email,
-            "password": password,
-            "confirmPassword": confirmPassword,
-
-
-*/
-
 export default function Register({ model }) {
     const [username, setUserName] = useState("");
     const [email, setEmail] = useState("");
@@ -75,10 +52,7 @@ export default function Register({ model }) {
         }
         if (!loading && !error && data) {
             console.log("Data: ", data);
-            //model.setUser(data);
         }
-        //setTimeout(() => { console.log(data) }, 5000);
-
     }
     return (<RegisterView setUserName={setUserName} setEmail={setEmail} setPassword={setPassword} setConfirmPassword={setConfirmPassword} send={register} />);
 }

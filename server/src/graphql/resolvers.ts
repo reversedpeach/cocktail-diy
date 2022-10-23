@@ -107,6 +107,7 @@ const resolvers = {
         },
         changeMyBar: async (parent, { newMyBar }, context, info) => {
             if (!context.user) throw new GraphQLError("you must be logged in to access this feature");
+            console.log("new bar: ", newMyBar, " user: ", context.user);
             return await setMybar(newMyBar, context.user);
         },
         addFriend: async (parent, { friendID }, context, info) => {
