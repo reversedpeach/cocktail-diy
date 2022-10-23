@@ -31,6 +31,16 @@ class CocktailModel {
 		this.alluserdrinks = ["whaha water", "rapsolja", "mainbudle", "testing drinks"];
 	}
 
+	setUserName(username) {
+		this.username = username;
+		this.notifyObservers();
+	}
+
+	setSeeingUserName(seeingUsername) {
+		this.seeingUsername = seeingUsername;
+		this.notifyObservers();
+	}
+
 	addMyBar(ing) {
 		if (this.mybar.indexOf(ing) === -1) {
 			this.mybar = this.mybar.concat(ing);

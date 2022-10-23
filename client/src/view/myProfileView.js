@@ -15,10 +15,10 @@ const StyledTitle = styled.div`
 	font-size: 24pt;
 	font-family: Helvetica;
 	padding: 2px;
-	color: #7F7F7F;;
+	color: #7f7f7f;
 	padding-bottom: 18px;
-    width:200px;
-    padding-top:4px;
+	width: 200px;
+	padding-top: 4px;
 `;
 
 const StyledTitleSmall = styled.div`
@@ -29,44 +29,39 @@ const StyledTitleSmall = styled.div`
 	font-family: Helvetica;
 	padding: 2px;
 	margin-top: 25px;
-	color: #7F7F7F;;
+	color: #7f7f7f;
 	padding-bottom: 6px;
-    width:200px;
-    padding-top:4px;
+	width: 200px;
+	padding-top: 4px;
 `;
 
 const StyledList = styled.li`
-display: flex;
-align-self: flex-start;
-justify-content: flex-start;
-font-size: 12pt;
-font-family: Helvetica;
-padding: 2px;
-color: #7F7F7F;
-width:200px;
-
-
-
-`
+	display: flex;
+	align-self: flex-start;
+	justify-content: flex-start;
+	font-size: 12pt;
+	font-family: Helvetica;
+	padding: 2px;
+	color: #7f7f7f;
+	width: 200px;
+`;
 
 export default function MyProfileView(props) {
 	return (
-		<><div className="rowBoxLeft">
-			<StyledTitle>{props.model.seeingUsername}</StyledTitle>
-			<StyledTitle>Level:100</StyledTitle>
-		</div>
+		<>
+			<div className="rowBoxLeft">
+				<StyledTitle>{props.seeingUsername}</StyledTitle>
+				<StyledTitle>Level:100</StyledTitle>
+			</div>
 			<div className="rowBoxLeft">
 				<div className="profileInfo">
 					<StyledTitleSmall>Favorite Drink</StyledTitleSmall> <StyledList>{props.favoritedrinks}</StyledList>
-					<StyledTitleSmall>
-						Recent Drinks
-					</StyledTitleSmall>
+					<StyledTitleSmall>Recent Drinks</StyledTitleSmall>
 					{props.likeddrinks.map((value, index) => {
 						return <StyledList key={index}>{value}</StyledList>;
 					})}
-
 					<div>
-						<StyledTitleSmall>Liked Drinks:{" "}</StyledTitleSmall>
+						<StyledTitleSmall>Liked Drinks: </StyledTitleSmall>
 						{props.recentdrinks.map((value, index) => {
 							return <StyledList key={index}>{value}</StyledList>;
 						})}
@@ -79,23 +74,24 @@ export default function MyProfileView(props) {
 						<div className="barRow">
 							<MyBarElem model={props.model} />
 							<div style={{ width: "135px" }}>
-								<Fab size="small" color="secondary" aria-label="add">
+								<Fab size="small" color="grey" aria-label="add">
 									<AddOutlined
 										onClick={(e) => {
-											if (props.showSearchingForm)
-												props.setShow(false);
-											else
-												props.setShow(true);
-										}} />
+											if (props.showSearchingForm) props.setShow(false);
+											else props.setShow(true);
+										}}
+									/>
 								</Fab>
 								{props.showSearchingForm ? (
 									<Select
-										value={selectedIngOptions}
+										value={props.selectedIngOptions}
 										options={props.allIng}
 										onChange={(e) => {
-											props.model.addMyBar(e[0].value);
+											console.log(e[0].value);
+											props.addMyBar(e[0].value);
 										}}
-										isMulti={true} />
+										isMulti={true}
+									/>
 								) : (
 									<div></div>
 								)}
@@ -103,7 +99,6 @@ export default function MyProfileView(props) {
 						</div>
 					</div>
 				</div>
-
 
 				<div>
 					<div className="followList">
@@ -113,23 +108,23 @@ export default function MyProfileView(props) {
 							return <StyledList key={index}>{value}</StyledList>;
 						})}
 						<div style={{ paddingTop: "20px" }}>
-							<Fab size="small" color="secondary" aria-label="add">
+							<Fab size="small" color="grey" aria-label="add">
 								<AddOutlined
 									onClick={(e) => {
-										if (props.showSearchingFriend)
-											props.setFriend(false);
-										else
-											props.setFriend(true);
-									}} />
+										if (props.showSearchingFriend) props.setFriend(false);
+										else props.setFriend(true);
+									}}
+								/>
 							</Fab>
 							{props.showSearchingFriend ? (
 								<Select
 									value={props.selectedIngOptions}
 									options={props.allUsers}
 									onChange={(e) => {
-										props.model.addFollowing(e[0].value);
+										props.addFollowing(e[0].value);
 									}}
-									isMulti={true} />
+									isMulti={true}
+								/>
 							) : (
 								<p></p>
 							)}
@@ -142,12 +137,19 @@ export default function MyProfileView(props) {
 							return <StyledList key={index}>{value}</StyledList>;
 						})}
 					</div>
-					<div style={{ paddingLeft: 40, paddingTop: 20 }}>
-						{!props.followButton ? <Button variant="contained">Follow</Button> : <p></p>}
-					</div>
+					{/* <div style={{ paddingLeft: 40, paddingTop: 20 }}>
+						{!props.followButton ? (
+							<Button variant="contained" color="grey">
+								Follow
+							</Button>
+						) : (
+							<p></p>
+						)}
+					</div> */}
 					<div style={{ paddingLeft: 40, paddingTop: 20 }}>
 						{props.model.seeingUsername !== props.model.username ? (
 							<Button
+								color="grey"
 								variant="contained"
 								onClick={() => {
 									props.setShowCom(false);
@@ -159,6 +161,7 @@ export default function MyProfileView(props) {
 						)}
 					</div>
 				</div>
-			</div></>
+			</div>
+		</>
 	);
 }

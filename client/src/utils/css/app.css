@@ -68,12 +68,11 @@
 	border: 0.01px;
 	border-style: dotted;
 	border-color: rgb(255, 255, 255);
-	background-color: #7F7F7F;
+	background-color: #7f7f7f;
 	margin-top: 150px;
 	margin-right: 55px;
 	margin-left: 55px;
 	padding-bottom: 20px;
-
 }
 
 .discoverBox {
@@ -84,7 +83,11 @@
 	justify-content: center;
 	flex-direction: column;
 	align-content: stretch;
+}
 
+.communityBox {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .rowBox {
@@ -104,15 +107,12 @@
 	align-items: flex-start;
 	gap: 3%;
 	margin-left: 55px;
-
 }
 
 .shakerBox {
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: row;
-
-
 }
 
 .ingCol {
@@ -123,7 +123,6 @@
 	justify-content: flex-start;
 	flex-direction: column;
 	align-items: flex-end;
-
 }
 
 .ingShaker {
@@ -138,8 +137,7 @@
 	justify-content: flex-end;
 	align-items: center;
 	align-content: center;
-	box-shadow: 1px 1px 4px #7F7F7F;
-	;
+	box-shadow: 1px 1px 4px #7f7f7f;
 }
 
 .ingShakerTitle {
@@ -152,7 +150,6 @@
 	font-size: 14px;
 	align-items: center;
 	text-align: center;
-
 }
 
 .ingShakerBtn {
@@ -170,16 +167,13 @@
 	align-content: center;
 	justify-content: center;
 	text-align: center;
-
 }
 
 .drinkRow {
 	flex-direction: row;
 	display: flex;
 	justify-content: center;
-
 }
-
 
 .barBox {
 	margin-top: 30px;
@@ -191,24 +185,16 @@
 	color: rgb(84, 84, 84);
 	text-align: center;
 	font-family: "Helvetica";
-
-
-
 }
 
 .barCol {
-
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	flex-direction: column;
-
-
 }
 
 .barShelf {
-
-
 	width: 460px;
 	height: 300px;
 	padding-bottom: 30px;
@@ -233,11 +219,10 @@
 }
 
 .barImage:hover {
-	opacity: 1.0;
+	opacity: 1;
 }
 
 .barRow {
-
 	padding-left: 20px;
 	padding-right: 20px;
 	width: 420px;
@@ -321,15 +306,15 @@
 	transition: 0.4s;
 }
 
-input:checked+.slider {
+input:checked + .slider {
 	background-color: #2196f3;
 }
 
-input:focus+.slider {
+input:focus + .slider {
 	box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
 	-webkit-transform: translateX(40px);
 	-ms-transform: translateX(40px);
 	transform: translateX(40px);
@@ -342,7 +327,6 @@ input:checked+.slider:before {
 .slider.round:before {
 	border-radius: 50%;
 }
-
 
 .createBtnBox {
 	display: flex;
@@ -359,7 +343,6 @@ input:checked+.slider:before {
 	color: #ffffff;
 	font-weight: bold;
 	align-self: center;
-
 }
 
 .drinkName {
@@ -371,10 +354,8 @@ input:checked+.slider:before {
 	font-family: Helvetica;
 	padding-bottom: 30px;
 	font-style: italic;
-	color: #7F7F7F;
-	;
+	color: #7f7f7f;
 	padding-top: 10px;
-
 }
 
 .followList {
