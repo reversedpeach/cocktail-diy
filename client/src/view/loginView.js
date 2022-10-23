@@ -18,7 +18,7 @@ export default function LoginView(props) {
         <div className="register">
             <div>
                 <div style={{ paddingBottom: 10 }}>
-                    <div className="title">Register </div>
+                    <div className="title">Log in </div>
                 </div>
             </div>
             <div>

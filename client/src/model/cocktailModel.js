@@ -42,8 +42,16 @@ class CocktailModel {
 		this.favoritedrinks = data.favoritedrink || [];
 		this.alluserdrinks = data.createdDrinks || [];
 		localStorage.setItem("token", data.token);
-		this.isAuth = true;
+		if (data) {
+			this.isAuth = true;
+		}
 		this.notifyObservers();
+	}
+
+	logOut() {
+		localStorage.setItem("token", null);
+		this.setUser(null);
+		this.isAuth = false;
 	}
 
 	setUserName(username) {
