@@ -51,7 +51,7 @@ export default function ResultsList({ model }) {
 					image={drink.img}
 					title={drink.name}
 					id={drink.id}
-					setDetails={() => model.setDetails(drink["idDrink"])}
+					setDetails={() => model.setDetails(drink.id)}
 				/>
 			);
 		})
