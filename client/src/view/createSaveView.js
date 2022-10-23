@@ -26,11 +26,7 @@ const StyledBtn = styled.button`
 function CreateSaveView(props) {
 	return (<div>
 		<form >
-			<input type="file" id="uploadimg" accept="image/*" onChange={(event) => {
-				console.log(event.target.files[0]);
-
-			}} />
-			<UploadAndDisplayImage />
+			<UploadAndDisplayImage {...props} />
 		</form>
 		<StyledBtn onClick={props.startCreate}>Create</StyledBtn>
 	</div>);
