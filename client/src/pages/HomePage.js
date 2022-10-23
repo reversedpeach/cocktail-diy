@@ -13,6 +13,7 @@ import ResultTitle from "../presenter/resultTitle.js";
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import CreatePresenter from "../presenter/createPresenter.js";
+import arrow from "../utils/images/arrow.png";
 
 const StyledModalCon = styled.div`
 position: fixed; 
@@ -43,14 +44,18 @@ const StyledModeDes = styled.span`
 	align-self: flex-start;
 	font-size: 10pt;
 	font-family: Helvetica;
-	width: 80%;
 	color: #7F7F7F;
 	padding-bottom: 12px;
 	margin-left:55px;
 	font-style: italic;
-	width: 350px;
-	
+	width: 350px;	
 `;
+
+const StyledImg = styled.img`
+
+width: 200px;
+display:flex;
+`
 
 export default function HomePage({ model }) {
 	const showDetails = useModelProp(model, "drinkdetails");
@@ -63,7 +68,10 @@ export default function HomePage({ model }) {
 				<StyledModeTitle>{currentMode.toUpperCase()}</StyledModeTitle>
 				<ToggleMode model={model} />
 			</div>
-			<StyledModeDes>{currentMode[0].toUpperCase() + currentMode.slice(1)} a new drink by dragging n' dropping ingredients from My Bar into the shaker or using the search form</StyledModeDes>
+			<div className="rowBoxDesc">
+				<StyledModeDes>{currentMode[0].toUpperCase() + currentMode.slice(1)} a new drink by dragging n' dropping ingredients from My Bar into the shaker or using the search form</StyledModeDes>
+				<StyledImg src={arrow} />
+			</div>
 			<div className="rowBox">
 				<div className="shakerBox">
 					<div className="ingCol">

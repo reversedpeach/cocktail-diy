@@ -102,6 +102,7 @@ export default function MyProfile(props) {
 			addFollowing={(e) => {
 				props.model.addFollowing(e);
 			}}
+			myBarLength={myBar.length}
 		/>
 	);
 }

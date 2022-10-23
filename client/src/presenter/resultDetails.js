@@ -31,9 +31,15 @@ export const GET_DRINK = gql`
 
 export default function ResultDetails({ model }) {
     const id = useModelProp(model, "drinkdetails");
+
+    var liked = "LIKE";
+
     const communityDrink = useModelProp(model, "communityDrink");
     const [drink, setDrink] = useState({});
     const [getDrinkDetails, { data, loading, error }] = useLazyQuery(GET_DRINK, { onCompleted: (data) => { console.log("recieved: ", data.getDrink, "ingreds: ", data.getDrink.ingredients); setDrink(data.getDrink) } });
+    function checkLike(likeddrinks) {
+        if (likeddrinks.includes(drink["strDrink"])) { return "LIKED" } else { return "LIKE" }
+    }
 
 
     useEffect(() => {
@@ -45,8 +51,7 @@ export default function ResultDetails({ model }) {
                     community: communityDrink
                 }
             })
-        }
-    }, [id]);
+        }}, [id]);
 
     if (!loading) {
         console.log("error:", error);
@@ -61,5 +66,8 @@ export default function ResultDetails({ model }) {
             image={data.getDrink.img}
             glass={drink.glass}
             alcoholic={drink.type}
-            endDetails={() => model.setDetails(null, null)} /> : <p>Loading...</p>);
+            endDetails={() => model.setDetails(null, null)} 
+            likeStatus={checkLike(likeddrinks)}
+            onLike={() => model.addLikedDrink(drink["strDrink"])}/> : <p>Loading...</p>);
+
 }

@@ -4,7 +4,7 @@ const IngShakerView = ({ ing, onRemove }) => {
 
         return <div className="ingShaker">
                 <span className="ingShakerTitle"> {ing}</span>
-                <button className="ingShakerBtn" onClick={() => onRemove(ing)}> x </button>
+                <button className="ingShakerBtn" onClick={() => onRemove(ing)}> X </button>
         </div>
 
 };

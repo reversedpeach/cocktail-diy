@@ -10,7 +10,12 @@ import { usePromise } from "../utils/usePromise.js";
 import styled from "styled-components";
 import CocktailSource from "../cocktailApi.js";
 import getFormData from "../utils/getFormData.js";
+
+import Select from "react-select";
+import { fontSize } from "@mui/system";
+
 import { gql, useMutation } from "@apollo/client";
+
 
 
 const StyledTitle = styled.div`
@@ -26,6 +31,11 @@ const StyledTitle = styled.div`
 	align-self: flex-start;
 
 	`;
+const StyledForm = styled.div`
+                border: '3px solid white',
+                borderRadius: '12px',
+                width: '20px'
+    font-family: 'Helvetica'`;
 
 /*const CREATE_DRINK_MUTATION = gql`
     mutation createDrink(
@@ -86,10 +96,30 @@ function CreatePresenter({ model }) {
 
     const types = [];
 
+    const customStyles = {
+        option: (styles, state) => ({
+            ...styles,
+            cursor: 'pointer',
+            width: '200px',
+            fontSize: "10pt",
+            color: "rgb(127,127,127)"
+        }),
+        control: (styles) => ({
+            ...styles,
+            cursor: 'pointer',
+            border: '3px solid rgb(127,127,127)',
+            borderRadius: '12px',
+            width: '200px',
+            fontSize: "10pt",
+            color: "rgb(127,127,127)"
+        })
+    };
+
+
     if (glass !== null) {
         for (let i = 0; i < glass.length; i++) {
             if (glass["strGlass"] !== null) {
-                glasses.push(glass[i]["strGlass"]);
+                glasses.push({ value: glass[i]["strGlass"], label: glass[i]["strGlass"] });
             }
         }
     }
@@ -97,7 +127,7 @@ function CreatePresenter({ model }) {
     if (type !== null) {
         for (let i = 0; i < type.length; i++) {
             if (type["strAlcoholic"] !== null) {
-                types.push(type[i]["strAlcoholic"]);
+                types.push({ value: type[i]["strAlcoholic"], label: type[i]["strAlcoholic"] });
             }
         }
     }
@@ -108,12 +138,11 @@ function CreatePresenter({ model }) {
             model.addIngredientsDrink(ingredients[i], measurement);
         }
         model.addInstructionsDrink(getFormData("instructions"));
-        model.addGlassDrink(getFormData("glasslist"));
-        model.addTypeDrink(getFormData("typelist"));
         model.addImgDrink(getFormData("uploadimg"));
 
         //need to empty object afterwards
         console.log(newdrink);
+
         createDrink({
             variables: {
                 name: newdrink.name,
@@ -129,26 +158,33 @@ function CreatePresenter({ model }) {
     function setName(name) {
         console.log("Setting name to: ", name);
         model.addNameDrink(name);
+
     }
 
     return (<React.Fragment><CreateTitleView />,
         <CreateNameView setName={setName} />
         <div className="rowBox">
             <div className="resultCol">
-                <StyledTitle>Ingredients</StyledTitle>,
+                <StyledTitle>Ingredients</StyledTitle>
                 {ingredients.map((ing, index) => (
                     <CreateElemListView ingredient={ing} id={"measurement" + (index + 1)} />
                 ))}
             </div>,
 
-            <CreateInstrucView />,
-            <div className="resultCol">,
-                <select id="glasslist">{glasses.map((glass) => (
-                    <CreateTypeGlassView element={glass} />
-                ))}</select>
-                <select id="typelist">{types.map((type) => (
-                    <CreateTypeGlassView element={type} />
-                ))}</select>,
+            <CreateInstrucView />
+            <div className="resultCol">
+                <StyledTitle>Select Glass and Type</StyledTitle>
+                <Select options={glasses}
+                    styles={customStyles}
+                    placeholder="Select glass"
+                    onChange={(choice) => model.addGlassDrink(choice.value)}>
+                </Select>
+                <Select options={types}
+                    styles={customStyles}
+                    placeholder="Select type"
+                    onChange={(choice) => model.addTypeDrink(choice.value)}></Select>
+                <br></br>
+
                 <StyledTitle>Upload an image</StyledTitle>
                 <CreateSaveView startCreate={saveData} />
             </div>

@@ -3,14 +3,13 @@ import styled from 'styled-components';
 
 const StyledInstructions = styled.textarea`
 display: flex;
-font-size: 12pt;
+font-size: 10pt;
 font-family: Helvetica;
 padding: 2px;
 color: #7F7F7F;;
 margin-top: 5px;
 width: 200px;
 justify-content: center;
-
 
 `
 const StyledTitle = styled.div`
@@ -29,10 +28,10 @@ const StyledTitle = styled.div`
 
 const createInstrucView = () => {
 
-    return <div className="resultCol">
-        <StyledTitle>Instructions</StyledTitle>
-        <StyledInstructions id="instructions" placeholder="Start with mixing..." rows="8" cols="40"></StyledInstructions>
-    </div>
+	return <div className="resultCol">
+		<StyledTitle>Instructions</StyledTitle>
+		<StyledInstructions id="instructions" placeholder="Start with mixing..." rows="8" cols="40"></StyledInstructions>
+	</div>
 
 
 

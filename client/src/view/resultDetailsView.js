@@ -2,6 +2,7 @@ import React from "react";
 import "../utils/css/drinkResults.css";
 import styled from "styled-components";
 
+
 const StyledDetails = styled.div`
   position: fixed;
   transform: translate(-50%, -50%);
@@ -110,6 +111,22 @@ margin-right: 30px;
 	
 `
 
+
+
+const StyledLikeBtn = styled.button`
+	display:flex;
+	width: 40px;
+	height: 20px;
+	border-radius: 5px;
+	border-color:cornflowerblue;
+	background-color: cornflowerblue;
+	color:  white;
+	cursor: pointer;
+	font-family:"Helvetica";
+	margin-left: 2px;
+	
+`
+
 function ResultDetailsView(props) {
 	return (
 		<StyledDetails>
@@ -120,12 +137,16 @@ function ResultDetailsView(props) {
 			<StyledCol>
 
 				<StyledRow><img className="img" src={props.image}></img>
+
 					<StyledCol>
 						<StyledHeadingSmall>Glass</StyledHeadingSmall>
 						<StyledInstructions>{props.glass || ""}</StyledInstructions>
 						<br></br>
 						<StyledHeadingSmall>Type</StyledHeadingSmall>
 						<StyledInstructions>{props.alcoholic || ""}</StyledInstructions>
+            <br></br>
+						<StyledLikeBtn onClick={onLike}> {likeStatus} </StyledLikeBtn>
+
 					</StyledCol>
 				</StyledRow>
 				<StyledRow>

@@ -9,7 +9,7 @@ class CocktailModel {
 		this.seeingUsername = "User123";
 		this.subscribers = [];
 		this.mybar = [
-			"Red wine",
+			"Gin",
 			"Vodka",
 			"Cointreau",
 			"Amaretto",
@@ -68,7 +68,6 @@ class CocktailModel {
 
 	addMyBar(ing) {
 		ing = ing.toLowerCase();
-		console.log(ing, this.mybar.indexOf(ing));
 		if (this.mybar.indexOf(ing) === -1) {
 			this.mybar = this.mybar.concat(ing);
 			this.notifyObservers();
@@ -122,6 +121,11 @@ class CocktailModel {
 
 	}
 
+	addLikedDrink(drink) {
+		this.likeddrinks.push(drink);
+		this.notifyObservers();
+	}
+
 
 	setIngList(ingList) {
 		this.currentdrink = ingList;
@@ -164,6 +168,11 @@ class CocktailModel {
 
 	removeIngShaker(ing) {
 		this.currentdrink = this.currentdrink.filter((elem) => elem !== ing);
+		this.notifyObservers();
+	}
+
+	removeElemBar(ing) {
+		this.mybar = this.mybar.filter((elem) => elem !== ing);
 		this.notifyObservers();
 	}
 
