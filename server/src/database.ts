@@ -97,6 +97,7 @@ function containsAllIngredients(drinkIngredients: String[], ingredients: String[
 }
 
 async function getDrinksByIngredients(ingredients: String[]) {
+    if (ingredients.length === 0) return await Drink.find();
     const drinks = await Drink.find({ "ingredients.name": { "$in": ingredients } }); //§
     const filteredDrinks = drinks.filter((drink) => {
         const drinkIngreds = drink.ingredients.map((ingred) => { return ingred.name });

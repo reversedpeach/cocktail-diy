@@ -20,11 +20,11 @@ text-align:center;
 
 `
 
-const ResultListView = ({ image, title, index, setDetails }) => {
+const ResultListView = ({ image, title, id, setDetails }) => {
 
 	return (
 		<div>
-			<div key={index}>
+			<div key={id}>
 				<img src={image} className="img" onClick={setDetails} />
 				<StyledName>
 					{title}

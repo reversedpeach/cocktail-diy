@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/reversedpeach/cocktail-diy#readme",
   "dependencies": {
+    "@apollo/client": "^3.7.0",
     "@appbaseio/reactivesearch": "^3.40.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -26,6 +27,7 @@
     "@mui/material": "^5.10.9",
     "context": "^3.0.4",
     "file-loader": "^6.2.0",
+    "graphql": "^16.6.0",
     "mui": "^0.0.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",

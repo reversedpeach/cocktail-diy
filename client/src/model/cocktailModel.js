@@ -2,7 +2,9 @@ import { CommentsDisabledOutlined } from "@mui/icons-material";
 
 class CocktailModel {
 	constructor() {
-		this.username = "User123";
+		this.isAuth = false
+		this.userID = "";
+		this.username = "";
 		this.password = "";
 		this.seeingUsername = "User123";
 		this.subscribers = [];
@@ -31,6 +33,19 @@ class CocktailModel {
 		this.alluserdrinks = ["whaha water", "rapsolja", "mainbudle", "testing drinks"];
 	}
 
+	setUser(data) {
+		console.log("Setting user in model with:", data, data.name, data.id, data.myBar);
+		this.username = data.name;
+		this.seeingUsername = data.name;
+		this.userID = data.id;
+		this.mybar = data.myBar || [];
+		this.favoritedrinks = data.favoritedrink || [];
+		this.alluserdrinks = data.createdDrinks || [];
+		localStorage.setItem("token", data.token);
+		this.isAuth = true;
+		this.notifyObservers();
+	}
+
 	setUserName(username) {
 		this.username = username;
 		this.notifyObservers();
@@ -42,10 +57,12 @@ class CocktailModel {
 	}
 
 	addMyBar(ing) {
+		ing = ing.toLowerCase();
+		console.log(ing, this.mybar.indexOf(ing));
 		if (this.mybar.indexOf(ing) === -1) {
 			this.mybar = this.mybar.concat(ing);
+			this.notifyObservers();
 		}
-		this.notifyObservers();
 	}
 
 	addFollowing(friend) {

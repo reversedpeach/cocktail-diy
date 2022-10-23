@@ -1,15 +1,23 @@
 import React, { useState, createContext } from "react";
 import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import "./utils/css/app.css";
 
 import readModel from "./readModel.js";
-
+import CocktailModel from './model/cocktailModel.js';
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import LoginPage from "./pages/LoginPage";
-import Register from "./pages/Register";
+//import Register from "./pages/Register";
+import Login from "./presenter/loginPresenter";
+import Register from "./presenter/registerPresenter";
 import CommunityPage from "./pages/CommunityPage";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+//import { useQuery, gql } from '@apollo/client';
+import { onError } from "@apollo/client/link/error";
+import { GET_USERS } from "./graphql/queries";
 
 import styled from "styled-components";
 
@@ -77,7 +85,8 @@ padding-right: 20px;
 `;
 
 
-const model = readModel();
+const model = new CocktailModel();
+
 
 const App = ({ model }) => {
 
@@ -85,6 +94,7 @@ const App = ({ model }) => {
 	return (
 		<Router>
 			<div>
+
 				<div>
 					<StyledNavBar>
 						<StyledNavWrapEnd>
@@ -100,7 +110,7 @@ const App = ({ model }) => {
 				<Routes>
 					<Route path="/" element={<HomePage model={model} />} />
 					<Route path="/profile" element={<ProfilePage model={model} />} />
-					<Route path="/login" element={<LoginPage model={model} />} />
+					<Route path="/login" element={<Login model={model} />} />
 					<Route path="/register" element={<Register model={model} />} />
 					<Route path="/community" element={<CommunityPage model={model} />} />
 				</Routes>
@@ -109,6 +119,37 @@ const App = ({ model }) => {
 	);
 };
 
-ReactDOM.render(<App model={model} />, document.querySelector("#app"));
+
+const httpLink = createHttpLink({
+	uri: 'http://localhost:4000/',
+});
+
+const authLink = setContext((_, { headers }) => {
+	// get the authentication token from local storage if it exists
+	const token = localStorage.getItem('token');
+	// return the headers to the context so httpLink can read them
+	return {
+		headers: {
+			...headers,
+			authorization: token ? `${token}` : "",
+		}
+	}
+});
+
+const client = new ApolloClient({
+	link: authLink.concat(httpLink),
+	cache: new InMemoryCache()
+});
+
+
+
+// Supported in React 18+
+const root = createRoot(document.getElementById('app'));
+
+root.render(
+	<ApolloProvider client={client}>
+		<App model={model} />
+	</ApolloProvider>,
+);
 
 export default App;

@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
+import { gql, useLazyQuery } from "@apollo/client";
 
 import useModelProp from "../utils/useModelProp.js";
-import CocktailSource from "../cocktailApi.js";
 import "../utils/css/drinkResults.css";
 import styled from "styled-components";
 
-
+const GET_ALL_INGREDIENTS = gql`
+	query Query{
+		getAllIngredients
+	}
+`;
 
 export default function SearchIng({ model, addIng }) {
 	const IngList = useModelProp(model, "mybar");
 	const shakering = useModelProp(model, "currentdrink");
 	const [options, setOptions] = useState([]);
+	const [allIng, setAllIng] = useState([]);
 	const currentOptions = [];
+	const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, {
+		onCompleted: (data) => {
+			console.log(data);
+			const ingredientsArray = data.getAllIngredients;
+			const ingredientDict = ingredientsArray.map((ingredient) => {
+				return { value: ingredient, label: ingredient }
+			})
+			console.log(ingredientDict);
+			setAllIng(ingredientDict);
+		}
+	});
+
 
 	const customStyles = {
 
@@ -29,26 +46,13 @@ export default function SearchIng({ model, addIng }) {
 
 	const [selectedOption, setSelectedOption] = useState(currentOptions);
 
-	async function getAllIng() {
-		const allIng = await CocktailSource.getAllIngredients();
-		let op = [];
-		for (const ing of allIng.drinks) {
-			op = op.concat({ value: ing["strIngredient1"], label: ing["strIngredient1"] });
-		}
-		for (const curIng of shakering) {
-			currentOptions = currentOptions.concat({ value: curIng, label: curIng });
-		}
-		setOptions(op);
-		setSelectedOption(currentOptions);
-	}
+	useEffect(() => {
+		getAllIngredients();
+	}, []);
 
 	function dic2arr(ingDic) {
 		return ingDic[0]["value"];
 	}
-
-	useEffect(() => {
-		getAllIng();
-	}, []);
 
 	useEffect(() => {
 		setSelectedOption(currentOptions);
@@ -58,11 +62,11 @@ export default function SearchIng({ model, addIng }) {
 		<Select
 			styles={customStyles}
 			value={selectedOption}
-			options={options}
+			options={allIng}
 			placeholder="Search for an ingredient to add"
-			onChange={(e) => {
-
-				addIng(dic2arr(e));
+			onChange={(selected) => {
+				console.log(selected);
+				addIng(dic2arr(selected));
 
 			}}
 			isMulti={true}

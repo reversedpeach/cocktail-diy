@@ -34,14 +34,25 @@ const resolvers = {
             }
         },
         getDrinks: async (parent: any, { ingredients, community }: { ingredients: String[], community: boolean }, { dataSources }, info: any) => {
+            console.log("reached getDrinks")
+            console.log(ingredients);
+            const ingreds = ingredients.map((ingredient) => {
+                return ingredient.toLowerCase();
+            })
             if (community) {
-                /*const drinks = await getDrinksByIngredient(ingredients);
-                const communityDrinks = drinks.map((drink) => {
+                const drinks = await getDrinksByIngredients(ingreds);
+                console.log(drinks);
+                return drinks;
+                /*const communityDrinks = drinks.map((drink) => {
                     drink.community:true;
                 })*/
-                return await getDrinksByIngredients(ingredients);
+                //return await getDrinksByIngredients(ingredients);
             }
-            const response = await dataSources.cocktailsAPI.getDrinks(ingredients);
+            const response = await dataSources.cocktailsAPI.getDrinks(ingreds);
+            const communityDrinks = await getDrinksByIngredients(ingreds);
+            console.log("community drinks: ", communityDrinks);
+            //console.log("Recieved from api on server: ", response);
+            if (response.drinks == 'None Found') return communityDrinks;
             const reformattedResponse = response.drinks.map((drink) => {
                 //console.log(drink);
                 //const ingredients= constructIngredientsArray(drink);
@@ -52,8 +63,10 @@ const resolvers = {
                     //ingredients: ingredients
                 }
             })
-            console.log(reformattedResponse);
-            return reformattedResponse
+            //console.log(reformattedResponse);
+            const result = [...communityDrinks, ...reformattedResponse];
+            console.log("result: ", result);
+            return result;
         },
         login: async (parent, { email, password }: { email: String, password: String }, context: any, info: any) => {
             return await login(email, password);
@@ -63,13 +76,19 @@ const resolvers = {
             return response.drinks;
         },
         getAllIngredients: async (parent, args, { dataSources }, info) => {
-            return await dataSources.cocktailsAPI.getAllIngredients();
+            //console.log("made it to resolver", JSON.stringify(dataSources));
+            const response = await dataSources.cocktailsAPI.getAllIngredients();
+            //console.log("Ingredients recieved: ", response.drinks);
+            return response.drinks.map((ingred) => { return ingred.strIngredient1 });
 
         },
         getIngredient: async (parent, args, { dataSources }, info) => {
             const response = await dataSources.cocktailsAPI.getIngredient(args.id);
             console.log(response.ingredients[0].strIngredient);
-            return response.ingredients[0].strIngredient;
+            return {
+                name: response.ingredients[0].strIngredient,
+                img: response.ingredients[0].strDrinkThumb
+            }
         },
     },
     Mutation: {
@@ -88,6 +107,7 @@ const resolvers = {
         },
         changeMyBar: async (parent, { newMyBar }, context, info) => {
             if (!context.user) throw new GraphQLError("you must be logged in to access this feature");
+            console.log("new bar: ", newMyBar, " user: ", context.user);
             return await setMybar(newMyBar, context.user);
         },
         addFriend: async (parent, { friendID }, context, info) => {
