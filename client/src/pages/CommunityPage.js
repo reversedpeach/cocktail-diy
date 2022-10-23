@@ -15,7 +15,7 @@ const StyledModeTitle = styled.span`
 	font-size: 40pt;
 	font-family: Helvetica;
 	font-weight: bold;
-	width: 80%;
+	width: 100%;
 	color: #7f7f7f;
 	padding-bottom: 12px;
 	margin-bottom: 20px;
@@ -42,7 +42,7 @@ export default function CommunityPage({ model }) {
 	return (
 		<div>
 			{!showCom ? (
-				<div>
+				<div className="discoverBox">
 					<StyledModeTitle> COMMUNITY </StyledModeTitle>
 					<div className="communityBox">
 						<div style={{ paddingLeft: 20, paddingTop: 20 }}>

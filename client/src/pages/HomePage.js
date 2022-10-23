@@ -4,7 +4,7 @@ import MyBar from "../presenter/myBar.js";
 import Shaker from "../presenter/shaker.js";
 import ResultsList from "../presenter/resultsList.js";
 import IngShaker from "../presenter/ingShaker.js";
-import MyBarElem from "../presenter/myBarElem.js";
+
 import SearchIng from "../presenter/searchIng.js";
 import ResultDetails from "../presenter/resultDetails.js";
 import useModelProp from "../utils/useModelProp.js";
@@ -15,14 +15,14 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import CreatePresenter from "../presenter/createPresenter.js";
 
 const StyledModalCon = styled.div`
-position: fixed; /* Stay in place */
-z-index: 0; /* Sit on top */
+position: fixed; 
+z-index: 0; 
 left: 0;
 top: 0;
-width: 100%; /* Full width */
-height: 100%; /* Full height */
-overflow: auto; /* Enable scroll if needed */
-background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+width: 100%;
+height: 100%; 
+overflow: auto; 
+background-color: rgba(0,0,0,0.4); 
 
 `
 const StyledModeTitle = styled.span`
@@ -31,7 +31,7 @@ const StyledModeTitle = styled.span`
 	font-size: 40pt;
 	font-family: Helvetica;
 	font-weight: bold;
-	width: 80%;
+	width: 100%;
 	color: #7F7F7F;;
 	padding-bottom: 12px;
 	margin-bottom: 20px;
@@ -52,14 +52,11 @@ const StyledModeDes = styled.span`
 	
 `;
 
-
-
-
-
 export default function HomePage({ model }) {
 	const showDetails = useModelProp(model, "drinkdetails");
 	const showResult = useModelProp(model, "currentdrink");
 	const currentMode = useModelProp(model, "selectedmode");
+
 	return (
 		<div className="discoverBox" >
 			<div className="rowBox">
@@ -68,7 +65,6 @@ export default function HomePage({ model }) {
 			</div>
 			<StyledModeDes>{currentMode[0].toUpperCase() + currentMode.slice(1)} a new drink by dragging n' dropping ingredients from My Bar into the shaker or using the search form</StyledModeDes>
 			<div className="rowBox">
-
 				<div className="shakerBox">
 					<div className="ingCol">
 						<IngShaker model={model} />
@@ -78,16 +74,11 @@ export default function HomePage({ model }) {
 				<div className="barBox">
 					<div className="barShelf">
 						<MyBar model={model} />
-						<div className="barRow">
-							<MyBarElem model={model} />
-						</div>
 					</div>
 					<div className="searchIngredientForm">
 						<SearchIng model={model} addIng={(add) => model.addIngShaker(add)} />
 					</div>
-
 				</div>
-
 			</div>
 
 			{currentMode === "create" ? (showResult.length > 0 ? (

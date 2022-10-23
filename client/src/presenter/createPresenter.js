@@ -63,6 +63,7 @@ function CreatePresenter({ model }) {
         model.addInstructionsDrink(getFormData("instructions"));
         model.addGlassDrink(getFormData("glasslist"));
         model.addTypeDrink(getFormData("typelist"));
+        model.addImgDrink(getFormData("uploadimg"));
 
         //need to empty object afterwards
         console.log(newdrink);

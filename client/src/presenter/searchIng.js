@@ -15,7 +15,6 @@ export default function SearchIng({ model, addIng }) {
 	const currentOptions = [];
 
 	const customStyles = {
-
 		option: (styles, state) => ({
 			...styles,
 			cursor: 'pointer',
@@ -24,6 +23,8 @@ export default function SearchIng({ model, addIng }) {
 			...styles,
 			cursor: 'pointer',
 			border: '3px solid rgb(127,127,127)',
+			borderRadius: '12px',
+			width: '260px'
 		})
 	};
 
