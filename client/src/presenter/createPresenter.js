@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import CreateElemListView from "../view/createElemListView.js";
 import CreateTitleView from "../view/createTitleView.js";
 import CreateInstrucView from "../view/createInstrucView.js";
 import CreateSaveView from "../view/createSaveView.js";
 import CreateTypeGlassView from "../view/createTypeGlassView.js";
+import CreateNameView from "../view/createNameView.js";
 import useModelProp from "../utils/useModelProp.js";
 import { usePromise } from "../utils/usePromise.js";
 import styled from "styled-components";
 import CocktailSource from "../cocktailApi.js";
 import getFormData from "../utils/getFormData.js";
+
 import Select from "react-select";
 import { fontSize } from "@mui/system";
+
+import { gql, useMutation } from "@apollo/client";
+
+
 
 const StyledTitle = styled.div`
 	display: flex;
@@ -31,6 +37,48 @@ const StyledForm = styled.div`
                 width: '20px'
     font-family: 'Helvetica'`;
 
+/*const CREATE_DRINK_MUTATION = gql`
+    mutation createDrink(
+        $name: String!
+        $ingredients: [{name:String, measurement:String}]!
+        $glasstype: String
+        $instructions: String!
+        $img: String
+    ){
+        createDrink(
+            name: $name
+            ingredients: $ingredients
+            glasstype: $glasstype
+            instructions: $instructions
+            img: $img
+        ){
+            name
+            id
+        }
+    }
+`;*/
+
+const CREATE_DRINK_MUTATION = gql`
+    mutation createDrink(
+        $name: String!
+        $ingredients: [Ingredientinput]!
+        $instructions: String!
+        $glassType: String
+        $type: String
+    ){
+        createDrink(
+            name: $name 
+            ingredients: $ingredients 
+            instructions: $instructions
+            glassType: $glassType
+            type:$type
+        ) {
+            name
+            id
+        }
+    }
+`;
+
 function CreatePresenter({ model }) {
     const ingredients = useModelProp(model, "currentdrink");
     const newdrink = useModelProp(model, "createddrink");
@@ -43,6 +91,9 @@ function CreatePresenter({ model }) {
     const [promiseType, setPromiseType] = React.useState(null);
     React.useEffect(() => setPromiseType(CocktailSource.getAllTypes()), []);
     const [type, err2] = usePromise(promiseType);
+    const [success, setSuccess] = useState(false);
+    const [createDrink, { data, loading, error }] = useMutation(CREATE_DRINK_MUTATION, { onCompleted: (data) => { console.log(data); setSuccess(true) } });
+
     const types = [];
 
     const customStyles = {
@@ -83,9 +134,8 @@ function CreatePresenter({ model }) {
 
     function saveData() {
         for (let i = 0; i < ingredients.length; i++) {
-            model.addIngredientsDrink(ingredients[i]);
             const measurement = getFormData("measurement" + (i + 1));
-            model.addMeasurementsDrink(measurement);
+            model.addIngredientsDrink(ingredients[i], measurement);
         }
         model.addInstructionsDrink(getFormData("instructions"));
         model.addImgDrink(getFormData("uploadimg"));
@@ -93,9 +143,26 @@ function CreatePresenter({ model }) {
         //need to empty object afterwards
         console.log(newdrink);
 
+        createDrink({
+            variables: {
+                name: newdrink.name,
+                ingredients: newdrink.ingredients,
+                instructions: newdrink.instructions,
+                glassType: newdrink.glass,
+                type: newdrink.type
+            },
+        });
+        model.resetCreatedDrink();
+    }
+
+    function setName(name) {
+        console.log("Setting name to: ", name);
+        model.addNameDrink(name);
+
     }
 
     return (<React.Fragment><CreateTitleView />,
+        <CreateNameView setName={setName} />
         <div className="rowBox">
             <div className="resultCol">
                 <StyledTitle>Ingredients</StyledTitle>
@@ -103,6 +170,7 @@ function CreatePresenter({ model }) {
                     <CreateElemListView ingredient={ing} id={"measurement" + (index + 1)} />
                 ))}
             </div>,
+
             <CreateInstrucView />
             <div className="resultCol">
                 <StyledTitle>Select Glass and Type</StyledTitle>
@@ -116,8 +184,9 @@ function CreatePresenter({ model }) {
                     placeholder="Select type"
                     onChange={(choice) => model.addTypeDrink(choice.value)}></Select>
                 <br></br>
+
                 <StyledTitle>Upload an image</StyledTitle>
-                <CreateSaveView startCreate={() => saveData()} />
+                <CreateSaveView startCreate={saveData} />
             </div>
         </div>
     </React.Fragment>

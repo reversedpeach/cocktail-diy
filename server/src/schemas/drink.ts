@@ -3,8 +3,9 @@ import { Schema, Types, model } from "mongoose";
 
 interface IDrink {
     name: string;
-    ingredients: { name: String, measurement: Number }[],
-    glassType: string,
+    ingredients: { name: String, measurement: String }[],
+    glass: string,
+    type: string,
     createdAt: Date;
     updatedAt: Date;
     creator: Types.ObjectId;
@@ -16,7 +17,8 @@ interface IDrink {
 const drinkSchema = new Schema<IDrink>({
     name: { type: String, required: true },
     ingredients: [Schema.Types.Mixed],
-    glassType: String,
+    glass: String,
+    type: String,
     createdAt: {
         type: Date,
         immutable: true,

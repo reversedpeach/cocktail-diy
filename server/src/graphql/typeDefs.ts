@@ -9,9 +9,12 @@ type Drink {
   id: String!
   name: String!
   ingredients: [Ingredient]
+  instructions: String
   creator: User
   img: String
-  community: Boolean
+  external: Boolean
+  glass:String
+  type:String
 }
 
 type User {
@@ -39,7 +42,7 @@ type APIdrink {
 
 input Ingredientinput {
   name: String!,
-  measurement: Int
+  measurement: String
 }
 
 type Query {
@@ -55,7 +58,7 @@ type Query {
 
 type Mutation {
   register(name: String!, email: String!, password: String!, confirmPassword: String!): User
-  createDrink(name: String!, ingredients: [Ingredientinput]!, glassType: String, instructions: String!, img: String): Drink
+  createDrink(name: String!, ingredients: [Ingredientinput]!, glassType: String, instructions: String!, img: String, type: String): Drink
   changeMyBar(newMyBar:[String]): [String]
   addFriend(friendID:String!): [User]
   changeDrink(id: String!, name: String, ingredients: [Ingredientinput], glassType: String, instructions: String, img: String): Drink

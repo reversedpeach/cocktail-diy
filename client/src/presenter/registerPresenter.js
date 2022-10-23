@@ -1,8 +1,11 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RegisterView from "../view/registerView.js";
+import useModelProp from "../utils/useModelProp.js";
 //import { REGISTER_USER_MUTATION } from "../graphql/mutations.js";
 import { gql, useMutation } from "@apollo/client";
+import { Navigate, useNavigate } from "react-router-dom";
+
+
 
 const REGISTER_USER_MUTATION = gql`
         mutation register(
@@ -27,6 +30,8 @@ const REGISTER_USER_MUTATION = gql`
 
 
 export default function Register({ model }) {
+    const navigate = useNavigate();
+    const isAuth = useModelProp(model, "isAuth");
     const [username, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -54,5 +59,12 @@ export default function Register({ model }) {
             console.log("Data: ", data);
         }
     }
+    useEffect(() => {
+        if (!loading && data) {
+            setTimeout(() => {
+                navigate("/");
+            }, 200)
+        }
+    }, [isAuth])
     return (<RegisterView setUserName={setUserName} setEmail={setEmail} setPassword={setPassword} setConfirmPassword={setConfirmPassword} send={register} />);
 }

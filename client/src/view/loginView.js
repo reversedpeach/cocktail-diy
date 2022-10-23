@@ -55,10 +55,12 @@ export default function LoginView(props) {
     }
 
     return (
+
         <div className="discoverBox">
             <div className="resultCol">
                 <div className="rowBoxLeft">
                     <StyledModeTitle> Sign In </StyledModeTitle>
+
                 </div>
                 <div style={{ marginLeft: 55, marginTop: 0 }}>
                     <Input

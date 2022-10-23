@@ -18,6 +18,7 @@ const CHANGE_MY_BAR_MUTATION = gql`
 
 
 export default function MyProfile(props) {
+	const loggedIn = useModelProp(props.model, "isAuth");
 	const favoritedrinks = useModelProp(props.model, "favoritedrinks");
 	const likeddrinks = useModelProp(props.model, "likeddrinks");
 	const recentdrinks = useModelProp(props.model, "recentdrinks");
@@ -54,6 +55,13 @@ export default function MyProfile(props) {
 			},
 		});
 	}
+
+	useEffect(() => {
+		if (!loggedIn) {
+			window.location.href = "/";
+		}
+	}, [loggedIn]);
+
 
 	/*
 	useEffect(() => {

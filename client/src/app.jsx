@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { createRoot } from 'react-dom/client';
 import "./utils/css/app.css";
 
+import NavBarPresenter from "./presenter/navBarPresenter";
+
 import CocktailModel from './model/cocktailModel.js';
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
@@ -83,7 +85,19 @@ padding-right: 20px;
 
 `;
 
+/*
+<StyledNavBar>
+						<StyledNavWrapEnd>
+							<StyledLink to="/"> Home</StyledLink>
+							<StyledLink to="/community">Community</StyledLink>
+							<StyledLink to="/profile"> Profile</StyledLink>
+							<StyledLink to="/login"> Login</StyledLink>
+							<StyledLink to="/register"> Register </StyledLink>
+						</StyledNavWrapEnd>
+					</StyledNavBar>
+*/
 
+localStorage.setItem("token", null);
 const model = new CocktailModel();
 
 
@@ -95,15 +109,8 @@ const App = ({ model }) => {
 			<div>
 
 				<div>
-					<StyledNavBar>
-						<StyledNavWrapEnd>
-							<StyledLink to="/"> Home</StyledLink>
-							<StyledLink to="/profile"> Profile</StyledLink>
-							<StyledLink to="/login"> Login</StyledLink>
-							<StyledLink to="/register"> Register </StyledLink>
 
-						</StyledNavWrapEnd>
-					</StyledNavBar>
+					<NavBarPresenter model={model} />
 
 				</div>
 				<Routes>
