@@ -20,6 +20,7 @@ export default function MyProfile(props) {
 	const users = useModelProp(props.model, "users");
 	const madedrinks = useModelProp(props.model, "userdrinks");
 	const mybar = useModelProp(props.model, "mybar");
+	const seeingUsername = useModelProp(props.model, "seeingUsername");
 	const [allIng, setAllIng] = useState([]);
 	const [allUsers, setUsers] = useState([]);
 	const [showSearchingForm, setShow] = useState(false);
@@ -46,6 +47,7 @@ export default function MyProfile(props) {
 		props.model.seeingUsername = "";
 	}*/
 
+
 	useEffect(() => {
 
 	}, []);
@@ -64,9 +66,16 @@ export default function MyProfile(props) {
 			showSearchingFriend={showSearchingFriend}
 			selectedIngOptions={selectedIngOptions}
 			followButton={followButton}
-			setshow={setShow}
+			seeingUsername={seeingUsername}
+			setShow={setShow}
 			setFriend={setFriend}
 			setShowCom={props.setShowCom}
+			addMyBar={(e) => {
+				props.model.addMyBar(e);
+			}}
+			addFollowing={(e) => {
+				props.model.addFollowing(e);
+			}}
 		/>
 	);
 }

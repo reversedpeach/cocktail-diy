@@ -4,6 +4,19 @@ import { TextField, Button, Input } from "@mui/material";
 import { REGISTER_USER_MUTATION, TESTMUTATION } from "../graphql/mutations.js";
 
 
+import styled from "styled-components";
+
+const StyledModeTitle = styled.span`
+	display: flex;
+	align-self: flex-start;
+	font-size: 16pt;
+	font-family: Helvetica;
+	font-weight: bold;
+	width: 80%;
+	color: #7f7f7f;
+	padding-bottom: 2px;
+	margin-bottom: 10px;
+`;
 export default function Register({ model }) {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("test");
@@ -31,7 +44,7 @@ export default function Register({ model }) {
 		<div className="register">
 			<div>
 				<div style={{ paddingBottom: 10 }}>
-					<div className="title">Register </div>
+					<StyledModeTitle> Register </StyledModeTitle>
 				</div>
 			</div>
 			<div>

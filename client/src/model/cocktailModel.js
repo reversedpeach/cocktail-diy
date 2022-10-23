@@ -1,3 +1,5 @@
+import { CommentsDisabledOutlined } from "@mui/icons-material";
+
 class CocktailModel {
 	constructor() {
 		this.isAuth = false
@@ -7,7 +9,7 @@ class CocktailModel {
 		this.seeingUsername = "User123";
 		this.subscribers = [];
 		this.mybar = [
-			"Gin",
+			"Red wine",
 			"Vodka",
 			"Cointreau",
 			"Amaretto",
@@ -21,7 +23,7 @@ class CocktailModel {
 		this.currentdrink = []; // array with ingredients
 		this.drinkdetails = null;
 		this.selectedmode = "discover";
-		this.createddrink = [];
+		this.createddrink = { ingredients: [], measurements: [], instructions: "", img: "", glass: "", type: "" }
 		this.favoritedrinks = "Pink Moon";
 		this.likeddrinks = ["Abbey Cocktail", "Pink Moon", "Singapore Sling"];
 		this.recentdrinks = ["Lone Tree Cocktail", "Rose", "Tom Collins", "Martini"];
@@ -41,6 +43,16 @@ class CocktailModel {
 		this.alluserdrinks = data.createdDrinks || [];
 		localStorage.setItem("token", data.token);
 		this.isAuth = true;
+    this.notifyObservers();
+    }
+    
+	setUserName(username) {
+		this.username = username;
+		this.notifyObservers();
+	}
+
+	setSeeingUserName(seeingUsername) {
+		this.seeingUsername = seeingUsername;
 		this.notifyObservers();
 	}
 
@@ -57,6 +69,33 @@ class CocktailModel {
 		}
 		this.notifyObservers();
 	}
+
+	addMeasurementsDrink(mea) {
+		this.createddrink.measurements.push(mea)
+		this.notifyObservers();
+	}
+
+	addIngredientsDrink(ing) {
+		this.createddrink.ingredients.push(ing)
+		this.notifyObservers();
+	}
+
+	addInstructionsDrink(ins) {
+		this.createddrink.instructions = ins;
+		this.notifyObservers();
+	}
+
+	addTypeDrink(ty) {
+		this.createddrink.type = ty;
+		this.notifyObservers();
+	}
+
+	addGlassDrink(gla) {
+		this.createddrink.glass = gla;
+		this.notifyObservers();
+	}
+
+
 
 	setIngList(ingList) {
 		this.currentdrink = ingList;

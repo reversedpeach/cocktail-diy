@@ -2,7 +2,6 @@ import React from "react";
 import styled from 'styled-components';
 
 
-
 const StyledTitle = styled.div`
 	display: flex;
 	font-size: 36pt;
@@ -30,8 +29,8 @@ display: flex;
 
 const CreateTitleView = ({ }) => {
 
-    return (<StyledCenter><StyledMiniTitle>Scroll to  </StyledMiniTitle>
-        <StyledTitle> CREATE NEW DRINK </StyledTitle></StyledCenter>)
+	return (<StyledCenter><StyledMiniTitle>Scroll to  </StyledMiniTitle>
+		<StyledTitle> CREATE NEW DRINK </StyledTitle></StyledCenter>)
 
 };
 

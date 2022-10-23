@@ -9,13 +9,10 @@ import SearchIng from "../presenter/searchIng.js";
 import ResultDetails from "../presenter/resultDetails.js";
 import useModelProp from "../utils/useModelProp.js";
 import ToggleMode from "../presenter/toggleMode.js";
-import CreateDrink from "../presenter/createDrink.js";
-import CreateInstruc from "../presenter/createInstruc.js";
-import CreateTitle from "../presenter/createTitle.js";
-import CreateSave from "../presenter/createSave.js";
 import ResultTitle from "../presenter/resultTitle.js";
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import CreatePresenter from "../presenter/createPresenter.js";
 
 const StyledModalCon = styled.div`
 position: fixed; /* Stay in place */
@@ -55,19 +52,7 @@ const StyledModeDes = styled.span`
 	
 `;
 
-const StyledTitle = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	align-content: center;
-	font-size: 16pt;
-	font-family: Helvetica;
-	color: white;
-	padding-bottom: 10px;
-	flex-direction: column;
-	align-self: flex-start;
 
-	`;
 
 
 
@@ -107,22 +92,7 @@ export default function HomePage({ model }) {
 
 			{currentMode === "create" ? (showResult.length > 0 ? (
 				<div className="colBox">
-					<CreateTitle />
-					<div className="rowBox">
-						<div className="resultCol">
-							<StyledTitle>Ingredients</StyledTitle>
-							<CreateDrink model={model} />
-						</div>
-						<div className="resultCol">
-							<StyledTitle>Instructions</StyledTitle>
-							<CreateInstruc model={model} />
-
-						</div>
-						<div className="resultCol">
-							<StyledTitle>Upload an image</StyledTitle>
-							<CreateSave />
-						</div>
-					</div>
+					<CreatePresenter model={model} />
 				</div>
 			)
 				: <p></p>) : (showResult.length > 0 ? (

@@ -59,6 +59,24 @@ const CocktailSource = {
 
 		return this.apiCall(paramsString).then((data) => data);
 	},
+
+	getAllTypes() {
+		const paramsString = "" + "list.php?a=list";
+
+		return this.apiCall(paramsString).then((data) => data);
+	},
+
+	getAllGlasses() {
+		const paramsString = "" + "list.php?g=list";
+
+		return this.apiCall(paramsString).then((data) => data);
+	},
+
+
+
+
+
+
 };
 
 export default CocktailSource;

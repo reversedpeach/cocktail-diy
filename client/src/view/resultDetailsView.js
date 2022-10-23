@@ -3,8 +3,7 @@ import "../utils/css/drinkResults.css";
 import styled from "styled-components";
 
 const StyledDetails = styled.div`
-  position: absolute;
-  
+  position: fixed;
   transform: translate(-50%, -50%);
   transition: 200ms ease-in-out;
   border-radius: 20px;
@@ -17,6 +16,7 @@ const StyledDetails = styled.div`
   padding-bottom: 40px;
   opacity:1 !important;
   box-shadow: 2px 2px 6px #888888;
+  z-index:1;
 `
 
 
