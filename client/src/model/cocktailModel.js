@@ -7,7 +7,7 @@ class CocktailModel {
 		this.seeingUsername = "User123";
 		this.subscribers = [];
 		this.mybar = [
-			"Gin",
+			"Red wine",
 			"Vodka",
 			"Cointreau",
 			"Amaretto",

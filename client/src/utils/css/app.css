@@ -227,8 +227,9 @@
 .barImage {
 	display: flex;
 	width: 80px;
-	filter: grayscale(30%);
+	filter: contrast(0%);
 	opacity: 0.9;
+	border: #494949;
 }
 
 .barImage:hover {
