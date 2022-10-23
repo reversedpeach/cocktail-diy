@@ -1,6 +1,6 @@
 import React from "react";
-
 import styled from 'styled-components'
+import UploadAndDisplayImage from "../presenter/uploadAndDisplayImage.js";
 
 const StyledBtn = styled.button`
 	border-radius: 18px;
@@ -23,18 +23,13 @@ const StyledBtn = styled.button`
 
 `
 
-const CreateSaveView = ({ startCreate }) => {
-
-	return <div>
+function CreateSaveView(props) {
+	return (<div>
 		<form >
-			<input type="file" id="uploadimg" accept="image/*" onChange={(event) => {
-				console.log(event.target.files[0]);
-
-			}} />
+			<UploadAndDisplayImage {...props} />
 		</form>
-		<StyledBtn onClick={startCreate}>Create</StyledBtn>
-	</div>
-
-};
+		<StyledBtn onClick={props.startCreate}>Create</StyledBtn>
+	</div>);
+}
 
 export default CreateSaveView;

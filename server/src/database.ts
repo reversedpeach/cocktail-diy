@@ -62,14 +62,17 @@ async function addFriend(userID: String, friendID: mongoose.Types.ObjectId) {
 }
 
 //Create drink 
-async function createDrink(name: String, ingredients: Ingredient[], creatorID: String, glassType: String, instructions: String, img: String) { //mongoose.Types.ObjectId
+async function createDrink(name: String, ingredients: Ingredient[], creatorID: String, glassType: String, instructions: String, img: String, type: String) { //mongoose.Types.ObjectId
+    const lowerCaseIngredients = ingredients.map((ingredient) => { return { name: ingredient.name.toLowerCase(), measurement: ingredient.measurement } });
+
     const drink = await Drink.create({
         name: name,
-        ingredients: ingredients,
+        ingredients: lowerCaseIngredients,
         creator: creatorID,
-        glassType: glassType,
+        glass: glassType,
         instructions: instructions,
         img: img,
+        type: type,
     });
     drink.save();
     registerCreatedDrink(creatorID, drink._id);
@@ -85,7 +88,7 @@ async function registerCreatedDrink(userID: String, drinkID: mongoose.Types.Obje
 
 interface Ingredient {
     name: String,
-    measurement: Number
+    measurement: String
 }
 
 function containsAllIngredients(drinkIngredients: String[], ingredients: String[]): boolean {
