@@ -16,12 +16,8 @@ async function createUser(name: String, email: String, password: String) {
 }
 
 async function setMybar(myNewBar: String[], userID: String) {
-    const user = await User.find({ "id": userID });
-    console.log("updating bar for user: ", user, "with: ", myNewBar);
     const res = await User.updateOne({ "_id": userID }, { "myBar": myNewBar });
-    console.log(res);
     const updatedUser = await User.findById(userID);
-    console.log("updated user: ", updatedUser);
     return updatedUser.myBar;
 }
 
@@ -87,7 +83,7 @@ async function registerCreatedDrink(userID: String, drinkID: mongoose.Types.Obje
     const user = await getUserByID(userID);
     var madeDrinks = user.createdDrinks;
     madeDrinks.push(drinkID);
-    const res = await User.updateOne({ "id": userID }, { "createdDrinks": madeDrinks });
+    const res = await User.updateOne({ "_id": userID }, { "createdDrinks": madeDrinks });
 }
 
 interface Ingredient {

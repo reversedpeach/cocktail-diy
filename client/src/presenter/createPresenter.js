@@ -138,7 +138,7 @@ function CreatePresenter({ model }) {
             model.addIngredientsDrink(ingredients[i], measurement);
         }
         model.addInstructionsDrink(getFormData("instructions"));
-        model.addImgDrink(getFormData("uploadimg"));
+        //model.addImgDrink(getFormData("uploadimg"));
 
         createDrink({
             variables: {
