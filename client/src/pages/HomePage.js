@@ -66,58 +66,57 @@ export default function HomePage({ model }) {
 
 	return (
 		<div className="discoverBox" >
+			{loggedIn == ! false ? (<div>
 
-			<div className="rowBox">
-				<StyledModeTitle>{currentMode.toUpperCase()}</StyledModeTitle>
-				<ToggleMode model={model} />
-			</div>
-			<div className="rowBoxDesc">
-				<StyledModeDes>{currentMode[0].toUpperCase() + currentMode.slice(1)} a new drink by dragging n' dropping ingredients from My Bar into the shaker or using the search form</StyledModeDes>
-				<StyledImg src={arrow} />
-			</div>
-			<div className="rowBox">
-				<div className="shakerBox">
-					<div className="ingCol">
-						<IngShaker model={model} />
-					</div>
-					<Shaker />
+				<div className="rowBox">
+					<StyledModeTitle>{currentMode.toUpperCase()}</StyledModeTitle>
+					<ToggleMode model={model} />
 				</div>
-				<div className="barBox">
-					<div className="barShelf">
-						<MyBar model={model} />
-					</div>
-					<div className="searchIngredientForm">
-						<SearchIng model={model} addIng={(add) => model.addIngShaker(add)} />
-					</div>
+				<div className="rowBoxDesc">
+					<StyledModeDes>{currentMode[0].toUpperCase() + currentMode.slice(1)} a new drink by dragging n' dropping ingredients from My Bar into the shaker or using the search form</StyledModeDes>
+					<StyledImg src={arrow} />
 				</div>
-			</div>
-
-			{currentMode === "create" ? (showResult.length > 0 ? (
-				<div className="colBox">
-					<CreatePresenter model={model} />
-				</div>
-			)
-				: <p></p>) : (showResult.length > 0 ? (
-					<div className="colBox">
-						<div className="resultCol">
-							<div>
-								<ResultTitle />
-								<div className="drinkresultsList">
-									<ResultsList model={model} />
-								</div>
-								{showDetails === null ? <div></div> :
-									<><StyledModalCon></StyledModalCon><ResultDetails model={model} /></>
-								}
-							</div>
+				<div className="rowBox">
+					<div className="shakerBox">
+						<div className="ingCol">
+							<IngShaker model={model} />
+						</div>
+						<Shaker />
+					</div>
+					<div className="barBox">
+						<div className="barShelf">
+							<MyBar model={model} />
+						</div>
+						<div className="searchIngredientForm">
+							<SearchIng model={model} addIng={(add) => model.addIngShaker(add)} />
 						</div>
 					</div>
-				) : (
-					<p></p>
-				))}
+				</div>
 
+				{currentMode === "create" ? (showResult.length > 0 ? (
+					<div className="colBox">
+						<CreatePresenter model={model} />
+					</div>
+				)
+					: <p></p>) : (showResult.length > 0 ? (
+						<div className="colBox">
+							<div className="resultCol">
+								<div>
+									<ResultTitle />
+									<div className="drinkresultsList">
+										<ResultsList model={model} />
+									</div>
+									{showDetails === null ? <div></div> :
+										<><StyledModalCon></StyledModalCon><ResultDetails model={model} /></>
+									}
+								</div>
+							</div>
+						</div>
+					) : (
+						<p></p>
+					))}
+			</div>) : <StartScreenView />}
 		</div>
 	);
 }
 
-
-{/*loggedIn == ! false ? <div> </div> : <StartScreenView />*/ }
