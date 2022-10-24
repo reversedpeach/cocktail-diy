@@ -1,4 +1,4 @@
-import { addFriend, setMybar, getDrinksByIngredients, getDrinkByName, getDrinkByID, getUsers, getUserByID, createDrink, Ingredient } from "../database";
+import { likeDrink, unlikeDrink, addFriend, setMybar, getDrinksByIngredients, getDrinkByName, getDrinkByID, getUsers, getUserByID, createDrink, Ingredient } from "../database";
 import { registerNewUser, login } from "../auth";
 import { GraphQLError } from "graphql";
 import { constructIngredientsArray } from "../util";
@@ -24,6 +24,10 @@ const resolvers = {
                     console.log(drink);
                     return drink;
                 }
+            }
+            if (args.community === null) { //if community isnt specified, return drink from either database or cocktaildb api
+                const drink = await getDrinkByID(args.id);
+                if (drink !== null) return drink;
             }
             const response = await dataSources.cocktailsAPI.getDrinkByID(args.id);
             const drink = response.drinks[0];
@@ -126,6 +130,18 @@ const resolvers = {
         addFriend: async (parent, { friendID }, context, info) => {
             if (!context.user) throw new GraphQLError("you must be logged in to access this feature");
             return await addFriend(context.user, friendID);
+        },
+        changeLikedDrinks: async (parent, args, context, info) => {
+            if (!context.user) throw new GraphQLError("you must be logged in to access this feature");
+            console.log("drink: ", args.drinkID, "add: ", args.add);
+            var res = false;
+            if (args.add) {
+                res = await likeDrink(args.drinkID, context.user);
+            } else {
+                res = await unlikeDrink(args.drinkID, context.user);
+            }
+            console.log("success: ", res);
+            return res;
         }
     }
 }

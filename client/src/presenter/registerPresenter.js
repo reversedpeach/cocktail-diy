@@ -24,10 +24,7 @@ const REGISTER_USER_MUTATION = gql`
                 token
                 id
                 myBar
-                likedDrinks{
-                    name
-                    id
-                }
+                likedDrinks
                 createdDrinks{
                     name
                     id

@@ -25,7 +25,7 @@ type User {
   myBar: [String]!
   friends: [User]
   favoriteDrink: Drink
-  likedDrinks: [Drink]
+  likedDrinks: [String]
   createdDrinks: [Drink]
 }
 
@@ -60,6 +60,7 @@ type Mutation {
   register(name: String!, email: String!, password: String!, confirmPassword: String!): User
   createDrink(name: String!, ingredients: [Ingredientinput]!, glassType: String, instructions: String!, img: String, type: String): Drink
   changeMyBar(newMyBar:[String]): [String]
+  changeLikedDrinks(drinkID:String!, add:Boolean): Boolean
   addFriend(friendID:String!): [User]
   changeDrink(id: String!, name: String, ingredients: [Ingredientinput], glassType: String, instructions: String, img: String): Drink
 }

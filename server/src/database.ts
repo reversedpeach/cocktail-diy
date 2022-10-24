@@ -30,7 +30,7 @@ async function getUsers() {
 }
 
 async function getUserByID(id: String) {
-    const user = await await User.findById(id).populate('friends').populate("createdDrinks").populate("likedDrinks");
+    const user = await await User.findById(id).populate('friends').populate("createdDrinks"); //.populate("likedDrinks")
     return user;
 }
 
@@ -126,5 +126,38 @@ async function getDrinkByID(id: String) {
     return await Drink.findById(id);
 }
 
-export { addFriend, setMybar, createDrink, createUser, getDrinksByCreator, getDrinkByID, getDrinkByName, getUserByID, getUserByName, getUserByEmail, getUsers, getFriends, getDrinksByIngredients, Ingredient }
+async function likeDrink(drinkID: String, userID: String) {
+    const user = await User.findById(userID);
+    console.log("user found: ", user);
+    const likedDrinks = user.likedDrinks;
+    console.log(likedDrinks);
+    if (!likedDrinks.includes(drinkID)) {
+        const newLikedDrinks = [...likedDrinks, drinkID];
+        const res = await User.updateOne({ "_id": userID }, { "likedDrinks": newLikedDrinks });
+        const userUpdated = await User.findById(userID);
+        console.log("new liked drinks: ", userUpdated.likedDrinks);
+        console.log(res);
+        return true;
+    }
+    return false;
+}
+
+async function unlikeDrink(drinkID: String, userID: String) {
+    const user = await User.findById(userID);
+    console.log("user found: ", user);
+    const likedDrinks = user.likedDrinks;
+    console.log(likedDrinks);
+    if (likedDrinks.includes(drinkID)) {
+        likedDrinks.map((drink) => { console.log(drink !== drinkID) });
+        const newLikedDrinks = likedDrinks.filter((drink) => { return drink !== drinkID });
+        const res = await User.updateOne({ "_id": userID }, { "likedDrinks": newLikedDrinks });
+        const userUpdated = await User.findById(userID);
+        console.log("new liked drinks: ", userUpdated.likedDrinks, "filtered:", newLikedDrinks);
+        console.log(res);
+        return true;
+    }
+    return false;
+}
+
+export { likeDrink, unlikeDrink, addFriend, setMybar, createDrink, createUser, getDrinksByCreator, getDrinkByID, getDrinkByName, getUserByID, getUserByName, getUserByEmail, getUsers, getFriends, getDrinksByIngredients, Ingredient }
 

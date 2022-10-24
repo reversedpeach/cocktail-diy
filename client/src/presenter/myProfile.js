@@ -30,11 +30,7 @@ const GET_USER_DETAILS = gql`
 				id
 				img
 			}
-			likedDrinks{
-				name
-				img
-				id
-			}
+			likedDrinks
         }
     }
 `;
@@ -43,11 +39,7 @@ const GET_USER_DETAILS = gql`
 export default function MyProfile(props) {
 	const loggedIn = useModelProp(props.model, "isAuth");
 	const id = useModelProp(props.model, "userID");
-	const favoritedrinks = useModelProp(props.model, "favoritedrinks");
-	//const likeddrinks = useModelProp(props.model, "likeddrinks");
-	const recentdrinks = useModelProp(props.model, "recentdrinks");
-	const following = useModelProp(props.model, "following");
-	const users = useModelProp(props.model, "users");
+	const likeddrinks = useModelProp(props.model, "likeddrinks");
 	//const madedrinks = useModelProp(props.model, "userdrinks");
 	const myBar = useModelProp(props.model, "mybar");
 	const seeingUsername = useModelProp(props.model, "seeingUsername");
@@ -62,7 +54,6 @@ export default function MyProfile(props) {
 	const [getUserDetails, { data, loading, error }] = useLazyQuery(GET_USER_DETAILS, {
 		fetchPolicy: 'network-only',
 		onCompleted: (data) => {
-			console.log("ran get user details query");
 			setMadeDrinks(data.getUser.createdDrinks);
 			setLikedDrinks(data.getUser.likedDrinks);
 		}
@@ -94,7 +85,7 @@ export default function MyProfile(props) {
 
 
 	useEffect(() => {
-		console.log("rerendered");
+		console.log("liked drinks in model: ", likeddrinks);
 		getAllIngredients();
 		getUserDetails({ variables: { getUserId: id } });
 	}, []);
@@ -107,25 +98,17 @@ export default function MyProfile(props) {
 	return !loading ? (
 		<MyProfileView
 			model={props.model}
-			favoritedrinks={favoritedrinks}
 			likedDrinks={likedDrinks}
-			recentdrinks={recentdrinks}
-			following={following}
 			madeDrinks={madeDrinks}
 			allIng={allIng}
 			allUsers={allUsers}
 			showSearchingForm={showSearchingForm}
 			showSearchingFriend={showSearchingFriend}
 			selectedIngOptions={selectedIngOptions}
-			followButton={followButton}
 			seeingUsername={(seeingUsername[0].toUpperCase() + seeingUsername.slice(1))}
 			setShow={setShow}
-			setFriend={setFriend}
 			setShowCom={props.setShowCom}
 			addMyBar={addToBar}
-			addFollowing={(e) => {
-				props.model.addFollowing(e);
-			}}
 			myBarLength={myBar.length}
 		/>
 	) : (<div>loading...</div>);
