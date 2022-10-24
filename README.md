@@ -1,7 +1,7 @@
 # COCKTAIL-DIY 
 
 ## To install dependencies
-`npm install`
+Run `npm install` in the client and in the server folder separately
 
 ## To run the client:
 Go to the client folder and run:

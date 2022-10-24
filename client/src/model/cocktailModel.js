@@ -56,7 +56,6 @@ class CocktailModel {
 		this.setUser(null);
 		this.isAuth = false;
 		this.notifyObservers();
-		console.log("loggar ut");
 	}
 
 	setUserName(username) {
@@ -94,7 +93,7 @@ class CocktailModel {
 	}
 
 	addMeasurementsDrink(mea) {
-		this.createddrink.measurements.push(mea)
+		this.createddrink.measurements.push(mea);
 		this.notifyObservers();
 	}
 
@@ -146,6 +145,8 @@ class CocktailModel {
 	emptyShaker() {
 		this.currentdrink = [];
 	}
+
+
 	setMode() {
 		if (this.selectedmode === "discover") {
 			this.selectedmode = "create";
