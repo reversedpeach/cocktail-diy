@@ -103,13 +103,14 @@ export default function MyProfileView(props) {
 				<div className="profileInfo">
 					{/*<StyledTitleSmall>Favorite Drink</StyledTitleSmall> <StyledList>{props.favoritedrinks}</StyledList>*/}
 					<StyledTitleSmall>Created Drinks</StyledTitleSmall>
-					{props.likeddrinks.map((value, index) => {
-						return <StyledList key={index}>{value}</StyledList>;
+					{props.madeDrinks.map((drink) => {
+						return <StyledList key={drink.name}>{drink.name}</StyledList>;
 					})}
 
 					<StyledTitleSmall>Liked Drinks </StyledTitleSmall>
-					{props.recentdrinks.map((value, index) => {
-						return <StyledList key={index}>{value}</StyledList>;
+					{props.likedDrinks.map((drink) => {
+						console.log("liked: ", drink);
+						return <StyledList key={drink.name}>{drink.name}</StyledList>;
 					})}
 				</div></div>
 

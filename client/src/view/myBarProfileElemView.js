@@ -48,9 +48,15 @@ const StyledIngTitle = styled.span`
 
 `;
 
+
+
 const MyBarProfileElemView = ({ barIng, onRemove }) => {
+
+    function remove() {
+        onRemove(barIng);
+    }
     return <div className="barCol">
-        <StyledRemove onClick={() => onRemove(barIng)}>X</StyledRemove>
+        <StyledRemove onClick={remove}>X</StyledRemove>
         <StyledElem type="image" src={"https://www.thecocktaildb.com/images/ingredients/" + barIng + "-Small.png"} />
         <StyledIngTitle>{barIng}</StyledIngTitle>
     </div>

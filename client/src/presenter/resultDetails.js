@@ -39,7 +39,7 @@ export default function ResultDetails({ model }) {
     const [drink, setDrink] = useState({});
     const [getDrinkDetails, { data, loading, error }] = useLazyQuery(GET_DRINK, { onCompleted: (data) => { console.log("recieved: ", data.getDrink, "ingreds: ", data.getDrink.ingredients); setDrink(data.getDrink) } });
     function checkLike(likeddrinks) {
-        if (likeddrinks.includes(drink["strDrink"])) { return "LIKED" } else { return "LIKE" }
+        if (likeddrinks.includes(drink.name)) { return "LIKED" } else { return "LIKE" }
     }
 
 
@@ -59,16 +59,21 @@ export default function ResultDetails({ model }) {
         console.log("data: ", data);
     }
 
+    function likeDrink(drink) {
+        model.addLikedDrink(drink)
+        saveLikedDrinksToServer()
+    }
+
     return (!loading && data ?
         <ResultDetailsView
             title={data.getDrink.name}
             ingredients={data.getDrink.ingredients}
             instructions={data.getDrink.instructions}
             image={data.getDrink.img}
-            glass={drink.glass}
-            alcoholic={drink.type}
+            glass={data.getDrink.glass}
+            alcoholic={data.getDrink.type}
             endDetails={() => model.setDetails(null, null)}
             likeStatus={checkLike(likeddrinks)}
-            onLike={() => model.addLikedDrink(drink["strDrink"])} /> : <p>Loading...</p>);
+            onLike={() => likeDrink(data.getDrink.name)} /> : <p>Loading...</p>);
 
 }

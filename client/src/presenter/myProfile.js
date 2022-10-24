@@ -16,15 +16,39 @@ const CHANGE_MY_BAR_MUTATION = gql`
     }
 `;
 
+const GET_USER_DETAILS = gql`
+    query getUser(
+        $getUserId:String
+    ){
+        getUser(
+           id: $getUserId
+        ){
+            name
+            myBar
+			createdDrinks{
+				name
+				id
+				img
+			}
+			likedDrinks{
+				name
+				img
+				id
+			}
+        }
+    }
+`;
+
 
 export default function MyProfile(props) {
 	const loggedIn = useModelProp(props.model, "isAuth");
+	const id = useModelProp(props.model, "userID");
 	const favoritedrinks = useModelProp(props.model, "favoritedrinks");
-	const likeddrinks = useModelProp(props.model, "likeddrinks");
+	//const likeddrinks = useModelProp(props.model, "likeddrinks");
 	const recentdrinks = useModelProp(props.model, "recentdrinks");
 	const following = useModelProp(props.model, "following");
 	const users = useModelProp(props.model, "users");
-	const madedrinks = useModelProp(props.model, "userdrinks");
+	//const madedrinks = useModelProp(props.model, "userdrinks");
 	const myBar = useModelProp(props.model, "mybar");
 	const seeingUsername = useModelProp(props.model, "seeingUsername");
 	const [allIng, setAllIng] = useState([]);
@@ -33,8 +57,15 @@ export default function MyProfile(props) {
 	const [showSearchingFriend, setFriend] = useState(false);
 	const [selectedIngOptions, setSelectedIngOptions] = useState([]);
 	const [followButton, setFollow] = useState(false);
-	//const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, { onCompleted: (data) => { console.log(data); setAllIng(data.getAllIngredients) } });//
-	const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, {
+	const [madeDrinks, setMadeDrinks] = useState([]);
+	const [likedDrinks, setLikedDrinks] = useState([]);
+	const [getUserDetails, { data, loading, error }] = useLazyQuery(GET_USER_DETAILS, {
+		onCompleted: (data) => {
+			setMadeDrinks(data.getUser.createdDrinks);
+			setLikedDrinks(data.getUser.likedDrinks);
+		}
+	});
+	const [getAllIngredients, { ingData }] = useLazyQuery(GET_ALL_INGREDIENTS, {
 		onCompleted: (data) => {
 			const ingredientsArray = data.getAllIngredients;
 			const ingredientDict = ingredientsArray.map((ingredient) => {
@@ -60,15 +91,9 @@ export default function MyProfile(props) {
 	}, [loggedIn]);
 
 
-	/*
-	useEffect(() => {
-		console.log("myBar model prop: ", myBar);
-		saveMyBarToServer(myBar);
-	}, [myBar]);
-	*/
-
 	useEffect(() => {
 		getAllIngredients();
+		getUserDetails({ variables: { getUserId: id } });
 	}, []);
 
 	async function addToBar(selected) {
@@ -76,14 +101,14 @@ export default function MyProfile(props) {
 		saveMyBarToServer(props.model.mybar);
 	}
 
-	return (
+	return !loading ? (
 		<MyProfileView
 			model={props.model}
 			favoritedrinks={favoritedrinks}
-			likeddrinks={likeddrinks}
+			likedDrinks={likedDrinks}
 			recentdrinks={recentdrinks}
 			following={following}
-			madedrinks={madedrinks}
+			madeDrinks={madeDrinks}
 			allIng={allIng}
 			allUsers={allUsers}
 			showSearchingForm={showSearchingForm}
@@ -100,5 +125,5 @@ export default function MyProfile(props) {
 			}}
 			myBarLength={myBar.length}
 		/>
-	);
+	) : (<div>loading...</div>);
 }
