@@ -10,7 +10,7 @@ function MyBar({ model }) {
 	return (<React.Fragment><MyBarView />,
 		<div className="barRow">{
 			shakering.map((element) => (
-				<MyBarElemView barIng={element} onAdd={(element) => model.addIngShaker(element)} onDrag={(ev) => ev.dataTransfer.setData("text", element)} />
+				<MyBarElemView barIng={element[0].toUpperCase() + element.slice(1)} onAdd={(element) => model.addIngShaker(element[0].toUpperCase() + element.slice(1))} onDrag={(ev) => ev.dataTransfer.setData("text", element[0].toUpperCase() + element.slice(1))} />
 			))}
 		</div></React.Fragment>);
 }

@@ -94,7 +94,7 @@ export default function MyProfile(props) {
 			showSearchingFriend={showSearchingFriend}
 			selectedIngOptions={selectedIngOptions}
 			followButton={followButton}
-			seeingUsername={seeingUsername}
+			seeingUsername={(seeingUsername[0].toUpperCase() + seeingUsername.slice(1))}
 			setShow={setShow}
 			setFriend={setFriend}
 			setShowCom={props.setShowCom}

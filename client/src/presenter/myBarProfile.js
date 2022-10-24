@@ -10,7 +10,7 @@ function MyBarProfile({ model }) {
     return (<React.Fragment><MyBarView />,
         <div className="barRow">{
             shakering.map((element) => (
-                <MyBarProfileElemView barIng={element} onRemove={(element) => model.removeElemBar(element)} />
+                <MyBarProfileElemView barIng={element[0].toUpperCase() + element.slice(1)} onRemove={(element) => model.removeElemBar(element[0].toUpperCase() + element.slice(1))} />
             ))}
         </div></React.Fragment>);
 }

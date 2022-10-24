@@ -115,8 +115,9 @@ margin-right: 30px;
 
 const StyledLikeBtn = styled.button`
 	display:flex;
-	width: 40px;
-	height: 20px;
+	width: fit-content;
+	height: 24px;
+
 	border-radius: 5px;
 	border-color:cornflowerblue;
 	background-color: cornflowerblue;
@@ -124,6 +125,8 @@ const StyledLikeBtn = styled.button`
 	cursor: pointer;
 	font-family:"Helvetica";
 	margin-left: 2px;
+	text-align:center;
+	align-items: center;
 	
 `
 
@@ -144,8 +147,8 @@ function ResultDetailsView(props) {
 						<br></br>
 						<StyledHeadingSmall>Type</StyledHeadingSmall>
 						<StyledInstructions>{props.alcoholic || ""}</StyledInstructions>
-            <br></br>
-						<StyledLikeBtn onClick={onLike}> {likeStatus} </StyledLikeBtn>
+						<br></br>
+						<StyledLikeBtn onClick={props.onLike}> {props.likeStatus} </StyledLikeBtn>
 
 					</StyledCol>
 				</StyledRow>
