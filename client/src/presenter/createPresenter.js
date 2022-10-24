@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CreateElemListView from "../view/createElemListView.js";
 import CreateTitleView from "../view/createTitleView.js";
 import CreateInstrucView from "../view/createInstrucView.js";
@@ -37,27 +37,6 @@ const StyledForm = styled.div`
                 width: '20px'
     font-family: 'Helvetica'`;
 
-/*const CREATE_DRINK_MUTATION = gql`
-    mutation createDrink(
-        $name: String!
-        $ingredients: [{name:String, measurement:String}]!
-        $glasstype: String
-        $instructions: String!
-        $img: String
-    ){
-        createDrink(
-            name: $name
-            ingredients: $ingredients
-            glasstype: $glasstype
-            instructions: $instructions
-            img: $img
-        ){
-            name
-            id
-        }
-    }
-`;*/
-
 const CREATE_DRINK_MUTATION = gql`
     mutation createDrink(
         $name: String!
@@ -92,6 +71,7 @@ function CreatePresenter({ model }) {
     React.useEffect(() => setPromiseType(CocktailSource.getAllTypes()), []);
     const [type, err2] = usePromise(promiseType);
     const [success, setSuccess] = useState(false);
+    const [status, setStatus] = useState("");
     const [createDrink, { data, loading, error }] = useMutation(CREATE_DRINK_MUTATION, { onCompleted: (data) => { console.log(data); setSuccess(true) } });
 
     const types = [];
@@ -132,7 +112,7 @@ function CreatePresenter({ model }) {
         }
     }
 
-    function saveData() {
+    function saveDrink() {
         for (let i = 0; i < ingredients.length; i++) {
             const measurement = getFormData("measurement" + (i + 1));
             model.addIngredientsDrink(ingredients[i], measurement);
@@ -157,6 +137,28 @@ function CreatePresenter({ model }) {
 
     }
 
+    if (error) {
+        setSuccess(false);
+    }
+
+    function resetStatus() {
+        setStatus("")
+        setSuccess(false);
+    }
+
+    useEffect(() => {
+        if (!loading && data) {
+            setStatus("Drink saved!")
+            setSuccess(true);
+            setTimeout(() => { resetStatus() }, 3000)
+        }
+        else if (error) {
+            setStatus("Something went wrong, please try again")
+            setSuccess(false);
+            setTimeout(() => { resetStatus() }, 3000)
+        }
+    }, [data, loading, error])
+
     return (<React.Fragment><CreateTitleView />,
         <CreateNameView setName={setName} />
         <div className="rowBox">
@@ -180,7 +182,7 @@ function CreatePresenter({ model }) {
                     onChange={(choice) => model.addTypeDrink(choice.value)}></Select>
                 <br></br>
                 <StyledTitle>Upload an image</StyledTitle>
-                <CreateSaveView startCreate={saveData} />
+                <CreateSaveView startCreate={saveDrink} success={success} loading={loading} status={status} />
             </div>
         </div>
     </React.Fragment>
