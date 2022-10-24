@@ -92,8 +92,11 @@ async function getUser(token: any) {
         if (err) return new GraphQLError("unauthorized");
         const userID = payload.id;
         const user = await getUserByID(userID);
+        //console.log("verified user: ", user)
         return user;
     })
+    //console.log("returning user: ", user)
+
     return user._id;
 }
 
