@@ -29,12 +29,15 @@ function MyBarProfile({ model }) {
         saveMyBarToServer(model.mybar);
     }
 
-    return (<React.Fragment><MyBarView />,
-        <div className="barRow">{
-            myBar.map((element) => (
-                <MyBarProfileElemView barIng={element[0].toUpperCase() + element.slice(1)} onRemove={removeIngredientFromBar} /> //(element) => model.removeElemBar(element[0].toUpperCase() + element.slice(1))
-            ))}
-        </div></React.Fragment>);
+    return (
+        <React.Fragment>
+            <MyBarView />
+            <div className="barRow">{
+                myBar.map((element) => (
+                    <MyBarProfileElemView barIng={element[0].toUpperCase() + element.slice(1)} onRemove={removeIngredientFromBar} />
+                ))}
+            </div>
+        </React.Fragment>);
 }
 
 export default MyBarProfile;

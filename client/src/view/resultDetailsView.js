@@ -119,7 +119,7 @@ const StyledLikeBtn = styled.button`
 	height: 24px;
 
 	border-radius: 5px;
-	border-color:cornflowerblue;
+	
 	background-color: cornflowerblue;
 	color:  white;
 	cursor: pointer;
@@ -127,6 +127,11 @@ const StyledLikeBtn = styled.button`
 	margin-left: 2px;
 	text-align:center;
 	align-items: center;
+	&:active{
+		background-color: #1858cd;
+		border-color:#1858cd;
+
+	}
 	
 `
 

@@ -67,7 +67,6 @@ export default function HomePage({ model }) {
 	return (
 		<div className="discoverBox" >
 			{loggedIn == ! false ? (<div>
-
 				<div className="rowBox">
 					<StyledModeTitle>{currentMode.toUpperCase()}</StyledModeTitle>
 					<ToggleMode model={model} />
