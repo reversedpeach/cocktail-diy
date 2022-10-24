@@ -8,18 +8,7 @@ class CocktailModel {
 		this.password = "";
 		this.seeingUsername = "User123";
 		this.subscribers = [];
-		this.mybar = [
-			"Gin",
-			"Vodka",
-			"Cointreau",
-			"Amaretto",
-			"Rum",
-			"Whiskey",
-			"Champagne",
-			"Bourbon",
-			"Tequila",
-			"Bacardi",
-		]; // array with objects of drinks
+		this.mybar = []; // array with objects of liqours
 		this.currentdrink = []; // array with ingredients
 		this.drinkdetails = null;
 		this.selectedmode = "discover";
@@ -85,6 +74,7 @@ class CocktailModel {
 
 	resetCreatedDrink() {
 		this.createddrink = { name: "", ingredients: [], instructions: "", img: "", glass: "", type: "" };
+		//this.currentdrink = [];
 	}
 
 	addNameDrink(name) {

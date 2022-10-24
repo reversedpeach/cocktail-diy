@@ -29,7 +29,9 @@ function CreateSaveView(props) {
 		<form >
 			<UploadAndDisplayImage {...props} />
 		</form>
-		<StyledBtn onClick={props.startCreate}>Create</StyledBtn>
+		{(props.loading) ? <p>Loading...</p> : <></>}
+		<p>{props.status}</p>
+		<StyledBtn onClick={props.startCreate} disabled={props.success}>Create</StyledBtn>
 	</div>);
 }
 
