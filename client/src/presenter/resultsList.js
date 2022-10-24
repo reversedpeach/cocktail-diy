@@ -27,8 +27,6 @@ export default function ResultsList({ model }) {
 
 
 	useEffect(() => {
-		console.log(model["currentdrink"]);
-		console.log("ingredients: ", shakering);
 		getDrinks({
 			variables: {
 				community: false,

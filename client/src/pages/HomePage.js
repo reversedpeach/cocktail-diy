@@ -14,6 +14,7 @@ import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import CreatePresenter from "../presenter/createPresenter.js";
 import arrow from "../utils/images/arrow.png";
+import StartScreenView from "../view/startScreenView.js";
 
 const StyledModalCon = styled.div`
 position: fixed; 
@@ -61,9 +62,11 @@ export default function HomePage({ model }) {
 	const showDetails = useModelProp(model, "drinkdetails");
 	const showResult = useModelProp(model, "currentdrink");
 	const currentMode = useModelProp(model, "selectedmode");
+	const loggedIn = useModelProp(model, "isAuth");
 
 	return (
 		<div className="discoverBox" >
+
 			<div className="rowBox">
 				<StyledModeTitle>{currentMode.toUpperCase()}</StyledModeTitle>
 				<ToggleMode model={model} />
@@ -111,6 +114,10 @@ export default function HomePage({ model }) {
 				) : (
 					<p></p>
 				))}
+
 		</div>
 	);
 }
+
+
+{/*loggedIn == ! false ? <div> </div> : <StartScreenView />*/ }

@@ -57,7 +57,6 @@ margin-left: 55px;
 
 export default function NavBarView(props) {
     function logOut() {
-        console.log("logging out");
         props.logOut();
     }
 
@@ -65,10 +64,9 @@ export default function NavBarView(props) {
         return (
             <StyledNavBar>
                 <StyledNavWrapEnd>
-                    <StyledLink to="/start"> Start</StyledLink>
                     <StyledLink to="/"> Home</StyledLink>
                     <StyledLink to="/profile"> Profile </StyledLink>
-                    <StyledLink onClick={logOut}> Log out </StyledLink>
+                    <StyledLink onClick={props.logOut}> Log out </StyledLink>
                 </StyledNavWrapEnd>
             </StyledNavBar>
         )
