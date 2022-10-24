@@ -7,7 +7,7 @@ import MyBarElemView from "../view/myBarElemView.js";
 function MyBar({ model }) {
 	const shakering = useModelProp(model, "mybar");
 
-	return (<React.Fragment><MyBarView />,
+	return (<React.Fragment><MyBarView />
 		<div className="barRow">{
 			shakering.map((element) => (
 				<MyBarElemView barIng={element[0].toUpperCase() + element.slice(1)} onAdd={(element) => model.addIngShaker(element[0].toUpperCase() + element.slice(1))} onDrag={(ev) => ev.dataTransfer.setData("text", element[0].toUpperCase() + element.slice(1))} />

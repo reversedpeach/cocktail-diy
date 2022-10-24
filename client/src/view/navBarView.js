@@ -66,7 +66,7 @@ export default function NavBarView(props) {
                 <StyledNavWrapEnd>
                     <StyledLink to="/"> Home</StyledLink>
                     <StyledLink to="/profile"> Profile </StyledLink>
-                    <StyledLink onClick={props.logOut}> Log out </StyledLink>
+                    <StyledLink onClick={logOut}> Log out </StyledLink>
                 </StyledNavWrapEnd>
             </StyledNavBar>
         )

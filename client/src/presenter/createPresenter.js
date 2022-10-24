@@ -166,7 +166,6 @@ function CreatePresenter({ model }) {
                     <CreateElemListView ingredient={ing} id={"measurement" + (index + 1)} />
                 ))}
             </div>,
-
             <CreateInstrucView />
             <div className="resultCol">
                 <StyledTitle>Select Glass and Type</StyledTitle>
@@ -180,7 +179,6 @@ function CreatePresenter({ model }) {
                     placeholder="Select type"
                     onChange={(choice) => model.addTypeDrink(choice.value)}></Select>
                 <br></br>
-
                 <StyledTitle>Upload an image</StyledTitle>
                 <CreateSaveView startCreate={saveData} />
             </div>

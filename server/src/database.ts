@@ -18,6 +18,7 @@ async function createUser(name: String, email: String, password: String) {
 async function setMybar(myNewBar: String[], userID: String) {
     const res = await User.updateOne({ "_id": userID }, { "myBar": myNewBar });
     const updatedUser = await User.findById(userID);
+    console.log("updated user: ", updatedUser);
     return updatedUser.myBar;
 }
 
