@@ -19,6 +19,14 @@ const LOGIN = gql`
             id
             name
             myBar
+            likedDrinks{
+                name
+                id
+            }
+            createdDrinks{
+                name
+                id
+            }
         }
     }
 `;

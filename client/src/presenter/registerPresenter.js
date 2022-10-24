@@ -24,6 +24,14 @@ const REGISTER_USER_MUTATION = gql`
                 token
                 id
                 myBar
+                likedDrinks{
+                    name
+                    id
+                }
+                createdDrinks{
+                    name
+                    id
+                }
             }
         }
         `;
@@ -65,5 +73,5 @@ export default function Register({ model }) {
             }, 200)
         }
     }, [isAuth])
-    return (<RegisterView setUserName={setUserName} setEmail={setEmail} setPassword={setPassword} setConfirmPassword={setConfirmPassword} send={register} />);
+    rn(<RegisterView setUserName={setUserName} setEmail={setEmail} setPassword={setPassword} setConfirmPassword={setConfirmPassword} send={register} />);
 }

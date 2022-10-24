@@ -43,6 +43,7 @@ class CocktailModel {
 		this.mybar = data.myBar || [];
 		this.favoritedrinks = data.favoritedrink || [];
 		this.alluserdrinks = data.createdDrinks || [];
+		this.likeddrinks = data.likedDrinks || [];
 		localStorage.setItem("token", data.token);
 		if (data) {
 			this.isAuth = true;
@@ -124,6 +125,8 @@ class CocktailModel {
 	}
 
 	addLikedDrink(drink) {
+		console.log("liked drinks: ", this.likeddrinks);
+		console.log("Liking in model: ", drink);
 		this.likeddrinks.push(drink);
 		this.notifyObservers();
 	}
@@ -173,7 +176,10 @@ class CocktailModel {
 	}
 
 	removeElemBar(ing) {
-		this.mybar = this.mybar.filter((elem) => elem !== ing);
+		console.log("in model removing: ", ing);
+		console.log("before:  ", this.mybar);
+		this.mybar = this.mybar.filter((elem) => elem.toLowerCase() !== ing.toLowerCase());
+		console.log("after:  ", this.mybar);
 		this.notifyObservers();
 	}
 

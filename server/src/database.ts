@@ -29,7 +29,7 @@ async function getUsers() {
 }
 
 async function getUserByID(id: String) {
-    const user = await User.findById(id).populate('friends');
+    const user = await await User.findById(id).populate('friends').populate("createdDrinks").populate("likedDrinks");
     return user;
 }
 
