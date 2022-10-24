@@ -60,7 +60,9 @@ export default function MyProfile(props) {
 	const [madeDrinks, setMadeDrinks] = useState([]);
 	const [likedDrinks, setLikedDrinks] = useState([]);
 	const [getUserDetails, { data, loading, error }] = useLazyQuery(GET_USER_DETAILS, {
+		fetchPolicy: 'network-only',
 		onCompleted: (data) => {
+			console.log("ran get user details query");
 			setMadeDrinks(data.getUser.createdDrinks);
 			setLikedDrinks(data.getUser.likedDrinks);
 		}
@@ -92,6 +94,7 @@ export default function MyProfile(props) {
 
 
 	useEffect(() => {
+		console.log("rerendered");
 		getAllIngredients();
 		getUserDetails({ variables: { getUserId: id } });
 	}, []);

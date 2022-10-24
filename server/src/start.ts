@@ -38,6 +38,7 @@ startStandaloneServer(server, {
         //console.log(token);
         // Try to retrieve a user with the token
         const user = await getUser(token);
+        console.log("user from token: ", user)
 
         // Add the user to the context
         return {
