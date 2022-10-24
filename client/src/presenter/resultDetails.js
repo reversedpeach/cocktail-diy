@@ -74,6 +74,7 @@ export default function ResultDetails({ model }) {
             alcoholic={data.getDrink.type}
             endDetails={() => model.setDetails(null, null)}
             likeStatus={checkLike(likeddrinks)}
-            onLike={() => likeDrink(data.getDrink.name)} /> : <p>Loading...</p>);
+            like={() => likeDrink(data.getDrink.name)}
+            unlike={() => unlikeDrink()} /> : <p>Loading...</p>);
 
 }

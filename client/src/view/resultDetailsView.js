@@ -148,8 +148,7 @@ function ResultDetailsView(props) {
 						<StyledHeadingSmall>Type</StyledHeadingSmall>
 						<StyledInstructions>{props.alcoholic || ""}</StyledInstructions>
 						<br></br>
-						<StyledLikeBtn onClick={props.onLike}> {props.likeStatus} </StyledLikeBtn>
-
+						<StyledLikeBtn onClick={props.likeStatus ? props.like : props.unlike}> {props.likeStatus} </StyledLikeBtn>
 					</StyledCol>
 				</StyledRow>
 				<StyledRow>
