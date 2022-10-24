@@ -9,7 +9,7 @@ interface IUser {
     myBar: String[];
     friends: Types.ObjectId[];
     favoriteDrink: Types.ObjectId;
-    likedDrinks: Types.ObjectId[];
+    likedDrinks: String[];
     createdDrinks: Types.ObjectId[];
 }
 
@@ -36,9 +36,9 @@ const userSchema = new Schema<IUser>({
         ref: "Drink"
     },
     likedDrinks: [{
-        type: Schema.Types.ObjectId,
-        ref: "Drink"
-    },],
+        type: String,
+        default: []
+    }],
     createdDrinks: [{
         type: Schema.Types.ObjectId,
         ref: "Drink"

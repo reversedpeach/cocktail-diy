@@ -23,7 +23,7 @@ const GET_DRINKS = gql`
 export default function ResultsList({ model }) {
 	const shakering = useModelProp(model, "currentdrink");
 	const [drinks, setDrinks] = useState([""]);
-	const [getDrinks, { data, loading, error }] = useLazyQuery(GET_DRINKS, { fetchPolicy: 'network-only', onCompleted: (data) => { console.log("Recieved: ", data.getDrinks); setDrinks(data.getDrinks) } });
+	const [getDrinks, { data, loading, error }] = useLazyQuery(GET_DRINKS, { fetchPolicy: 'network-only', onCompleted: (data) => { setDrinks(data.getDrinks) } });
 
 
 	useEffect(() => {

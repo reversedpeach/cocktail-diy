@@ -110,7 +110,7 @@ export default function MyProfileView(props) {
 					<StyledTitleSmall>Liked Drinks </StyledTitleSmall>
 					{props.likedDrinks.map((drink) => {
 						console.log("liked: ", drink);
-						return <StyledList key={drink.name}>{drink.name}</StyledList>;
+						return <StyledList key={drink}>{drink}</StyledList>;
 					})}
 				</div></div>
 

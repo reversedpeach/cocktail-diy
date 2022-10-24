@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { usePromise, promiseNoData } from "../utils/usePromise.js";
 import CocktailSource from "../cocktailApi.js";
-import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import { gql, useLazyQuery, useMutation } from "@apollo/client";
 
 import useModelProp from "../utils/useModelProp.js";
 import "../utils/css/drinkResults.css";
 import ResultDetailsView from "../view/resultDetailsView.js";
 
-export const GET_DRINK = gql`
+const GET_DRINK = gql`
     query getDrink(
         $community: Boolean
         $getDrinkId: String
@@ -16,6 +16,7 @@ export const GET_DRINK = gql`
             community: $community
             id: $getDrinkId
         ){
+            id
             name
             ingredients{
                 name
@@ -29,17 +30,33 @@ export const GET_DRINK = gql`
     }
 `;
 
+const CHANGE_LIKED_DRINKS = gql`
+    mutation ChangeLikedDrinks(
+        $drinkId: String!
+        $add:Boolean
+    ) {
+        changeLikedDrinks(
+            drinkID: $drinkId
+            add:$add
+        )
+    }   
+`;
+
+
 export default function ResultDetails({ model }) {
     const id = useModelProp(model, "drinkdetails");
-
-    var liked = "LIKE";
-
     const communityDrink = useModelProp(model, "communityDrink");
-    const likeddrinks = useModelProp(model, "likeddrinks");
-    const [drink, setDrink] = useState({});
-    const [getDrinkDetails, { data, loading, error }] = useLazyQuery(GET_DRINK, { onCompleted: (data) => { console.log("recieved: ", data.getDrink, "ingreds: ", data.getDrink.ingredients); setDrink(data.getDrink) } });
-    function checkLike(likeddrinks) {
-        if (likeddrinks.includes(drink.name)) { return "LIKED" } else { return "LIKE" }
+    const likedDrinks = useModelProp(model, "likeddrinks");
+    const [liked, setLiked] = useState(false);
+    //const [drink, setDrink] = useState(null);
+    const [getDrinkDetails, { data, loading, error }] = useLazyQuery(GET_DRINK);
+    const [changeLikedDrinks, { likedData, likedLoading, likedError }] = useMutation(CHANGE_LIKED_DRINKS, { onCompleted: (data) => { console.log("Received form server when likeaction: ", data); } });
+
+
+    function isLiked(drink) {
+        console.log("checking if liked: ", drink, "result: ", likedDrinks.includes(drink))
+        //if (likedDrinks.includes(drink)) { return "LIKED" } else { return "LIKE" }
+        return likedDrinks.includes(drink);
     }
 
 
@@ -54,14 +71,44 @@ export default function ResultDetails({ model }) {
         }
     }, [id]);
 
-    if (!loading) {
-        console.log("error:", error);
-        console.log("data: ", data);
-    }
+    useEffect(() => {
+        if (!loading && data) {
+            if (isLiked(data.getDrink.name)) {
+                setLiked(true);
+            } else {
+                setLiked(false);
+            }
+        }
+    }, [data]);
 
     function likeDrink(drink) {
-        model.addLikedDrink(drink)
-        saveLikedDrinksToServer()
+        const updated = model.addLikedDrink(drink)
+        if (updated) {
+            setLiked(true);
+            saveLikedDrinksToServer(drink, true)
+        }
+    }
+
+    function saveLikedDrinksToServer(drink, add) {
+        changeLikedDrinks({
+            variables: { drinkId: drink, add: add }
+        })
+    }
+
+    function unlikeDrink(drink) {
+        const updated = model.removeLikedDrink(drink)
+        if (updated) {
+            setLiked(false);
+            saveLikedDrinksToServer(drink, false)
+        }
+    }
+
+    if (!likedLoading) {
+        console.log("result form likeaction: ", likedData, likedError);
+    }
+
+    if (likedError) {
+        console.log(likedError);
     }
 
     return (!loading && data ?
@@ -73,8 +120,7 @@ export default function ResultDetails({ model }) {
             glass={data.getDrink.glass}
             alcoholic={data.getDrink.type}
             endDetails={() => model.setDetails(null, null)}
-            likeStatus={checkLike(likeddrinks)}
+            liked={liked}
             like={() => likeDrink(data.getDrink.name)}
-            unlike={() => unlikeDrink()} /> : <p>Loading...</p>);
-
+            unlike={() => unlikeDrink(data.getDrink.name)} /> : <p>Loading...</p>);
 }

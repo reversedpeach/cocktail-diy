@@ -126,8 +126,25 @@ class CocktailModel {
 	addLikedDrink(drink) {
 		console.log("liked drinks: ", this.likeddrinks);
 		console.log("Liking in model: ", drink);
-		this.likeddrinks.push(drink);
-		this.notifyObservers();
+		if (!this.likeddrinks.includes(drink)) {
+			this.likeddrinks = [...this.likeddrinks, drink];
+			console.log("updated liked drinks in model: ", this.likeddrinks);
+			this.notifyObservers();
+			return true
+		}
+		return false;
+	}
+
+	removeLikedDrink(drink) {
+		console.log("liked drinks: ", this.likeddrinks);
+		console.log("unliking in model: ", drink);
+		if (this.likeddrinks.includes(drink)) {
+			this.likeddrinks = this.likeddrinks.filter((elem) => elem !== drink);
+			console.log("updated liked drinks in model: ", this.likeddrinks);
+			this.notifyObservers();
+			return true
+		}
+		return false
 	}
 
 

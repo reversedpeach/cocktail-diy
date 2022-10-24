@@ -16,10 +16,10 @@ const StyledIngTitle = styled.span`
 `;
 
 const MyBarElemView = ({ barIng, onAdd, onDrag }) => {
-        return <div className="barCol">
+        return <li key="{barIng}" className="barCol" >
                 <input draggable="true" onDragEnd={() => onAdd(barIng)} className="barImage" type="image" src={"https://www.thecocktaildb.com/images/ingredients/" + barIng + "-Small.png"} onClick={() => onAdd(barIng)} />
                 <StyledIngTitle>{barIng}</StyledIngTitle>
-        </div>
+        </li>
 
 
 };

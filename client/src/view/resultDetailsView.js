@@ -131,6 +131,18 @@ const StyledLikeBtn = styled.button`
 `
 
 function ResultDetailsView(props) {
+	console.log(props.liked);
+	function like() {
+		console.log("liking");
+		props.like();
+	}
+
+	function unlike() {
+		console.log("unliking");
+		props.unlike();
+	}
+
+
 	return (
 		<StyledDetails>
 			<StyledRow>
@@ -148,7 +160,7 @@ function ResultDetailsView(props) {
 						<StyledHeadingSmall>Type</StyledHeadingSmall>
 						<StyledInstructions>{props.alcoholic || ""}</StyledInstructions>
 						<br></br>
-						<StyledLikeBtn onClick={props.likeStatus ? props.like : props.unlike}> {props.likeStatus} </StyledLikeBtn>
+						<StyledLikeBtn onClick={props.liked ? unlike : like}> {props.liked ? "liked" : "like"} </StyledLikeBtn>
 					</StyledCol>
 				</StyledRow>
 				<StyledRow>
