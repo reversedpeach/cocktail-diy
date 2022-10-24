@@ -36,19 +36,16 @@ export default function MyProfile(props) {
 	//const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, { onCompleted: (data) => { console.log(data); setAllIng(data.getAllIngredients) } });//
 	const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, {
 		onCompleted: (data) => {
-			console.log(data);
 			const ingredientsArray = data.getAllIngredients;
 			const ingredientDict = ingredientsArray.map((ingredient) => {
 				return { value: ingredient, label: ingredient }
 			})
-			console.log(ingredientDict);
 			setAllIng(ingredientDict);
 		}
 	});
 	const [changeMyBar, { myBarData, myBarLoading, myBarError }] = useMutation(CHANGE_MY_BAR_MUTATION);
 
 	async function saveMyBarToServer(newBar) {
-		console.log("new Bar: ", newBar);
 		changeMyBar({
 			variables: {
 				newMyBar: newBar
@@ -75,7 +72,6 @@ export default function MyProfile(props) {
 	}, []);
 
 	async function addToBar(selected) {
-		console.log("Selected ingredient: ", selected);
 		props.model.addMyBar(selected);
 		saveMyBarToServer(props.model.mybar);
 	}

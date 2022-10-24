@@ -86,7 +86,6 @@ export default function MyProfileView(props) {
 										value={props.selectedIngOptions}
 										options={props.allIng}
 										onChange={(e) => {
-											console.log(e[0].value);
 											props.addMyBar(e[0].value);
 										}}
 										isMulti={true}

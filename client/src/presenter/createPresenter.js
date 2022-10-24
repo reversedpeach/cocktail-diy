@@ -140,9 +140,6 @@ function CreatePresenter({ model }) {
         model.addInstructionsDrink(getFormData("instructions"));
         model.addImgDrink(getFormData("uploadimg"));
 
-        //need to empty object afterwards
-        console.log(newdrink);
-
         createDrink({
             variables: {
                 name: newdrink.name,
@@ -156,7 +153,6 @@ function CreatePresenter({ model }) {
     }
 
     function setName(name) {
-        console.log("Setting name to: ", name);
         model.addNameDrink(name);
 
     }

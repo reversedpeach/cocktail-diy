@@ -22,10 +22,10 @@ const CocktailSource = {
 			return null;
 		}
 		const paramsString = "" + (query === undefined ? "" : "filter.php?i=" + query);
-		// console.log(paramsString);
+
 
 		return this.apiCall(paramsString).then((data) => {
-			// console.log(data["drinks"]);
+
 			return data.drinks;
 		}); // gets all the drinks as objects
 	},

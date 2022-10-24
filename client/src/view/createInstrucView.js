@@ -10,6 +10,7 @@ color: #7F7F7F;;
 margin-top: 5px;
 width: 200px;
 justify-content: center;
+box-shadow: 1px 1px 4px rgb(124, 124, 124);
 
 `
 const StyledTitle = styled.div`

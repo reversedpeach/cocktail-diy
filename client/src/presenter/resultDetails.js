@@ -44,7 +44,6 @@ export default function ResultDetails({ model }) {
 
 
     useEffect(() => {
-        console.log("id is: ", id);
         if (id) {
             getDrinkDetails({
                 variables: {

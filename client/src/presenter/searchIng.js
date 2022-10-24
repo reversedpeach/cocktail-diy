@@ -20,12 +20,10 @@ export default function SearchIng({ model, addIng }) {
 	const currentOptions = [];
 	const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, {
 		onCompleted: (data) => {
-			console.log(data);
 			const ingredientsArray = data.getAllIngredients;
 			const ingredientDict = ingredientsArray.map((ingredient) => {
 				return { value: ingredient, label: ingredient }
 			})
-			console.log(ingredientDict);
 			setAllIng(ingredientDict);
 		}
 	});
@@ -66,7 +64,6 @@ export default function SearchIng({ model, addIng }) {
 			options={allIng}
 			placeholder="Search for an ingredient to add"
 			onChange={(selected) => {
-				console.log(selected);
 				addIng(dic2arr(selected));
 
 			}}

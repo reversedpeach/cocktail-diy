@@ -2,7 +2,7 @@ import { CommentsDisabledOutlined } from "@mui/icons-material";
 
 class CocktailModel {
 	constructor() {
-		this.isAuth = false
+		this.isAuth = false;
 		this.userID = "";
 		this.username = "";
 		this.password = "";
@@ -36,7 +36,7 @@ class CocktailModel {
 	}
 
 	setUser(data) {
-		console.log("Setting user in model with:", data, data.name, data.id, data.myBar);
+		//console.log("Setting user in model with:", data, data.name, data.id, data.myBar);
 		this.username = data.name;
 		this.seeingUsername = data.name;
 		this.userID = data.id;
@@ -54,6 +54,8 @@ class CocktailModel {
 		localStorage.setItem("token", null);
 		this.setUser(null);
 		this.isAuth = false;
+		this.notifyObservers();
+		console.log("loggar ut");
 	}
 
 	setUserName(username) {
@@ -135,7 +137,6 @@ class CocktailModel {
 	addIngShaker(ing) {
 		var tempSet = new Set(this.currentdrink.concat(ing));
 		this.currentdrink = Array.from(tempSet);
-		console.log(ing + " is added");
 		this.notifyObservers();
 	}
 
@@ -187,7 +188,7 @@ class CocktailModel {
 
 	notifyObservers() {
 		this.subscribers.forEach((callback) => {
-			//console.log(callback);
+
 			try {
 				callback();
 			} catch (err) {

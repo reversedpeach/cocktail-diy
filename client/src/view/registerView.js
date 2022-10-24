@@ -41,7 +41,6 @@ const StyledButton = styled.button`
 `;
 
 export default function RegisterView(props) {
-    console.log("rendered view");
     function setUserName(value) {
         props.setUserName(value);
     }

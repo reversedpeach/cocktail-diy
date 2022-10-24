@@ -103,22 +103,17 @@ const model = new CocktailModel();
 
 const App = ({ model }) => {
 
-	console.log(model);
 	return (
 		<Router>
 			<div>
-
 				<div>
-
 					<NavBarPresenter model={model} />
-
 				</div>
 				<Routes>
 					<Route path="/" element={<HomePage model={model} />} />
 					<Route path="/profile" element={<ProfilePage model={model} />} />
 					<Route path="/login" element={<Login model={model} />} />
 					<Route path="/register" element={<Register model={model} />} />
-					<Route path="/start" element={<StartScreenView />} />
 				</Routes>
 			</div>
 		</Router>

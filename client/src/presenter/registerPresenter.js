@@ -37,10 +37,9 @@ export default function Register({ model }) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER_MUTATION, { onCompleted: (data) => { console.log(data); model.setUser(data.register) } });
-    console.log("rendered");
+
 
     function register() {
-        console.log(username, email, password, confirmPassword, registerUser);
         registerUser({
             variables: {
                 name: username,

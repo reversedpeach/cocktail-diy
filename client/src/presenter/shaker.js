@@ -15,9 +15,8 @@ function Shaker({ model }) {
 
 	}
 
-
 	return (
-		<ShakerView onDrop={console.log("drop")} onDragOver={(ev) => allowDrop(ev)} />
+		<ShakerView onDragOver={(ev) => allowDrop(ev)} />
 	)
 };
 
