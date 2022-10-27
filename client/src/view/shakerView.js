@@ -8,11 +8,12 @@ const StyledShaker = styled.img`
 `
 
 const ShakerView = ({ onDrop, onDragOver }) => {
-
-
 	return (
 		<div>
-			<StyledShaker src={shaker} ondrop={(ev) => onDrop(ev)} ondragover={(ev) => onDragOver(ev)} />
+			<StyledShaker src={shaker}
+				ondrop={(ev) => onDrop(ev)}
+				ondragover={(ev) => onDragOver(ev)}
+			/>
 		</div>
 	);
 };

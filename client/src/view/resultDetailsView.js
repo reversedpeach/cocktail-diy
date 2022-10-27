@@ -166,11 +166,13 @@ function ResultDetailsView(props) {
 					<StyledCol>
 						<StyledHeading>Ingredients </StyledHeading>
 						<StyledTable>
-							{props.ingredients.map((ingredient) =>
-								<tr>
-									<td>{ingredient.name} </td>
-									<td> : {ingredient.measurement}</td>
-								</tr>
+							{props.ingredients.map((ingredient, index) =>
+								<tbody key={index}>
+									<tr>
+										<td>{ingredient.name} </td>
+										<td> : {ingredient.measurement}</td>
+									</tr>
+								</tbody>
 							)}</StyledTable>
 					</StyledCol>
 					<StyledCol>

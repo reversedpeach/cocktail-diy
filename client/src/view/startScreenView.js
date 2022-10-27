@@ -25,7 +25,7 @@ const StyledModeTitle = styled.span`
 const StartScreenView = () => {
 
     return (
-        <div className="discoverBox">
+        <div className="backgroundBox">
             <StyledModeTitle>COCKTAIL DIY</StyledModeTitle>
             <StyledShaker src={shaker} />
         </div>

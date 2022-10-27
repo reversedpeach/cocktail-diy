@@ -6,7 +6,10 @@ import ToggleModeView from "../view/toggleModeView.js";
 function ToggleMode({ model }) {
     const mode = useModelProp(model, "selectedmode");
     return (
-        <ToggleModeView currentMode={mode} changeMode={() => model.setMode()} />
+        <ToggleModeView
+            currentMode={mode}
+            changeMode={() => model.setMode()}
+        />
     )
 };
 

@@ -11,7 +11,11 @@ export default function NavBar(props) {
         props.model.logOut();
     }
 
-    return (<NavBarView isLoggedIn={loggedIn} logOut={logOut} />)
+    return (
+        <NavBarView
+            isLoggedIn={loggedIn}
+            logOut={logOut}
+        />)
 
 
 

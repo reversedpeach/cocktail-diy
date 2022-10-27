@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
-
 import useModelProp from "../utils/useModelProp.js";
 import ResultDetailsView from "../view/resultDetailsView.js";
 
