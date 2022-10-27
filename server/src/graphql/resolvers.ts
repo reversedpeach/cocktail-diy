@@ -123,12 +123,19 @@ const resolvers = {
             try {
                 return await registerNewUser(args.name, args.email, args.password, args.confirmPassword);
             } catch (error) {
-                return error;
+                console.log("throwing error ", error);
+                throw new GraphQLError(error);
             }
         },
         createDrink: async (parent, { name, ingredients, glassType, instructions, img, type }: { name: String, ingredients: Ingredient[], glassType: String, instructions: String, img: String, type: String }, context: any, info: any) => {
             if (!context.user) throw new GraphQLError("you must be logged in to access this feature");
-            return await createDrink(name, ingredients, context.user, glassType, instructions, img, type)
+            try {
+                return await createDrink(name, ingredients, context.user, glassType, instructions, img, type)
+            } catch (error) {
+                console.log("throwing error", error);
+                throw new GraphQLError(error);
+            }
+
         },
         changeMyBar: async (parent, { newMyBar }, context, info) => {
             if (!context.user) throw new GraphQLError("you must be logged in to access this feature");

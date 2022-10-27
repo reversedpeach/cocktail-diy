@@ -79,7 +79,7 @@ function Create({ model }) {
     const [status, setStatus] = useState("");
     const [getGlasses, { glassData, glassLoading, glassError }] = useLazyQuery(GET_GLASSES, { onCompleted: (data) => { setGlasses(data.getAllGlasses) } });
     const [getTypes, { typeData, typeLoading, typeError }] = useLazyQuery(GET_TYPES, { onCompleted: (data) => { setTypes(data.getAllTypes) } });
-    const [createDrink, { data, loading, error }] = useMutation(CREATE_DRINK_MUTATION, { onCompleted: (data) => { setSuccess(true) } });
+    const [createDrink, { data, loading, error }] = useMutation(CREATE_DRINK_MUTATION, { onCompleted: (data) => { }, onError: (error) => { } });
 
     const customStyles = {
         option: (styles, state) => ({
@@ -134,7 +134,6 @@ function Create({ model }) {
         }
         model.addInstructionsDrink(getFormData("instructions"));
         //model.addImgDrink(getFormData("uploadimg"));
-
         createDrink({
             variables: {
                 name: newdrink.name,
@@ -144,6 +143,7 @@ function Create({ model }) {
                 type: newdrink.type
             },
         });
+
         model.resetCreatedDrink();
     }
 
@@ -152,24 +152,22 @@ function Create({ model }) {
 
     }
 
-    if (error) {
-        setSuccess(false);
-    }
-
     function resetStatus() {
         setStatus("")
         setSuccess(false);
     }
 
     useEffect(() => {
-        if (!loading && data) {
+        if (error) {
+            console.log("Error;", error)
+            setStatus("Something went wrong; " + error.message);
+            setSuccess(false);
+            setTimeout(() => { resetStatus() }, 5000)
+        }
+        else if (!loading && data) {
+            console.log(data);
             setStatus("Drink saved!")
             setSuccess(true);
-            setTimeout(() => { resetStatus() }, 3000)
-        }
-        else if (error) {
-            setStatus("Something went wrong, please try again")
-            setSuccess(false);
             setTimeout(() => { resetStatus() }, 3000)
         }
     }, [data, loading, error])

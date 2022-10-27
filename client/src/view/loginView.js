@@ -83,7 +83,9 @@ export default function LoginView(props) {
                     />
                 </div>
             </div>
-
+            <div>
+                {props.error ? <p>{props.error.message}</p> : <></>}
+            </div>
             <StyledButton variant="contained" disabled={props.loading === true} onClick={(e) => { e.preventDefault(); send(); }}>
                 Login
             </StyledButton>

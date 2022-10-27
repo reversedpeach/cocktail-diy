@@ -107,6 +107,9 @@ export default function RegisterView(props) {
                     />
                 </div>
             </div>
+            <div>
+                {props.error ? <p>{props.error.message}</p> : <></>}
+            </div>
 
             <StyledButton variant="contained" disabled={props.loading === true} onClick={(e) => { e.preventDefault(); send(); }}>
                 Register

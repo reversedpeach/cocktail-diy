@@ -9,8 +9,7 @@ const Drink = drinkModel;
 //Create user
 async function createUser(name: String, email: String, password: String) {
     const user = new User({ name: name, email: email, password: password });
-    console.log("hejsan", user);
-    user.save();
+    await user.save();
     console.log("Saved user: ", user);
     return user;//.id
 }
@@ -18,27 +17,20 @@ async function createUser(name: String, email: String, password: String) {
 async function setMybar(myNewBar: String[], userID: String) {
     const res = await User.updateOne({ "_id": userID }, { "myBar": myNewBar });
     const updatedUser = await User.findById(userID);
-    console.log("updated user: ", updatedUser);
     return updatedUser.myBar;
 }
 
 async function getUsers() {
-    console.log('reached getting users');
     return await User.find().populate('friends');
-    /*console.log(typeof users);
-    return users;*/
 }
 
 async function getUserByID(id: String) {
-    const user = await await User.findById(id).populate('friends').populate("createdDrinks"); //.populate("likedDrinks")
+    const user = await User.findById(id).populate('friends').populate("createdDrinks"); //.populate("likedDrinks")
     return user;
 }
 
 async function getUserByName(name: String) {
-    console.log('reached getUser with name ', name);
     User.findOne({ 'name': name }, 'name', function (err, results) {
-        console.log(err);
-        console.log(results);
         return results;
     })
 }
@@ -64,6 +56,7 @@ async function addFriend(userID: String, friendID: mongoose.Types.ObjectId) {
 
 //Create drink 
 async function createDrink(name: String, ingredients: Ingredient[], creatorID: String, glassType: String, instructions: String, img: String, type: String) { //mongoose.Types.ObjectId
+
     const lowerCaseIngredients = ingredients.map((ingredient) => { return { name: ingredient.name.toLowerCase(), measurement: ingredient.measurement } });
 
     const drink = await Drink.create({
