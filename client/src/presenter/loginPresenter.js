@@ -40,15 +40,6 @@ export default function Login({ model }) {
                 password: password,
             },
         });
-        if (error) {
-            console.log(error);
-        }
-        if (loading) {
-            console.log("loading: ", loading)
-        }
-        if (!loading && !error && data) {
-            console.log("Data: ", data);
-        }
     }
     useEffect(() => {
         if (!loading && data) {
@@ -62,6 +53,7 @@ export default function Login({ model }) {
         <LoginView
             setEmail={setEmail}
             setPassword={setPassword}
+            error={error}
             send={login}
         />);
 }

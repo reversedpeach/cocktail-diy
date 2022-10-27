@@ -1,24 +1,24 @@
 import { getUserByID, createUser, getUserByEmail, } from "./database";
 import bcryptjs from "bcryptjs";
 import { GraphQLError } from "graphql";
-import UserInputError from '@apollo/server';
 import { validateLoginInput, validateRegisterInput } from "./validators";
 import jwt from "jsonwebtoken";
 
+
 async function registerNewUser(name: String, email: String, password: String, confirmPassword: String) {
-    try {
-        validateRegisterInput(name, email, password, confirmPassword);
-        console.log("validated input")
-    } catch {
-        console.log("invalid input");
-        return new GraphQLError("invalid input");
+
+    const foundError = await validateRegisterInput(name, email, password, confirmPassword);
+    console.log("validated input")
+    if (foundError) {
+        throw new GraphQLError('Invalid input');
     }
+
     console.log("trying to find user");
     const user = await getUserByEmail(email);
 
     if (user !== null) {
         console.log("user already exists");
-        return new GraphQLError("User already exists");
+        throw new GraphQLError("User already exists");
     }
     const hashedPassword = await bcryptjs.hash(password.toString(), 10); //primitive string needed in hash
     const newUser = await createUser(name, email, hashedPassword);
@@ -54,14 +54,13 @@ async function generateJWToken(user: any) {//fix type
 
 
 async function login(email: String, password: String) {
-    try {
-        validateLoginInput(email, password)
-    } catch (error) {
-        console.log("invalid input");
-        return new GraphQLError("invalid input");
+
+    const foundError = await validateLoginInput(email, password)
+    if (foundError) {
+        throw new GraphQLError('Invalid input');
     }
+
     const user = await getUserByEmail(email);
-    //console.log('found user:', user);
     if (user !== null) {
         const passwordCheck = await bcryptjs.compare(password.toString(), user.password.toString());
         if (passwordCheck) {
@@ -83,13 +82,13 @@ async function login(email: String, password: String) {
         }
     }
     console.log("incorrect email or password");
-    return new GraphQLError("incorrect email or password");
+    return new GraphQLError("Incorrect email or password");
 }
 
 //process.env.REFRESH_TOKEN_SECRET
 async function getUser(token: any) {
     const user = await jwt.verify(token, process.env.SECRET_KEY, async (err: any, payload: any) => {
-        if (err) return new GraphQLError("unauthorized");
+        if (err) return new GraphQLError("Unauthorized");
         const userID = payload.id;
         const user = await getUserByID(userID);
         //console.log("verified user: ", user)

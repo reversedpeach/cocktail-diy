@@ -17,6 +17,17 @@ margin-bottom: 20px;
 
 `;
 
+const StyledError = styled.div`
+display: flex;
+align-self: flex-start;
+font-size: 14pt;
+font-family: Helvetica;
+font-weight: bold;
+width: 100%;
+color: black;
+margin-left: 55px;
+`;
+
 const StyledButton = styled.button`
 	border-radius: 20px;
 	display: flex;
@@ -107,6 +118,9 @@ export default function RegisterView(props) {
                     />
                 </div>
             </div>
+            <StyledError>
+                {props.error ? <p>{props.error.message}</p> : <></>}
+            </StyledError>
 
             <StyledButton variant="contained" disabled={props.loading === true} onClick={(e) => { e.preventDefault(); send(); }}>
                 Register

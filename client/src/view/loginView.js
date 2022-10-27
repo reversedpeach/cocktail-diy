@@ -40,6 +40,19 @@ const StyledButton = styled.button`
 	font-size: 12pt;
 `;
 
+const StyledError = styled.div`
+display: flex;
+align-self: flex-start;
+font-size: 14pt;
+font-family: Helvetica;
+font-weight: bold;
+width: 100%;
+color: black;
+margin-left: 55px;
+
+`;
+
+
 
 export default function LoginView(props) {
     function setEmail(value) {
@@ -83,7 +96,9 @@ export default function LoginView(props) {
                     />
                 </div>
             </div>
-
+            <StyledError>
+                {props.error ? <p>{props.error.message}</p> : <></>}
+            </StyledError>
             <StyledButton variant="contained" disabled={props.loading === true} onClick={(e) => { e.preventDefault(); send(); }}>
                 Login
             </StyledButton>

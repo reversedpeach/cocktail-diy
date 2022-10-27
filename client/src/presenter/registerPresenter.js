@@ -40,7 +40,7 @@ export default function Register({ model }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER_MUTATION, { onCompleted: (data) => { console.log(data); model.setUser(data.register) } });
+    const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER_MUTATION, { onCompleted: (data) => { console.log(data); if (!error) { model.setUser(data.register) } }, onError: (error) => { console.log("error: ", error) } });
 
 
     function register() {
@@ -52,15 +52,6 @@ export default function Register({ model }) {
                 confirmPassword: confirmPassword,
             },
         });
-        if (error) {
-            console.log(error);
-        }
-        if (loading) {
-            console.log("loading: ", loading)
-        }
-        if (!loading && !error && data) {
-            console.log("Data: ", data);
-        }
     }
     useEffect(() => {
         if (!loading && data) {
@@ -69,11 +60,14 @@ export default function Register({ model }) {
             }, 200)
         }
     }, [isAuth])
+
+
     return (<RegisterView
         setUserName={setUserName}
         setEmail={setEmail}
         setPassword={setPassword}
         setConfirmPassword={setConfirmPassword}
+        error={error}
         send={register}
     />);
 }
