@@ -12,8 +12,8 @@ function MyBar({ model }) {
 			<MyBarView />
 			<div className="barRow">{
 				shakering.length > 0 ?
-					shakering.map((element) => (
-						<MyBarElemView barIng={element[0].toUpperCase() + element.slice(1)} onAdd={(element) => model.addIngShaker(element[0].toUpperCase() + element.slice(1))} />
+					shakering.map((element, index) => (
+						<MyBarElemView key={index} barIng={element[0].toUpperCase() + element.slice(1)} onAdd={(element) => model.addIngShaker(element[0].toUpperCase() + element.slice(1))} />
 					)) : <MyBarNoIngView />}
 			</div>
 		</React.Fragment>);

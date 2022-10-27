@@ -70,5 +70,11 @@ export default function Register({ model }) {
             }, 200)
         }
     }, [isAuth])
-    return (<RegisterView setUserName={setUserName} setEmail={setEmail} setPassword={setPassword} setConfirmPassword={setConfirmPassword} send={register} />);
+    return (<RegisterView
+        setUserName={setUserName}
+        setEmail={setEmail}
+        setPassword={setPassword}
+        setConfirmPassword={setConfirmPassword}
+        send={register}
+    />);
 }

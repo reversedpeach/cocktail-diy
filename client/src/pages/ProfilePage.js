@@ -11,7 +11,7 @@ export default function ProfilePage({ model }) {
 		model.setSeeingUserName(model.username);
 	}, []);
 	return (
-		<div className="discoverBox">
+		<div className="backgroundBox">
 			<MyProfile model={model} setShowCom={() => { }} />
 		</div>
 	);

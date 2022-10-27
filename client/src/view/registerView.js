@@ -63,7 +63,7 @@ export default function RegisterView(props) {
 
     //return (<div>hello</div>)
     return (
-        <div className="discoverBox">
+        <div className="backgroundBox">
             <div className="resultCol">
                 <div className="rowBoxLeft">
                     <StyledModeTitle> Sign Up </StyledModeTitle>

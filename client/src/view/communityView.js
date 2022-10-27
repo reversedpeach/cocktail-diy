@@ -3,7 +3,7 @@ import React from "react";
 export default function CommunityView(props) {
 	return (
 		<div className="community">
-			<div className="title">Users:</div>
+			<div className="comTitle">Users:</div>
 			<br></br>
 			{props.users.map((value, index) => {
 				return (

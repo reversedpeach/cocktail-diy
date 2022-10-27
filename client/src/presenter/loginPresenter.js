@@ -4,8 +4,6 @@ import LoginView from "../view/loginView.js";
 import { Navigate, useNavigate } from "react-router-dom";
 import useModelProp from "../utils/useModelProp.js";
 
-
-
 const LOGIN = gql`
     query login(
         $email:String
@@ -27,7 +25,6 @@ const LOGIN = gql`
         }
     }
 `;
-
 
 export default function Login({ model }) {
     const navigate = useNavigate();
@@ -60,5 +57,11 @@ export default function Login({ model }) {
             }, 200)
         }
     }, [isAuth])
-    return (<LoginView setEmail={setEmail} setPassword={setPassword} send={login} />);
+
+    return (
+        <LoginView
+            setEmail={setEmail}
+            setPassword={setPassword}
+            send={login}
+        />);
 }
