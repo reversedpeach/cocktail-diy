@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
-import "../utils/css/drinkResults.css";
 import useModelProp from "../utils/useModelProp.js";
-import CocktailSource from "../cocktailApi.js";
+
 import ResultListView from "../view/resultListView.js";
 
 
@@ -44,20 +43,18 @@ export default function ResultsList({ model }) {
 	}
 
 	function setDetails(drink) {
-		console.log("Setting details with: ", drink);
 		model.setDetails(drink.id, drink.external);
 	}
 
 	return !loading ? (
 		drinks.map((drink) => {
-			//console.log(drink)
 			return (
 				<ResultListView
 					image={drink.img}
 					title={drink.name}
 					id={drink.id}
 					external={drink.external}
-					setDetails={() => { console.log("2 setting details with: ", drink); setDetails(drink) }}
+					setDetails={() => { setDetails(drink) }}
 				/>
 			);
 		})

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import MyBarProfile from "../presenter/myBarProfile.js";
+import MyBarProfile from "../presenter/myBarProfilePresenter.js";
 
 import styled from "styled-components";
 import Select from "react-select";
 
 import { AddOutlined } from "@mui/icons-material";
-import { Fab, Button } from "@mui/material";
+import { Fab } from "@mui/material";
 
 const StyledHeadTitle = styled.span`
 	display: flex;
@@ -21,18 +21,6 @@ const StyledHeadTitle = styled.span`
 
 `;
 
-const StyledTitle = styled.div`
-	display: flex;
-	align-self: flex-start;
-	justify-content: flex-start;
-	font-size: 24pt;
-	font-family: Helvetica;
-	padding: 2px;
-	color: #7f7f7f;
-	padding-bottom: 18px;
-	width: 200px;
-	padding-top: 4px;
-`;
 
 const StyledTitleSmall = styled.div`
 	display: flex;
@@ -109,7 +97,6 @@ export default function MyProfileView(props) {
 
 					<StyledTitleSmall>Liked Drinks </StyledTitleSmall>
 					{props.likedDrinks.map((drink) => {
-						console.log("liked: ", drink);
 						return <StyledList key={drink}>{drink}</StyledList>;
 					})}
 				</div></div>

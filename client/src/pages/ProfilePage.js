@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import MyProfile from "../presenter/myProfile.js";
+import MyProfile from "../presenter/myProfilePresenter.js";
 
 import styled from "styled-components";
 

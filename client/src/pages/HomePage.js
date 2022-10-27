@@ -1,18 +1,18 @@
 import React from "react";
 
-import MyBar from "../presenter/myBar.js";
-import Shaker from "../presenter/shaker.js";
-import ResultsList from "../presenter/resultsList.js";
-import IngShaker from "../presenter/ingShaker.js";
+import MyBar from "../presenter/myBarHomePresenter.js";
+import Shaker from "../presenter/shakerPresenter.js";
+import ResultsList from "../presenter/resultsListPresenter.js";
+import IngShaker from "../presenter/ingShakerPresenter.js";
 
-import SearchIng from "../presenter/searchIng.js";
-import ResultDetails from "../presenter/resultDetails.js";
+import SearchIng from "../presenter/searchIngPresenter.js";
+import ResultDetails from "../presenter/resultDetailsPresenter.js";
 import useModelProp from "../utils/useModelProp.js";
-import ToggleMode from "../presenter/toggleMode.js";
-import ResultTitle from "../presenter/resultTitle.js";
+import ToggleMode from "../presenter/toggleModePresenter.js";
+import ResultTitle from "../presenter/resultTitlePresenter.js";
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import CreatePresenter from "../presenter/createPresenter.js";
+import Create from "../presenter/createPresenter.js";
 import arrow from "../utils/images/arrow.png";
 import StartScreenView from "../view/startScreenView.js";
 
@@ -94,7 +94,7 @@ export default function HomePage({ model }) {
 
 				{currentMode === "create" ? (showResult.length > 0 ? (
 					<div className="colBox">
-						<CreatePresenter model={model} />
+						<Create model={model} />
 					</div>
 				)
 					: <p></p>) : (showResult.length > 0 ? (

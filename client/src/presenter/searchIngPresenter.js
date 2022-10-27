@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { gql, useLazyQuery } from "@apollo/client";
 
-import useModelProp from "../utils/useModelProp.js";
-import "../utils/css/drinkResults.css";
-import styled from "styled-components";
+
 
 const GET_ALL_INGREDIENTS = gql`
 	query Query{
@@ -13,9 +11,6 @@ const GET_ALL_INGREDIENTS = gql`
 `;
 
 export default function SearchIng({ model, addIng }) {
-	const IngList = useModelProp(model, "mybar");
-	const shakering = useModelProp(model, "currentdrink");
-	const [options, setOptions] = useState([]);
 	const [allIng, setAllIng] = useState([]);
 	const currentOptions = [];
 	const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, {
