@@ -181,7 +181,7 @@ function Create({ model }) {
             <div className="resultCol">
                 <StyledTitle>Ingredients</StyledTitle>
                 {ingredients.map((ing, index) => (
-                    <CreateElemListView ingredient={ing} id={"measurement" + (index + 1)} />
+                    <CreateElemListView key={index} ingredient={ing} id={"measurement" + (index + 1)} />
                 ))}
             </div>,
             <CreateInstrucView />
