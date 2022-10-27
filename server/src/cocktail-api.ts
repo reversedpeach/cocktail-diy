@@ -58,16 +58,25 @@ class CocktailsAPI extends RESTDataSource {
     }
 
     async getDrinkByID(id: String): Promise<Drink> {
-        return await this.get(`lookup.php?i=${encodeURIComponent(id.toString())}`);
+        return this.get(`lookup.php?i=${encodeURIComponent(id.toString())}`);
     }
 
     async getAllIngredients(): Promise<Ingredient[]> {
         return this.get(`list.php?i=list`);
     }
 
+    async getAllTypes(): Promise<String[]> {
+        return this.get(`list.php?a=list`);
+    }
+
+    async getAllGlasses(): Promise<String[]> {
+        return this.get(`list.php?g=list`);
+    }
+
     getIngredient(name: String): Promise<Ingredient> {
         return this.get(`search.php?i=${encodeURIComponent(name.toString())}`);
     }
+
 }
 
 export { CocktailsAPI, Ingredient, Drink }

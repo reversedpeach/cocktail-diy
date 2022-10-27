@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import RegisterView from "../view/registerView.js";
 import useModelProp from "../utils/useModelProp.js";
-//import { REGISTER_USER_MUTATION } from "../graphql/mutations.js";
 import { gql, useMutation } from "@apollo/client";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 

@@ -47,7 +47,7 @@ export default function ResultDetails({ model }) {
     const [liked, setLiked] = useState(false);
     //const [drink, setDrink] = useState(null);
     const [getDrinkDetails, { data, loading, error }] = useLazyQuery(GET_DRINK);
-    const [changeLikedDrinks, { likedData, likedLoading, likedError }] = useMutation(CHANGE_LIKED_DRINKS, { onCompleted: (data) => { console.log("Received form server when likeaction: ", data); } });
+    const [changeLikedDrinks, { likedData, likedLoading, likedError }] = useMutation(CHANGE_LIKED_DRINKS);
 
 
     function isLiked(drink) {
@@ -96,10 +96,6 @@ export default function ResultDetails({ model }) {
             setLiked(false);
             saveLikedDrinksToServer(drink, false)
         }
-    }
-
-    if (!likedLoading) {
-        console.log("result form likeaction: ", likedData, likedError);
     }
 
     if (likedError) {

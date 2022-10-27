@@ -53,6 +53,8 @@ type Query {
   login(email:String, password:String): User
   getAPIdrinks(ingredients:[String]): [APIdrink]
   getAllIngredients: [String] 
+  getAllGlasses: [String] 
+  getAllTypes: [String]
   getIngredient(id:String):Ingredient
 }
 

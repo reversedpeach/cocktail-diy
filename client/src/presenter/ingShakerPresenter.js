@@ -1,7 +1,6 @@
 import React from "react";
 import useModelProp from "../utils/useModelProp.js";
 import IngShakerView from "../view/ingShakerView.js";
-// import { useDropzone } from 'react-dropzone'
 
 function IngShaker({ model }) {
     const shakering = useModelProp(model, "currentdrink");

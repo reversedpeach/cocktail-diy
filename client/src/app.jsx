@@ -6,21 +6,20 @@ import "./utils/css/app.css";
 import NavBarPresenter from "./presenter/navBarPresenter";
 
 import CocktailModel from './model/cocktailModel.js';
-import HomePage from "./pages/HomePage";
-import ProfilePage from "./pages/ProfilePage";
+import HomePage from "./presenter/HomePagePresenter";
+
 
 import Login from "./presenter/loginPresenter";
 import Register from "./presenter/registerPresenter";
+import MyProfile from "./presenter/myProfilePresenter";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-//import { useQuery, gql } from '@apollo/client';
-import { onError } from "@apollo/client/link/error";
-import { GET_USERS } from "./graphql/queries";
+
 
 import styled from "styled-components";
-import StartScreenView from "./view/startScreenView";
+
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -85,18 +84,6 @@ padding-right: 20px;
 
 `;
 
-/*
-<StyledNavBar>
-						<StyledNavWrapEnd>
-							<StyledLink to="/"> Home</StyledLink>
-							<StyledLink to="/community">Community</StyledLink>
-							<StyledLink to="/profile"> Profile</StyledLink>
-							<StyledLink to="/login"> Login</StyledLink>
-							<StyledLink to="/register"> Register </StyledLink>
-						</StyledNavWrapEnd>
-					</StyledNavBar>
-*/
-
 localStorage.setItem("token", null);
 const model = new CocktailModel();
 
@@ -111,7 +98,7 @@ const App = ({ model }) => {
 				</div>
 				<Routes>
 					<Route path="/" element={<HomePage model={model} />} />
-					<Route path="/profile" element={<ProfilePage model={model} />} />
+					<Route path="/profile" element={<MyProfile model={model} />} />
 					<Route path="/login" element={<Login model={model} />} />
 					<Route path="/register" element={<Register model={model} />} />
 				</Routes>
