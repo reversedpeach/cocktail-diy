@@ -18,11 +18,22 @@ const StyledBtn = styled.button`
 	align-self: flex-end;
 	align-items: center;
 	justify-content: center;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 200px;
 	box-shadow: 1px 1px 4px rgb(124, 124, 124);
 
 `
+
+const StyledStatus = styled.div`
+display: flex;
+align-self: flex-end;
+font-size: 12pt;
+font-family: Helvetica;
+font-weight: bold;
+width: 300px;
+padding-top: 50px;
+color: white;
+`;
 
 function CreateSaveView(props) {
 	return (<div>
@@ -30,7 +41,7 @@ function CreateSaveView(props) {
 			<UploadAndDisplayImage {...props} />
 		</form>
 		{(props.loading) ? <p>Loading...</p> : <></>}
-		<p>{props.status}</p>
+		<StyledStatus>{props.status}</StyledStatus>
 		<StyledBtn onClick={props.startCreate} disabled={props.success}>Create</StyledBtn>
 	</div>);
 }

@@ -10,7 +10,7 @@ async function registerNewUser(name: String, email: String, password: String, co
     const foundError = await validateRegisterInput(name, email, password, confirmPassword);
     console.log("validated input")
     if (foundError) {
-        throw new GraphQLError('invalid input');
+        throw new GraphQLError('Invalid input');
     }
 
     console.log("trying to find user");
@@ -57,7 +57,7 @@ async function login(email: String, password: String) {
 
     const foundError = await validateLoginInput(email, password)
     if (foundError) {
-        throw new GraphQLError('invalid input');
+        throw new GraphQLError('Invalid input');
     }
 
     const user = await getUserByEmail(email);
@@ -82,13 +82,13 @@ async function login(email: String, password: String) {
         }
     }
     console.log("incorrect email or password");
-    return new GraphQLError("incorrect email or password");
+    return new GraphQLError("Incorrect email or password");
 }
 
 //process.env.REFRESH_TOKEN_SECRET
 async function getUser(token: any) {
     const user = await jwt.verify(token, process.env.SECRET_KEY, async (err: any, payload: any) => {
-        if (err) return new GraphQLError("unauthorized");
+        if (err) return new GraphQLError("Unauthorized");
         const userID = payload.id;
         const user = await getUserByID(userID);
         //console.log("verified user: ", user)

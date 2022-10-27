@@ -10,21 +10,20 @@ const StyledElem = styled.input`
 	opacity: 0.9;
 	border: #494949;
     z-index: 0;
-   
     &:hover{
         cursor:default
     }
 `;
 
 const StyledRemove = styled.div`
-width: 16px;
-height: 16px;
-margin-left:20px;
-margin-top:-5px;
-  z-index: 100;
-border-radius: 100%;
-border: solid; 
-box-shadow: 1px 1px 6px #888888;
+    width: 16px;
+    height: 16px;
+    margin-left:20px;
+    margin-top:-5px;
+    z-index: 100;
+    border-radius: 100%;
+    border: solid; 
+    box-shadow: 1px 1px 6px #888888;
     position: absolute;
     color:rgb(127,127,127);
     background-color: white;
@@ -32,7 +31,7 @@ box-shadow: 1px 1px 6px #888888;
     &:hover{
         cursor:pointer;
     }
-`
+`;
 
 const StyledIngTitle = styled.span`
 	font-size: 10pt;
@@ -45,7 +44,6 @@ const StyledIngTitle = styled.span`
     display:flex;
     align-self:center;
     justify-content:center;
-
 `;
 
 

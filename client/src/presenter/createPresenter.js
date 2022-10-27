@@ -160,7 +160,7 @@ function Create({ model }) {
     useEffect(() => {
         if (error) {
             console.log("Error;", error)
-            setStatus("Something went wrong; " + error.message);
+            setStatus("Something went wrong:\n " + error.message);
             setSuccess(false);
             setTimeout(() => { resetStatus() }, 5000)
         }
@@ -196,7 +196,10 @@ function Create({ model }) {
                     onChange={(choice) => model.addTypeDrink(choice.value)}></Select>
                 <br></br>
                 <StyledTitle>Upload an image</StyledTitle>
-                <CreateSaveView startCreate={saveDrink} success={success} loading={loading} status={status} />
+                <CreateSaveView startCreate={saveDrink}
+                    success={success}
+                    loading={loading}
+                    status={status} />
             </div>
         </div>
     </React.Fragment>
