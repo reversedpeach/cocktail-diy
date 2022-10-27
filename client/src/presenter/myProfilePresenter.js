@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import useModelProp from "../utils/useModelProp.js";
 import MyProfileView from "../view/myProfileView.js";
-
+import LoadingStatusView from "../view/loadingStatusView.js";
 const GET_ALL_INGREDIENTS = gql`
 	query Query{
 		getAllIngredients
@@ -106,5 +106,5 @@ export default function MyProfile(props) {
 			addMyBar={addToBar}
 			myBarLength={myBar.length}
 		/>
-	) : (<div>loading...</div>);
+	) : (<LoadingStatusView />);
 }

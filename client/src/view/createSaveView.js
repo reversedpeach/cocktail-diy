@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components'
 import UploadAndDisplayImage from "../presenter/uploadDisplayImgPresenter.js";
-
+import LoadingStatusView from "./loadingStatusView.js";
 const StyledBtn = styled.button`
 	border-radius: 18px;
 	display: flex;
@@ -40,7 +40,7 @@ function CreateSaveView(props) {
 		<form >
 			<UploadAndDisplayImage {...props} />
 		</form>
-		{(props.loading) ? <p>Loading...</p> : <></>}
+		{(props.loading) ? <LoadingStatusView /> : <></>}
 		<StyledStatus>{props.status}</StyledStatus>
 		<StyledBtn onClick={props.startCreate} disabled={props.success}>Create</StyledBtn>
 	</div>);

@@ -3,8 +3,8 @@ import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import useModelProp from "../utils/useModelProp.js";
 
 import ResultListView from "../view/resultListView.js";
-
-
+import NoDrinkMessageView from "../view/noDrinkMessageView.js";
+import LoadingStatusView from "../view/loadingStatusView.js";
 
 const GET_DRINKS = gql`
     query getDrinks($community: Boolean, $ingredients: [String]) {
@@ -16,7 +16,6 @@ const GET_DRINKS = gql`
         }
     }
 `;
-
 
 
 export default function ResultsList({ model }) {
@@ -39,7 +38,7 @@ export default function ResultsList({ model }) {
 	}
 
 	if (drinks.length === 0) {
-		return (<p>No results</p>)
+		return (<NoDrinkMessageView />)
 	}
 
 	function setDetails(drink) {
@@ -60,6 +59,6 @@ export default function ResultsList({ model }) {
 			);
 		})
 	) : (
-		<p>Loading...</p>
+		<LoadingStatusView />
 	);
 }

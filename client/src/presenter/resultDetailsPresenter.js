@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import useModelProp from "../utils/useModelProp.js";
 import ResultDetailsView from "../view/resultDetailsView.js";
+import LoadingStatusView from "../view/loadingStatusView.js";
 
 const GET_DRINK = gql`
     query getDrink(
@@ -112,5 +113,5 @@ export default function ResultDetails({ model }) {
             endDetails={() => model.setDetails(null, null)}
             liked={liked}
             like={() => likeDrink(data.getDrink.name)}
-            unlike={() => unlikeDrink(data.getDrink.name)} /> : <p>Loading...</p>);
+            unlike={() => unlikeDrink(data.getDrink.name)} /> : <LoadingStatusView />);
 }
