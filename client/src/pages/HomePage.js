@@ -1,17 +1,14 @@
 import React from "react";
-
 import MyBar from "../presenter/myBarHomePresenter.js";
 import Shaker from "../presenter/shakerPresenter.js";
 import ResultsList from "../presenter/resultsListPresenter.js";
 import IngShaker from "../presenter/ingShakerPresenter.js";
-
 import SearchIng from "../presenter/searchIngPresenter.js";
 import ResultDetails from "../presenter/resultDetailsPresenter.js";
 import useModelProp from "../utils/useModelProp.js";
 import ToggleMode from "../presenter/toggleModePresenter.js";
 import ResultTitle from "../presenter/resultTitlePresenter.js";
 import styled from "styled-components";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Create from "../presenter/createPresenter.js";
 import arrow from "../utils/images/arrow.png";
 import StartScreenView from "../view/startScreenView.js";
@@ -65,7 +62,7 @@ export default function HomePage({ model }) {
 	const loggedIn = useModelProp(model, "isAuth");
 
 	return (
-		<div className="discoverBox" >
+		<div className="backgroundBox" >
 			{loggedIn == ! false ? (<div>
 				<div className="rowBox">
 					<StyledModeTitle>{currentMode.toUpperCase()}</StyledModeTitle>

@@ -47,9 +47,10 @@ export default function ResultsList({ model }) {
 	}
 
 	return !loading ? (
-		drinks.map((drink) => {
+		drinks.map((drink, index) => {
 			return (
 				<ResultListView
+					key={index}
 					image={drink.img}
 					title={drink.name}
 					id={drink.id}

@@ -32,8 +32,8 @@ function MyBarProfile({ model }) {
         <React.Fragment>
             <MyBarView />
             <div className="barRow">{
-                myBar.map((element) => (
-                    <MyBarProfileElemView barIng={element[0].toUpperCase() + element.slice(1)} onRemove={removeIngredientFromBar} />
+                myBar.map((element, index) => (
+                    <MyBarProfileElemView key={index} barIng={element[0].toUpperCase() + element.slice(1)} onRemove={removeIngredientFromBar} />
                 ))}
             </div>
         </React.Fragment>);

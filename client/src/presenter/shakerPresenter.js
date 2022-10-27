@@ -8,7 +8,9 @@ function Shaker() {
 	}
 
 	return (
-		<ShakerView onDragOver={(ev) => allowDrop(ev)} />
+		<ShakerView
+			onDragOver={(ev) => allowDrop(ev)}
+		/>
 	)
 };
 

@@ -1,8 +1,15 @@
-.shakerimg {
-	height: 360px
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* Pages flex-box structures */
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+.backgroundBox {
+	margin-top: 10px;
+	background-color: white;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	flex-direction: column;
+	align-content: stretch;
 }
-
-
 
 .colBox {
 	box-shadow: 1px 1px 4px #888888;
@@ -20,21 +27,6 @@
 	margin-right: 55px;
 	margin-left: 55px;
 	padding-bottom: 20px;
-}
-
-.discoverBox {
-	margin-top: 10px;
-	background-color: white;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	flex-direction: column;
-	align-content: stretch;
-}
-
-.communityBox {
-	display: flex;
-	flex-wrap: wrap;
 }
 
 .rowBox {
@@ -63,6 +55,15 @@
 	justify-content: flex-start;
 	align-items: flex-start;
 	gap: 14%;
+}
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* Shaker */
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+.shakerimg {
+	height: 360px
 }
 
 .shakerBox {
@@ -127,11 +128,10 @@
 	font-weight: bold;
 }
 
-.drinkRow {
-	flex-direction: row;
-	display: flex;
-	justify-content: center;
-}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* My Bar */
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 .barBox {
 	margin-top: 30px;
@@ -168,7 +168,6 @@
 	flex-direction: column;
 }
 
-/* Make the image responsive */
 .barImage {
 	display: flex;
 	width: 80px;
@@ -193,30 +192,52 @@
 	flex-direction: row;
 }
 
-.myProfile {
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* Search Ingredients */
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+.searchIngredientForm {
+	left: 10%;
+	padding-top: 50px;
 	display: flex;
-	flex-direction: row;
-	position: absolute;
-	top: 30px;
+	justify-content: flex-start;
+	width: 400px;
 }
 
-.title {
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* Community page */
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+.communityBox {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.comTitle {
 	display: flex;
 	height: 30px;
 	width: 200px;
 	font-family: Helvetica;
 }
 
-.profileBar {
-	/* display: flex; */
-	padding-left: 30px;
-}
 
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* Profile page */
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 .profileInfo {
 	flex-direction: column;
 	display: flex;
 	padding-top: 20px;
 }
+
+.followList {
+	padding-top: 20px;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* Toggle */
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 .switchBox {
 	display: flex;
@@ -226,7 +247,7 @@
 	margin-right: 55px;
 }
 
-/* https://www.w3schools.com/howto/howto_css_switch.asp */
+/* The switch is inspired from: https://www.w3schools.com/howto/howto_css_switch.asp */
 .switch {
 	position: relative;
 	display: flex;
@@ -234,14 +255,12 @@
 	height: 48px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
 	opacity: 0;
 	width: 0;
 	height: 0;
 }
 
-/* The slider */
 .slider {
 	position: absolute;
 	cursor: pointer;
@@ -288,11 +307,10 @@ input:checked+.slider:before {
 	border-radius: 50%;
 }
 
-.createBtnBox {
-	display: flex;
-	align-self: flex-end;
-	padding-right: 40%;
-}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* Create new drink */
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 .createTitle {
 	display: flex;
@@ -305,27 +323,20 @@ input:checked+.slider:before {
 	align-self: center;
 }
 
-.drinkName {
-	display: flex;
-	align-self: flex-start;
-	justify-content: center;
-	align-items: center;
-	font-size: 10pt;
-	font-family: Helvetica;
-	padding-bottom: 30px;
-	font-style: italic;
-	color: #7f7f7f;
-	padding-top: 10px;
-}
 
-.followList {
-	padding-top: 20px;
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* Drink results */
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+.resultCol {
+	display: flex;
+	flex-direction: column;
+	font-family: "Helvetica";
 }
 
 .drinkresults {
 	display: flex;
 	flex-direction: column;
-
 }
 
 .drinkresultsList {
@@ -339,22 +350,6 @@ input:checked+.slider:before {
 	justify-content: center;
 }
 
-.resultCol {
-	display: flex;
-	flex-direction: column;
-	font-family: "Helvetica";
-
-}
-
-.searchIngredientForm {
-	left: 10%;
-	padding-top: 50px;
-	display: flex;
-	justify-content: flex-start;
-	width: 400px;
-}
-
-
 .drinkImg {
 	margin: 10px;
 	cursor: pointer;
@@ -367,5 +362,4 @@ input:checked+.slider:before {
 	border-width: 2px;
 	border-style: solid;
 	box-shadow: 1px 1px 4px #3c3c3c;
-
 }
