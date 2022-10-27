@@ -3,18 +3,14 @@ import CreateElemListView from "../view/createElemListView.js";
 import CreateTitleView from "../view/createTitleView.js";
 import CreateInstrucView from "../view/createInstrucView.js";
 import CreateSaveView from "../view/createSaveView.js";
-import CreateTypeGlassView from "../view/createTypeGlassView.js";
 import CreateNameView from "../view/createNameView.js";
 import useModelProp from "../utils/useModelProp.js";
-import { usePromise } from "../utils/usePromise.js";
 import styled from "styled-components";
-import CocktailSource from "../cocktailApi.js";
 import getFormData from "../utils/getFormData.js";
 
 import Select from "react-select";
-import { fontSize } from "@mui/system";
 
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useLazyQuery } from "@apollo/client";
 
 
 
@@ -58,23 +54,32 @@ const CREATE_DRINK_MUTATION = gql`
     }
 `;
 
+const GET_GLASSES = gql`
+query getGlasses {
+  getAllGlasses
+}
+`;
+
+const GET_TYPES = gql`
+query getTypes {
+  getAllTypes
+}
+`;
+
 function Create({ model }) {
     const ingredients = useModelProp(model, "currentdrink");
     const newdrink = useModelProp(model, "createddrink");
 
-    const [promiseGlass, setPromiseGlass] = React.useState(null);
-    React.useEffect(() => setPromiseGlass(CocktailSource.getAllGlasses()), []);
-    const [glass, err1] = usePromise(promiseGlass);
-    const glasses = [];
+    const [glassList, setGlassList] = useState([]);
+    const [typeList, setTypeList] = useState([]);
+    const glassTypes = [];
+    const typeTypes = [];
 
-    const [promiseType, setPromiseType] = React.useState(null);
-    React.useEffect(() => setPromiseType(CocktailSource.getAllTypes()), []);
-    const [type, err2] = usePromise(promiseType);
     const [success, setSuccess] = useState(false);
     const [status, setStatus] = useState("");
+    const [getGlasses, { glassData, glassLoading, glassError }] = useLazyQuery(GET_GLASSES, { onCompleted: (data) => { setGlasses(data.getAllGlasses) } });
+    const [getTypes, { typeData, typeLoading, typeError }] = useLazyQuery(GET_TYPES, { onCompleted: (data) => { setTypes(data.getAllTypes) } });
     const [createDrink, { data, loading, error }] = useMutation(CREATE_DRINK_MUTATION, { onCompleted: (data) => { setSuccess(true) } });
-
-    const types = [];
 
     const customStyles = {
         option: (styles, state) => ({
@@ -95,22 +100,32 @@ function Create({ model }) {
         })
     };
 
-
-    if (glass !== null) {
-        for (let i = 0; i < glass.length; i++) {
-            if (glass["strGlass"] !== null) {
-                glasses.push({ value: glass[i]["strGlass"], label: glass[i]["strGlass"] });
+    function setGlasses(glasses) {
+        if (glasses !== null) {
+            for (let i = 0; i < glasses.length; i++) {
+                if (glasses[i] !== null) {
+                    glassTypes.push({ value: glasses[i], label: glasses[i] });
+                }
             }
         }
+        setGlassList(glassTypes);
     }
 
-    if (type !== null) {
-        for (let i = 0; i < type.length; i++) {
-            if (type["strAlcoholic"] !== null) {
-                types.push({ value: type[i]["strAlcoholic"], label: type[i]["strAlcoholic"] });
+    function setTypes(types) {
+        if (types !== null) {
+            for (let i = 0; i < types.length; i++) {
+                if (types[i] !== null) {
+                    typeTypes.push({ value: types[i], label: types[i] });
+                }
             }
         }
+        setTypeList(typeTypes);
     }
+
+    useEffect(() => {
+        getGlasses();
+        getTypes();
+    }, [])
 
     function saveDrink() {
         for (let i = 0; i < ingredients.length; i++) {
@@ -172,12 +187,12 @@ function Create({ model }) {
             <CreateInstrucView />
             <div className="resultCol">
                 <StyledTitle>Select Glass and Type</StyledTitle>
-                <Select options={glasses}
+                <Select options={glassList}
                     styles={customStyles}
                     placeholder="Select glass"
                     onChange={(choice) => model.addGlassDrink(choice.value)}>
                 </Select>
-                <Select options={types}
+                <Select options={typeList}
                     styles={customStyles}
                     placeholder="Select type"
                     onChange={(choice) => model.addTypeDrink(choice.value)}></Select>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { gql, useLazyQuery } from "@apollo/client";
+import { PropaneSharp } from "@mui/icons-material";
 
 
 
@@ -10,7 +11,7 @@ const GET_ALL_INGREDIENTS = gql`
 	}
 `;
 
-export default function SearchIng({ model, addIng }) {
+export default function SearchIng({ model }) {
 	const [allIng, setAllIng] = useState([]);
 	const currentOptions = [];
 	const [getAllIngredients, { data, loading, error }] = useLazyQuery(GET_ALL_INGREDIENTS, {
@@ -51,6 +52,10 @@ export default function SearchIng({ model, addIng }) {
 	useEffect(() => {
 		setSelectedOption(currentOptions);
 	}, [model["currentdrink"]]);
+
+	function addIng(ing) {
+		model.addIngShaker(ing);
+	}
 
 	return (
 		<Select

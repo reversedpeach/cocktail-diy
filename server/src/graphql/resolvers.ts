@@ -107,6 +107,14 @@ const resolvers = {
                 img: response.ingredients[0].strDrinkThumb
             }
         },
+        getAllTypes: async (parent, args, { dataSources }, info) => {
+            const response = await dataSources.cocktailsAPI.getAllTypes();
+            return response.drinks.map((type) => { return type.strAlcoholic });
+        },
+        getAllGlasses: async (parent, args, { dataSources }, info) => {
+            const response = await dataSources.cocktailsAPI.getAllGlasses();
+            return response.drinks.map((glass) => { return glass.strGlass });
+        },
     },
     Mutation: {
         register: async (parent: any, args: any, context: any, info: any) => {

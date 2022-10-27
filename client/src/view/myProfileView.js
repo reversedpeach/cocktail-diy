@@ -99,69 +99,8 @@ export default function MyProfileView(props) {
 					{props.likedDrinks.map((drink) => {
 						return <StyledList key={drink}>{drink}</StyledList>;
 					})}
-				</div></div>
-
-
-			{/*<div>
-					<div className="followList">
-						<StyledTitleSmall>Following </StyledTitleSmall>
-						{props.following.map((value, index) => {
-							return <StyledList key={index}>{value}</StyledList>;
-						})}
-						<div style={{ paddingTop: "20px" }}>
-							<Fab size="small" color="grey" aria-label="add">
-								<AddOutlined
-									onClick={(e) => {
-										if (props.showSearchingFriend) props.setFriend(false);
-										else props.setFriend(true);
-									}}
-								/>
-							</Fab>
-							{props.showSearchingFriend ? (
-								<Select
-									value={props.selectedIngOptions}
-									options={props.allUsers}
-									onChange={(e) => {
-										props.addFollowing(e[0].value);
-									}}
-									isMulti={true}
-								/>
-							) : (
-								<p></p>
-							)}
-						</div>
-							</div>
-					<div style={{ paddingTop: 10 }}>
-						<StyledTitleSmall>Created Drinks</StyledTitleSmall>
-						{props.madedrinks.map((value, index) => {
-							return <StyledList key={index}>{value}</StyledList>;
-						})}
-					</div>
-					{/* <div style={{ paddingLeft: 40, paddingTop: 20 }}>
-						{!props.followButton ? (
-							<Button variant="contained" color="grey">
-								Follow
-							</Button>
-						) : (
-							<p></p>
-						)}
-					</div> 
-				<div style={{ paddingLeft: 40, paddingTop: 20 }}>
-					{props.model.seeingUsername !== props.model.username ? (
-						<Button
-							color="grey"
-							variant="contained"
-							onClick={() => {
-								props.setShowCom(false);
-							}}>
-							Back to Community
-						</Button>
-					) : (
-						<p></p>
-					)}
 				</div>
-			</div>*/}</div>
-
-
+			</div>
+		</div>
 	);
 }
