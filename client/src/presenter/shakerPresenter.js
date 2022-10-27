@@ -3,8 +3,6 @@ import React from "react";
 import ShakerView from "../view/shakerView.js";
 
 function Shaker() {
-
-
 	function allowDrop(ev) {
 		ev.preventDefault();
 	}

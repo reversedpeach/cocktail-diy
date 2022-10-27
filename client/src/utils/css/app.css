@@ -321,3 +321,51 @@ input:checked+.slider:before {
 .followList {
 	padding-top: 20px;
 }
+
+.drinkresults {
+	display: flex;
+	flex-direction: column;
+
+}
+
+.drinkresultsList {
+	margin: 20px;
+	padding-right: 30px;
+	padding-left: 30px;
+	column-gap: 5%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.resultCol {
+	display: flex;
+	flex-direction: column;
+	font-family: "Helvetica";
+
+}
+
+.searchIngredientForm {
+	left: 10%;
+	padding-top: 50px;
+	display: flex;
+	justify-content: flex-start;
+	width: 400px;
+}
+
+
+.drinkImg {
+	margin: 10px;
+	cursor: pointer;
+	width: 200px;
+	height: 200px;
+	display: flex;
+	justify-content: space-between;
+	border-radius: 100%;
+	border-color: white;
+	border-width: 2px;
+	border-style: solid;
+	box-shadow: 1px 1px 4px #3c3c3c;
+
+}

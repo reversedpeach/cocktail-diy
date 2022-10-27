@@ -1,5 +1,5 @@
 import React from "react";
-import "../utils/css/drinkResults.css";
+
 
 import styled from "styled-components";
 
@@ -25,7 +25,7 @@ const ResultListView = ({ image, title, id, setDetails }) => {
 	return (
 		<div>
 			<div key={id}>
-				<img src={image} className="img" onClick={setDetails} />
+				<img src={image} className="drinkImg" onClick={setDetails} />
 				<StyledName>
 					{title}
 				</StyledName>

@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { usePromise, promiseNoData } from "../utils/usePromise.js";
-import CocktailSource from "../cocktailApi.js";
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 
 import useModelProp from "../utils/useModelProp.js";
-import "../utils/css/drinkResults.css";
 import ResultDetailsView from "../view/resultDetailsView.js";
 
 const GET_DRINK = gql`
@@ -54,8 +51,6 @@ export default function ResultDetails({ model }) {
 
 
     function isLiked(drink) {
-        console.log("checking if liked: ", drink, "result: ", likedDrinks.includes(drink))
-        //if (likedDrinks.includes(drink)) { return "LIKED" } else { return "LIKE" }
         return likedDrinks.includes(drink);
     }
 

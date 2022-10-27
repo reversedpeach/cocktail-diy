@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import useModelProp from "../utils/useModelProp.js";
 import MyProfileView from "../view/myProfileView.js";
-import CocktailSource from "../cocktailApi.js";
 
 const GET_ALL_INGREDIENTS = gql`
 	query Query{
@@ -39,8 +38,6 @@ const GET_USER_DETAILS = gql`
 export default function MyProfile(props) {
 	const loggedIn = useModelProp(props.model, "isAuth");
 	const id = useModelProp(props.model, "userID");
-	const likeddrinks = useModelProp(props.model, "likeddrinks");
-	//const madedrinks = useModelProp(props.model, "userdrinks");
 	const myBar = useModelProp(props.model, "mybar");
 	const seeingUsername = useModelProp(props.model, "seeingUsername");
 	const [allIng, setAllIng] = useState([]);
@@ -48,7 +45,6 @@ export default function MyProfile(props) {
 	const [showSearchingForm, setShow] = useState(false);
 	const [showSearchingFriend, setFriend] = useState(false);
 	const [selectedIngOptions, setSelectedIngOptions] = useState([]);
-	const [followButton, setFollow] = useState(false);
 	const [madeDrinks, setMadeDrinks] = useState([]);
 	const [likedDrinks, setLikedDrinks] = useState([]);
 	const [getUserDetails, { data, loading, error }] = useLazyQuery(GET_USER_DETAILS, {
@@ -85,7 +81,6 @@ export default function MyProfile(props) {
 
 
 	useEffect(() => {
-		console.log("liked drinks in model: ", likeddrinks);
 		getAllIngredients();
 		getUserDetails({ variables: { getUserId: id } });
 	}, []);

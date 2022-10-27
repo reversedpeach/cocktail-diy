@@ -1,5 +1,4 @@
 import React from "react";
-import "../utils/css/drinkResults.css";
 import styled from "styled-components";
 
 
@@ -136,14 +135,11 @@ const StyledLikeBtn = styled.button`
 `
 
 function ResultDetailsView(props) {
-	console.log(props.liked);
 	function like() {
-		console.log("liking");
 		props.like();
 	}
 
 	function unlike() {
-		console.log("unliking");
 		props.unlike();
 	}
 
@@ -155,9 +151,7 @@ function ResultDetailsView(props) {
 				<StyledBtn onClick={props.endDetails}>X</StyledBtn>
 			</StyledRow>
 			<StyledCol>
-
-				<StyledRow><img className="img" src={props.image}></img>
-
+				<StyledRow><img className="drinkImg" src={props.image}></img>
 					<StyledCol>
 						<StyledHeadingSmall>Glass</StyledHeadingSmall>
 						<StyledInstructions>{props.glass || ""}</StyledInstructions>
@@ -165,7 +159,7 @@ function ResultDetailsView(props) {
 						<StyledHeadingSmall>Type</StyledHeadingSmall>
 						<StyledInstructions>{props.alcoholic || ""}</StyledInstructions>
 						<br></br>
-						<StyledLikeBtn onClick={props.liked ? unlike : like}> {props.liked ? "liked" : "like"} </StyledLikeBtn>
+						<StyledLikeBtn onClick={props.liked ? unlike : like}> {props.liked ? "LIKED" : "LIKE"} </StyledLikeBtn>
 					</StyledCol>
 				</StyledRow>
 				<StyledRow>

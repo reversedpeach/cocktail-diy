@@ -2,7 +2,6 @@ import MyBarView from "../view/myBarView.js";
 import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import useModelProp from "../utils/useModelProp.js";
-import "../utils/css/drinkResults.css";
 import MyBarProfileElemView from "../view/myBarProfileElemView.js";
 
 

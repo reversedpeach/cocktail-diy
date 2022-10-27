@@ -58,7 +58,7 @@ const CREATE_DRINK_MUTATION = gql`
     }
 `;
 
-function CreatePresenter({ model }) {
+function Create({ model }) {
     const ingredients = useModelProp(model, "currentdrink");
     const newdrink = useModelProp(model, "createddrink");
 
@@ -72,7 +72,7 @@ function CreatePresenter({ model }) {
     const [type, err2] = usePromise(promiseType);
     const [success, setSuccess] = useState(false);
     const [status, setStatus] = useState("");
-    const [createDrink, { data, loading, error }] = useMutation(CREATE_DRINK_MUTATION, { onCompleted: (data) => { console.log(data); setSuccess(true) } });
+    const [createDrink, { data, loading, error }] = useMutation(CREATE_DRINK_MUTATION, { onCompleted: (data) => { setSuccess(true) } });
 
     const types = [];
 
@@ -159,7 +159,8 @@ function CreatePresenter({ model }) {
         }
     }, [data, loading, error])
 
-    return (<React.Fragment><CreateTitleView />,
+    return (<React.Fragment>
+        <CreateTitleView />,
         <CreateNameView setName={setName} />
         <div className="rowBox">
             <div className="resultCol">
@@ -189,4 +190,4 @@ function CreatePresenter({ model }) {
     )
 };
 
-export default CreatePresenter;
+export default Create;

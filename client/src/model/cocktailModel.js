@@ -25,7 +25,6 @@ class CocktailModel {
 	}
 
 	setUser(data) {
-		//console.log("Setting user in model with:", data, data.name, data.id, data.myBar);
 		this.username = data.name;
 		this.seeingUsername = data.name;
 		this.userID = data.id;
@@ -114,11 +113,8 @@ class CocktailModel {
 	}
 
 	addLikedDrink(drink) {
-		console.log("liked drinks: ", this.likeddrinks);
-		console.log("Liking in model: ", drink);
 		if (!this.likeddrinks.includes(drink)) {
 			this.likeddrinks = [...this.likeddrinks, drink];
-			console.log("updated liked drinks in model: ", this.likeddrinks);
 			this.notifyObservers();
 			return true
 		}
@@ -126,17 +122,13 @@ class CocktailModel {
 	}
 
 	removeLikedDrink(drink) {
-		console.log("liked drinks: ", this.likeddrinks);
-		console.log("unliking in model: ", drink);
 		if (this.likeddrinks.includes(drink)) {
 			this.likeddrinks = this.likeddrinks.filter((elem) => elem !== drink);
-			console.log("updated liked drinks in model: ", this.likeddrinks);
 			this.notifyObservers();
 			return true
 		}
 		return false
 	}
-
 
 	setIngList(ingList) {
 		this.currentdrink = ingList;
@@ -184,10 +176,7 @@ class CocktailModel {
 	}
 
 	removeElemBar(ing) {
-		console.log("in model removing: ", ing);
-		console.log("before:  ", this.mybar);
 		this.mybar = this.mybar.filter((elem) => elem.toLowerCase() !== ing.toLowerCase());
-		console.log("after:  ", this.mybar);
 		this.notifyObservers();
 	}
 
