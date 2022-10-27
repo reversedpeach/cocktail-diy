@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
-import UploadAndDisplayImage from "../presenter/uploadAndDisplayImage.js";
+import UploadAndDisplayImage from "../presenter/uploadDisplayImgPresenter.js";
 
 const StyledBtn = styled.button`
 	border-radius: 18px;
