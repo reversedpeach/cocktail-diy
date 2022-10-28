@@ -15,7 +15,7 @@ In a different terminal window (than the client) run this command from the serve
 ## .env file for Server
 Make sure you define a .env file in the root of the server containing 
 `SECRET_KEY = "<Your secret key>"`
-`API_KEY = "<Patreon-supporter API key>"` For examination purposes you can use 9973533
+`APIKEY = "<Patreon-supporter API key>"` For examination purposes you can use "9973533"
 
 ## To reinstall node_modules
 `rm -rf node_modules`
