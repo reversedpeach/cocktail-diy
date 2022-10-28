@@ -2,7 +2,6 @@ import React from "react";
 import useModelProp from "../utils/useModelProp.js";
 import StartScreenView from "../view/startScreenView.js";
 import HomePageView from "../view/homePageView.js";
-import { PropaneSharp } from "@mui/icons-material";
 
 
 
