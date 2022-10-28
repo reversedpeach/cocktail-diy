@@ -1,8 +1,7 @@
-import MyBarView from "../view/myBarView.js";
 import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import useModelProp from "../utils/useModelProp.js";
-import MyBarProfileElemView from "../view/myBarProfileElemView.js";
+import MyBarProfileView from "../view/myBarProfileView.js";
 
 
 const CHANGE_MY_BAR_MUTATION = gql`
@@ -27,16 +26,9 @@ function MyBarProfile({ model }) {
         model.removeElemBar(ingredient);
         saveMyBarToServer(model.mybar);
     }
+    return (<MyBarProfileView myBar={myBar} onRemove={removeIngredientFromBar} />)
 
-    return (
-        <React.Fragment>
-            <MyBarView />
-            <div className="barRow">{
-                myBar.map((element, index) => (
-                    <MyBarProfileElemView key={index} barIng={element[0].toUpperCase() + element.slice(1)} onRemove={removeIngredientFromBar} />
-                ))}
-            </div>
-        </React.Fragment>);
+
 }
 
 export default MyBarProfile;

@@ -1,37 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CreateElemListView from "../view/createElemListView.js";
-import CreateTitleView from "../view/createTitleView.js";
-import CreateInstrucView from "../view/createInstrucView.js";
-import CreateSaveView from "../view/createSaveView.js";
-import CreateNameView from "../view/createNameView.js";
 import useModelProp from "../utils/useModelProp.js";
-import styled from "styled-components";
 import getFormData from "../utils/getFormData.js";
-
-import Select from "react-select";
-
+import CreateView from "../view/createView.js";
 import { gql, useMutation, useLazyQuery } from "@apollo/client";
 
-
-
-const StyledTitle = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	align-content: center;
-	font-size: 16pt;
-	font-family: Helvetica;
-	color: white;
-	padding-bottom: 10px;
-	flex-direction: column;
-	align-self: flex-start;
-
-	`;
-const StyledForm = styled.div`
-                border: '3px solid white',
-                borderRadius: '12px',
-                width: '20px'
-    font-family: 'Helvetica'`;
 
 const CREATE_DRINK_MUTATION = gql`
     mutation createDrink(
@@ -81,24 +53,7 @@ function Create({ model }) {
     const [getTypes, { typeData, typeLoading, typeError }] = useLazyQuery(GET_TYPES, { onCompleted: (data) => { setTypes(data.getAllTypes) } });
     const [createDrink, { data, loading, error }] = useMutation(CREATE_DRINK_MUTATION, { onCompleted: (data) => { }, onError: (error) => { } });
 
-    const customStyles = {
-        option: (styles, state) => ({
-            ...styles,
-            cursor: 'pointer',
-            width: '200px',
-            fontSize: "10pt",
-            color: "rgb(127,127,127)"
-        }),
-        control: (styles) => ({
-            ...styles,
-            cursor: 'pointer',
-            border: '3px solid rgb(127,127,127)',
-            borderRadius: '12px',
-            width: '200px',
-            fontSize: "10pt",
-            color: "rgb(127,127,127)"
-        })
-    };
+
 
     function setGlasses(glasses) {
         if (glasses !== null) {
@@ -172,38 +127,7 @@ function Create({ model }) {
         }
     }, [data, loading, error])
 
-    return (<React.Fragment>
-        <CreateTitleView />,
-        <CreateNameView setName={setName} />
-        <div className="rowBox">
-            <div className="resultCol">
-                <StyledTitle>Ingredients</StyledTitle>
-                {ingredients.map((ing, index) => (
-                    <CreateElemListView key={index} ingredient={ing} id={"measurement" + (index + 1)} />
-                ))}
-            </div>,
-            <CreateInstrucView />
-            <div className="resultCol">
-                <StyledTitle>Select Glass and Type</StyledTitle>
-                <Select options={glassList}
-                    styles={customStyles}
-                    placeholder="Select glass"
-                    onChange={(choice) => model.addGlassDrink(choice.value)}>
-                </Select>
-                <Select options={typeList}
-                    styles={customStyles}
-                    placeholder="Select type"
-                    onChange={(choice) => model.addTypeDrink(choice.value)}></Select>
-                <br></br>
-                <StyledTitle>Upload an image</StyledTitle>
-                <CreateSaveView startCreate={saveDrink}
-                    success={success}
-                    loading={loading}
-                    status={status} />
-            </div>
-        </div>
-    </React.Fragment>
-    )
+    return (<CreateView model={model} success={success} loading={loading} saveDrink={saveDrink} status={status} setName={setName} ingredients={ingredients} glassList={glassList} typeList={typeList} setGlass={(glass) => model.addGlassDrink(glass)} setType={(type) => model.addTypeDrink(type)} />);
 };
 
 export default Create;
